@@ -396,14 +396,14 @@ add
 
 	public function addAndroidControls() {
 		#if android
-        androidc = new AndroidControls();
+                androidc = new AndroidControls();
 
 		switch (androidc.mode)
 		{
 			case VIRTUALPAD_RIGHT | VIRTUALPAD_LEFT | VIRTUALPAD_CUSTOM:
 				controls.setVirtualPadNOTES(androidc._virtualPad, FULL, NONE);
 			case HITBOX:
-				controls.setHitBoxNOTES(androidc._hitbox);
+				controls.setHitBox(androidc._hitbox);
 			default:
 		}
 
@@ -421,7 +421,7 @@ add
 		#end
 	}
 
-    public function addPadCamera() {
+        public function addPadCamera() {
 		#if android
 		var camcontrol = new flixel.FlxCamera();
 		FlxG.cameras.add(camcontrol);
@@ -478,7 +478,7 @@ add
 	public function addVirtualPad(?DPad, ?Action)
 	#end
 
-    public function addPadCamera() {
+        public function addPadCamera() {
 		#if android
 		var camcontrol = new flixel.FlxCamera();
 		FlxG.cameras.add(camcontrol);
