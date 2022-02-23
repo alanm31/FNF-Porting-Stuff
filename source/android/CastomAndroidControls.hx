@@ -29,7 +29,7 @@ class CastomAndroidControls extends MusicBeatState
 	var leftArrow:FlxSprite;
 	var rightArrow:FlxSprite;
 
-	var controlitems:Array<String> = ['right control','left control','keyboard','custom','hitbox'];
+	var controlitems:Array<String> = ['VIRTUALPAD_RIGHT','VIRTUALPAD_LEFT','VIRTUALPAD_CUSTOM','DUO','HITBOX','KEYBOARD'];
 
 	var curSelected:Int = 0;
 
@@ -54,12 +54,12 @@ class CastomAndroidControls extends MusicBeatState
 		menuBG.screenCenter();
 		add(menuBG);
 
-        var exitbutton = new FlxButton(FlxG.width - 200, 50, "Exit", function()
-        {
+                var exitbutton = new FlxButton(FlxG.width - 200, 50, "Exit", function()
+                {
 			FlxG.switchState(new OptionsMenu());
 		});
 		exitbutton.setGraphicSize(Std.int(exitbutton.width) * 3);
-        exitbutton.label.setFormat(null, 16, 0x333333, "center");
+                exitbutton.label.setFormat(null, 16, 0x333333, "center");
 		exitbutton.color = FlxColor.fromRGB(255,0,0);
 		add(exitbutton);		
 
@@ -69,7 +69,7 @@ class CastomAndroidControls extends MusicBeatState
 			FlxG.switchState(new OptionsMenu());
 		});
 		savebutton.setGraphicSize(Std.int(savebutton.width) * 3);
-        savebutton.label.setFormat(null, 16, 0x333333, "center");
+                savebutton.label.setFormat(null, 16, 0x333333, "center");
 		savebutton.color = FlxColor.fromRGB(0,255,0);
 		add(savebutton);
 
@@ -148,30 +148,36 @@ class CastomAndroidControls extends MusicBeatState
 
 			switch (daChoice)
 			{
-				case 'right control':
+				case 'VIRTUALPAD_RIGHT':
 					remove(_pad);
 					_pad = null;
 					_pad = new FlxVirtualPad(RIGHT_FULL, NONE);
 					_pad.alpha = 0.75;
 					add(_pad);
-				case 'left control':
+				case 'VIRTUALPAD_LEFT':
 					remove(_pad);
 					_pad = null;
 					_pad = new FlxVirtualPad(FULL, NONE);
 					_pad.alpha = 0.75;
 					add(_pad);
-				case 'keyboard':
-					_pad.alpha = 0;
-				case 'custom':
+				case 'VIRTUALPAD_CUSTOM':
 					add(_pad);
 					_pad.alpha = 0.75;
 					loadcustom();
-				case 'hitbox':
+				case 'DUO':
+					remove(_pad);
+					_pad = null;
+					_pad = new FlxVirtualPad(DUO, NONE);
+					_pad.alpha = 0.75;
+					add(_pad);
+				case 'HITBOX':
+					_pad.alpha = 0;
+				case 'KEYBOARD':
 					remove(_pad);
 					_pad.alpha = 0;
 			}
 
-			if (daChoice == "hitbox")
+			if (daChoice == "HITBOX")
 			{
 				_hb.visible = true;
 				upPozition.visible = false;
@@ -179,7 +185,15 @@ class CastomAndroidControls extends MusicBeatState
 				leftPozition.visible = false;
 				rightPozition.visible = false;
 			}
-			else
+			else if (daChoice == "KEYBOARD")
+			{
+				_hb.visible = false;
+				upPozition.visible = false;
+				downPozition.visible = false;
+				leftPozition.visible = false;
+				rightPozition.visible = false;
+			}
+                        else
 			{
 				_hb.visible = false;
 				upPozition.visible = true;
@@ -192,8 +206,8 @@ class CastomAndroidControls extends MusicBeatState
 	function trackbutton(touch:flixel.input.touch.FlxTouch){
 		var daChoice:String = controlitems[Math.floor(curSelected)];
 
-        if (daChoice == 'custom')
-        {
+                if (daChoice == 'VIRTUALPAD_CUSTOM')
+                {
 			if (buttonistouched){
 				
 				if (bindbutton.justReleased && touch.justReleased)
@@ -244,7 +258,7 @@ class CastomAndroidControls extends MusicBeatState
 		config.setcontrolmode(curSelected);
 		var daChoice:String = controlitems[Math.floor(curSelected)];
 
-    	if (daChoice == 'custom'){
+    	        if (daChoice == 'VIRTUALPAD_CUSTOM'){
 			savecustom();
 		}
 	}
