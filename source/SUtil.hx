@@ -117,7 +117,14 @@ class SUtil
 		flash.system.System.exit(0);
 	}
 	
-	public static function applicationAlert(title:String, description:String){
+    public static function applicationAlert(title:String, description:String){
         Application.current.window.alert(description, title);
+    }
+
+    static public function saveContent(fileName:String = "file", fileExtension:String = ".json", fileData:String = "you forgot something to add in your editor"){
+        sys.io.File.saveContent(SUtil.getPath() + fileName + fileExtension, fileData);
+        #if android
+        android.AndroidTools.toast("File Saved Successfully!!", 1);
+        #end
     }
 }
