@@ -63,10 +63,6 @@ class SUtil
             FileSystem.createDirectory(sPath + "/" + "." + Application.current.meta.get("file") + "/files");
         }
 
-        if (!FileSystem.exists(SUtil.getPath() + "log")){
-            FileSystem.createDirectory(SUtil.getPath() + "log");
-        }
-
         if (!FileSystem.exists(SUtil.getPath() + "assets")){
             SUtil.applicationAlert("Instructions:", "Try copying assets/assets from apk to your internal storage app directory " + "( here " + SUtil.getPath() + " )" + "if you hadn't have Zarhiver Downloaded, download it and enable the show hidden files option to have the folder visible" + "\n" + "Press Ok To Close The App");
 	    flash.system.System.exit(0);
@@ -106,6 +102,10 @@ class SUtil
 
                 errMsg += e.error;
 
+                if (!FileSystem.exists(SUtil.getPath() + "log")){
+                    FileSystem.createDirectory(SUtil.getPath() + "log");
+                }
+
 		File.saveContent(SUtil.getPath() + path, errMsg + "\n");
 
 		Sys.println(errMsg);
@@ -122,7 +122,11 @@ class SUtil
     }
 
     static public function saveContent(fileName:String = "file", fileExtension:String = ".json", fileData:String = "you forgot something to add in your editor"){
-        sys.io.File.saveContent(SUtil.getPath() + fileName + fileExtension, fileData);
+        if (!FileSystem.exists(SUtil.getPath() + "system-saves")){
+            FileSystem.createDirectory(SUtil.getPath() + "system-saves");
+        }
+
+        sys.io.File.saveContent(SUtil.getPath() + "system-saves" + fileName + fileExtension, fileData);
         #if android
         android.AndroidTools.toast("File Saved Successfully!!", 1);
         #end
