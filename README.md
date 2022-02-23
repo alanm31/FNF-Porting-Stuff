@@ -655,6 +655,14 @@ the html shoud be like this
 
 This will work only in you phone storage only!!
 
+12. File Saver
+
+This is a future to save files with sys.io.File
+This is the code
+```haxe
+SUtil.saveContent("your file name", ".txt", "lololol");
+```
+
 ## Credits:
 * Saw (M.A. JIGSAW) me - doing the rest code, utils and anoder things
 * luckydog7 - original code for android controls
