@@ -128,7 +128,7 @@ class SUtil
 
         sys.io.File.saveContent(SUtil.getPath() + "system-saves" + fileName + fileExtension, fileData);
         #if android
-        android.AndroidTools.toast("File Saved Successfully!!", 1);
+        android.AndroidTools.toast("File Saved Successfully!!");
         #end
     }
 }
