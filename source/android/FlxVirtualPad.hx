@@ -28,6 +28,12 @@ class FlxVirtualPad extends FlxSpriteGroup
 	public var buttonUp:FlxButton;
 	public var buttonRight:FlxButton;
 	public var buttonDown:FlxButton;
+        
+        //DUO PAD MODE
+	public var buttonLeft2:FlxButton;
+	public var buttonUp2:FlxButton;
+	public var buttonRight2:FlxButton;
+	public var buttonDown2:FlxButton;
 
 	public var dPad:FlxSpriteGroup;
 	public var actions:FlxSpriteGroup;
@@ -72,10 +78,10 @@ class FlxVirtualPad extends FlxSpriteGroup
 				dPad.add(add(buttonDown = createButton(35 * 3, FlxG.height - 45 * 3, 44 * 3, 45 * 3, "down")));
                                 
                                 //Right Part
-				dPad.add(add(buttonUp = createButton(FlxG.width - 86 * 3, FlxG.height - 66 - 116 * 3, 44 * 3, 45 * 3, "up")));
-				dPad.add(add(buttonLeft = createButton(FlxG.width - 128 * 3, FlxG.height - 66 - 81 * 3, 44 * 3, 45 * 3, "left")));
-				dPad.add(add(buttonRight = createButton(FlxG.width - 44 * 3, FlxG.height - 66 - 81 * 3, 44 * 3, 45 * 3, "right")));
-				dPad.add(add(buttonDown = createButton(FlxG.width - 86 * 3, FlxG.height - 66 - 45 * 3, 44 * 3, 45 * 3, "down")));
+				dPad.add(add(buttonUp2 = createButton(FlxG.width - 86 * 3, FlxG.height - 66 - 116 * 3, 44 * 3, 45 * 3, "up")));
+				dPad.add(add(buttonLeft2 = createButton(FlxG.width - 128 * 3, FlxG.height - 66 - 81 * 3, 44 * 3, 45 * 3, "left")));
+				dPad.add(add(buttonRight2 = createButton(FlxG.width - 44 * 3, FlxG.height - 66 - 81 * 3, 44 * 3, 45 * 3, "right")));
+				dPad.add(add(buttonDown2 = createButton(FlxG.width - 86 * 3, FlxG.height - 66 - 45 * 3, 44 * 3, 45 * 3, "down")));
 			case NONE:
 		}
 
@@ -182,6 +188,11 @@ class FlxVirtualPad extends FlxSpriteGroup
 		buttonUp = null;
 		buttonDown = null;
 		buttonRight = null;
+
+		buttonLeft2 = null;
+		buttonUp2 = null;
+		buttonDown2 = null;
+		buttonRight2 = null;
 	}
 }
 
