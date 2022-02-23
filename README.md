@@ -661,6 +661,8 @@ This is a future to save files with sys.io.File
 This is the code
 ```haxe
 SUtil.saveContent("your file name", ".txt", "lololol");
+
+The file location where is saved, will be where the assets and mods are located in phone storage in system-saves folder
 ```
 
 ## Credits:
