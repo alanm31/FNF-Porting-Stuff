@@ -89,8 +89,8 @@ add
 ```haxe
 	#if android
 	import flixel.group.FlxGroup;
-	import ui.Hitbox;
-	import ui.FlxVirtualPad;
+	import android.Hitbox;
+	import android.FlxVirtualPad;
 	import flixel.ui.FlxButton;
 	#end
 
