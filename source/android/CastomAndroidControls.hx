@@ -175,11 +175,20 @@ class CastomAndroidControls extends MusicBeatState
 					_pad.alpha = 0.75;
 					add(_pad);
 				case 'HITBOX':
-					_pad.alpha = 0;
-				case 'KEYBOARD':
+					_pad.alpha = 0;                         
+				case 'KEYBOARD':                     
 					remove(_pad);
 					_pad.alpha = 0;
 			}
+
+                        if (daChoice != "HITBOX")
+			{
+		                _hb.visible = false;
+			}
+                        else
+                        {
+				_hb.visible = true;
+                        }
 
 			if (daChoice != "VIRTUALPAD_CUSTOM")
 			{
