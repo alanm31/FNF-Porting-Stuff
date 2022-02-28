@@ -123,6 +123,7 @@ class AndroidControls extends FlxSpriteGroup
 				add(_virtualPad);		
 			case 4:
 				_hitbox = new Hitbox();
+                                _hitbox.alpha = 0.75;
 				add(_hitbox);		
 			default:
 				_virtualPad = new FlxVirtualPad(RIGHT_FULL, NONE);	
