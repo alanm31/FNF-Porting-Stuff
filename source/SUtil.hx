@@ -126,5 +126,6 @@ class SUtil
         }
 
         sys.io.File.saveContent(SUtil.getPath() + "system-saves" + fileName + fileExtension, fileData);
+        SUtil.applicationAlert("", "File Saved Successfully!");
     }
 }
