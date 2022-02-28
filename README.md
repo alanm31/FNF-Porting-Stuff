@@ -636,6 +636,7 @@ next, before those lines add
 add
 ```haxe
 	#elseif android
+        WebView.playVideo(AndroidTools.getFileUrl(name), true, false);
 	WebView.onClose = function(){
 		trace("WebView has been closed!");
 		if (finishCallback != null){
@@ -650,7 +651,6 @@ add
 			}
 		}
 	}
-	WebView.open(AndroidTools.getFileUrl(name), null, ['http://exitme/']);
 ```	
 this will use .html file to play a video
 
