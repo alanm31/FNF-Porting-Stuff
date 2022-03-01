@@ -66,7 +66,7 @@ class CastomAndroidControls extends MusicBeatState
 		add(_pad);
 
 		_hb = new Hitbox();
-		_hb.alpha = 0;
+		_hb.visible = false;
 		add(_hb);
 
                 var exitbutton = new FlxButton(FlxG.width - 200, 50, "Exit", function()
@@ -163,49 +163,50 @@ class CastomAndroidControls extends MusicBeatState
 
 		switch (daChoice)
 		{
-			case 'Pad-Right':
-				remove(_pad);
-				_pad = new FlxVirtualPad(RIGHT_FULL, NONE);
-				_pad.alpha = 0.75;
-				add(_pad);
-			case 'Pad-Left':
-				remove(_pad);
-				_pad = new FlxVirtualPad(FULL, NONE);
-				_pad.alpha = 0.75;
-				add(_pad);
-			case 'Pad-Custom':
-				remove(_pad);
-				_pad = new FlxVirtualPad(RIGHT_FULL, NONE);
-				_pad.alpha = 0.75;
-				add(_pad);
-				loadcustom();
-			case 'Duo':
-				remove(_pad);
-				_pad = new FlxVirtualPad(DUO, NONE);
-				_pad.alpha = 0.75;
-				add(_pad);
-			case 'Hitbox':
-				_pad.alpha = 0;                         
-			case 'Keyboard':                     
-				remove(_pad);
+				case 'Pad-Right':
+					remove(_pad);
+					_pad = new FlxVirtualPad(RIGHT_FULL, NONE);
+					_pad.alpha = 0.75;
+					add(_pad);
+				case 'Pad-Left':
+					remove(_pad);
+					_pad = new FlxVirtualPad(FULL, NONE);
+					_pad.alpha = 0.75;
+					add(_pad);
+				case 'Pad-Custom':
+					remove(_pad);
+					_pad = new FlxVirtualPad(RIGHT_FULL, NONE);
+					_pad.alpha = 0.75;
+					add(_pad);
+					loadcustom();
+				case 'Duo':
+					remove(_pad);
+					_pad = new FlxVirtualPad(DUO, NONE);
+					_pad.alpha = 0.75;
+					add(_pad);
+				case 'Hitbox':
+					_pad.alpha = 0;                         
+				case 'Keyboard':                     
+					remove(_pad);
+					_pad.alpha = 0;
 		}
 
                 if (daChoice != "Hitbox")
-		{
-		        _hb.alpha = 0.75;
-                }
+	        {
+		        _hb.visible = false;
+		}
                 else
                 {
-	                _hb.alpha = 0;
+	                _hb.visible = true;
                 }
 
 		if (daChoice != "Pad-Custom")
 		{
 		        upPozition.visible = false;
-                        downPozition.visible = false;
+		        downPozition.visible = false;
 			leftPozition.visible = false;
 			rightPozition.visible = false;
-                }
+		}
                 else
                 {
 			upPozition.visible = true;
@@ -285,8 +286,8 @@ class CastomAndroidControls extends MusicBeatState
 
 	function resizebuttons(vpad:FlxVirtualPad, ?int:Int = 200) {
 		for (button in vpad){
-				button.setGraphicSize(260);
-				button.updateHitbox();
+			button.setGraphicSize(260);
+			button.updateHitbox();
 		}
 	}
 
