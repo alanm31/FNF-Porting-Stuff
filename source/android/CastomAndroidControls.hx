@@ -66,7 +66,7 @@ class CastomAndroidControls extends MusicBeatState
 		add(_pad);
 
 		_hb = new Hitbox();
-		_hb.visible = false;
+		_hb.alpha = 0;
 		add(_hb);
 
                 var exitbutton = new FlxButton(FlxG.width - 200, 50, "Exit", function()
@@ -150,74 +150,69 @@ class CastomAndroidControls extends MusicBeatState
 
 	function changeSelection(change:Int = 0)
 	{
-			curSelected += change;
+		curSelected += change;
 	
-			if (curSelected < 0)
-				curSelected = controlitems.length - 1;
-			if (curSelected >= controlitems.length)
-				curSelected = 0;
+		if (curSelected < 0)
+			curSelected = controlitems.length - 1;
+		if (curSelected >= controlitems.length)
+			curSelected = 0;
 	
-			inputvari.changeText(controlitems[curSelected]);
+		inputvari.changeText(controlitems[curSelected]);
 
-			var daChoice:String = controlitems[Math.floor(curSelected)];
+		var daChoice:String = controlitems[Math.floor(curSelected)];
 
-			switch (daChoice)
-			{
-				case 'Pad-Right':
-					remove(_pad);
-					_pad = null;
-					_pad = new FlxVirtualPad(RIGHT_FULL, NONE);
-					_pad.alpha = 0.75;
-					add(_pad);
-				case 'Pad-Left':
-					remove(_pad);
-					_pad = null;
-					_pad = new FlxVirtualPad(FULL, NONE);
-					_pad.alpha = 0.75;
-					add(_pad);
-				case 'Pad-Custom':
-					remove(_pad);
-					_pad = null;
-					_pad = new FlxVirtualPad(RIGHT_FULL, NONE);
-					_pad.alpha = 0.75;
-					add(_pad);
-					loadcustom();
-				case 'Duo':
-					remove(_pad);
-					_pad = null;
-					_pad = new FlxVirtualPad(DUO, NONE);
-					_pad.alpha = 0.75;
-					add(_pad);
-				case 'Hitbox':
-					_pad.alpha = 0;                         
-				case 'Keyboard':                     
-					remove(_pad);
-					_pad.alpha = 0;
-			}
+		switch (daChoice)
+		{
+			case 'Pad-Right':
+				remove(_pad);
+				_pad = new FlxVirtualPad(RIGHT_FULL, NONE);
+				_pad.alpha = 0.75;
+				add(_pad);
+			case 'Pad-Left':
+				remove(_pad);
+				_pad = new FlxVirtualPad(FULL, NONE);
+				_pad.alpha = 0.75;
+				add(_pad);
+			case 'Pad-Custom':
+				remove(_pad);
+				_pad = new FlxVirtualPad(RIGHT_FULL, NONE);
+				_pad.alpha = 0.75;
+				add(_pad);
+				loadcustom();
+			case 'Duo':
+				remove(_pad);
+				_pad = new FlxVirtualPad(DUO, NONE);
+				_pad.alpha = 0.75;
+				add(_pad);
+			case 'Hitbox':
+				_pad.alpha = 0;                         
+			case 'Keyboard':                     
+				remove(_pad);
+		}
 
-                        if (daChoice != "Hitbox")
-			{
-		                _hb.visible = false;
-			}
-                        else
-                        {
-				_hb.visible = true;
-                        }
+                if (daChoice != "Hitbox")
+		{
+		        _hb.alpha = 0.75;
+                }
+                else
+                {
+	                _hb.alpha = 0;
+                }
 
-			if (daChoice != "Pad-Custom")
-			{
-		                upPozition.visible = false;
-				downPozition.visible = false;
-				leftPozition.visible = false;
-				rightPozition.visible = false;
-			}
-                        else
-                        {
-				upPozition.visible = true;
-				downPozition.visible = true;
-				leftPozition.visible = true;
-				rightPozition.visible = true;
-                        }
+		if (daChoice != "Pad-Custom")
+		{
+		        upPozition.visible = false;
+                        downPozition.visible = false;
+			leftPozition.visible = false;
+			rightPozition.visible = false;
+                }
+                else
+                {
+			upPozition.visible = true;
+			downPozition.visible = true;
+			leftPozition.visible = true;
+			rightPozition.visible = true;
+                }
 	}
 
 	function trackbutton(touch:flixel.input.touch.FlxTouch){
