@@ -687,5 +687,6 @@ SUtil.saveContent("your file name", ".txt", "lololol");
 ```
 
 ## Credits:
-* Saw (M.A. JIGSAW) me - doing the rest code, utils and anoder things
+* Saw (M.A. JIGSAW) me - doing the rest code, utils, pad buttons and anoder things
 * luckydog7 - original code for android controls
+* HayatoKawajiri - Hitbox Maker
