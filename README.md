@@ -423,10 +423,9 @@ add
 		trackedinputsUI = controls.trackedinputsUI;
 		controls.trackedinputsUI = [];
 	}
-	#else
-	public function addVirtualPad(?DPad, ?Action)
 	#end
 
+	#if android
 	public function addAndroidControls() {
 		#if android
                 androidc = new AndroidControls();
@@ -453,17 +452,17 @@ add
 		androidc.visible = false;
 
 		add(androidc);
-		#end
 	}
+	#end
 
+	#if android
         public function addPadCamera() {
-		#if android
 		var camcontrol = new flixel.FlxCamera();
 		FlxG.cameras.add(camcontrol);
 		camcontrol.bgColor.alpha = 0;
 		_virtualpad.cameras = [camcontrol];
-		#end
 	}
+	#end
 	
 	override function destroy() {
 		#if android
@@ -508,18 +507,16 @@ add
 		trackedinputsUI = controls.trackedinputsUI;
 		controls.trackedinputsUI = [];
 	}
-	#else
-	public function addVirtualPad(?DPad, ?Action)
 	#end
 
+	#if android
         public function addPadCamera() {
-		#if android
 		var camcontrol = new flixel.FlxCamera();
 		FlxG.cameras.add(camcontrol);
 		camcontrol.bgColor.alpha = 0;
 		_virtualpad.cameras = [camcontrol];
-		#end
 	}
+	#end
 	
 	override function destroy() {
 		#if android
@@ -535,10 +532,14 @@ And Somehow you finised to add the android controls to your psych engine copy
 
 now on every state/substate add
 ```haxe
+        #if android
 	addVirtualPad(FULL, A_B);
+        #end
 
 	//if you want it to have a camera
+        #if android
 	addPadCamera()
+        #end
 
 	//in states, those needs to be added before super.create();
 	//in substates, in fuction new at the last line add those
@@ -546,7 +547,9 @@ now on every state/substate add
 	//on Playstate.hx after all
 	//obj.camera = ...
 	//add
+        #if android
 	addAndroidControls();
+        #end
 
 	//to make the controls visible the code is
 	#if android
