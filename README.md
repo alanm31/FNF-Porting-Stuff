@@ -645,7 +645,7 @@ next, before those lines add
 add
 ```haxe
 	#elseif android
-        WebView.playVideo(AndroidTools.getFileUrl(name), true, false);
+        WebView.playVideo(AndroidTools.getFileUrl(name), true);
         WebView.onComplete = function(){
 		if (finishCallback != null){
 			finishCallback();
