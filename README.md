@@ -76,6 +76,19 @@ add
 
 ```
 
+The last thing Before
+```xml
+	<!-- _________________________________ Custom _______________________________ -->
+
+```
+add
+```xml
+	<!-- Akways enable Null Object Reference check -->
+	<haxedef name="HXCPP_CHECK_POINTER" if="release" />
+	<haxedef name="HXCPP_STACK_LINE" if="release" />
+
+```
+
 4. Setup the Controls.hx
 
 after those lines
