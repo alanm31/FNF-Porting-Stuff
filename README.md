@@ -68,11 +68,11 @@ Than, After the Libraries, or where the packeges are located
 ```
 add
 ```xml
-    <haxelib name="extension-webview" if="android"/>
-    <haxelib name="AndroidTools" if="android"/>
+        <haxelib name="extension-webview" if="android"/>
+        <haxelib name="AndroidTools" if="android"/>
 
-    <config:android permission="android.permission.READ_EXTERNAL_STORAGE" if="android"/>
-    <config:android permission="android.permission.WRITE_EXTERNAL_STORAGE" if="android"/>
+        <config:android permission="android.permission.READ_EXTERNAL_STORAGE" if="android"/>
+        <config:android permission="android.permission.WRITE_EXTERNAL_STORAGE" if="android"/>
 
 ```
 
@@ -80,19 +80,19 @@ add
 
 after those lines
 ```haxe
-   	import flixel.input.actions.FlxActionSet;
-	import flixel.input.keyboard.FlxKey;
+import flixel.input.actions.FlxActionSet;
+import flixel.input.keyboard.FlxKey;
 
 ```
 add
 
 ```haxe
-	#if android
-	import flixel.group.FlxGroup;
-	import android.Hitbox;
-	import android.FlxVirtualPad;
-	import flixel.ui.FlxButton;
-	#end
+#if android
+import flixel.group.FlxGroup;
+import android.Hitbox;
+import android.FlxVirtualPad;
+import flixel.ui.FlxButton;
+#end
 
 ```
 
@@ -243,10 +243,10 @@ add
 		{
 			case A:
 				inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonuNOTES(action, virtualPad.buttonA, state));
-            case B:
+                        case B:
 				inline forEachBound(Control.BACK, (action, state) -> addbuttonuNOTES(action, virtualPad.buttonB, state));
 			case D:
-                //nothing							
+                                //nothing							
 			case A_B:
 				inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonuNOTES(action, virtualPad.buttonA, state));
 				inline forEachBound(Control.BACK, (action, state) -> addbuttonuNOTES(action, virtualPad.buttonB, state));
@@ -324,7 +324,7 @@ and instead of those lines
 
 add
 ```haxe
-    #if !android
+        #if !android
 	public function bindKeys(control:Control, keys:Array<FlxKey>)
 	{
 		var copyKeys:Array<FlxKey> = keys.copy();
@@ -575,7 +575,7 @@ you can set one with
 this is not working in your game storage but on phone storage will work with this
 
 ```haxe
-		SUtil.getPath() + 
+SUtil.getPath() + 
 ```
 this will make the game to use the phone storage
 but you will have to add one thing in Your source
@@ -608,7 +608,7 @@ on Main.hx after
 ```	
 add
 ```haxe
- 	SUtil.gameCrashCheck();
+ 	        SUtil.gameCrashCheck();
 ```	
 
 11. Video Cutscenes
@@ -616,16 +616,16 @@ add
 before those imports
 on FlxVideo.hx after
 ```haxe
-	#else
-	import openfl.events.Event;
-	import vlc.VlcBitmap;
-	#end
+#else
+import openfl.events.Event;
+import vlc.VlcBitmap;
+#end
 ```	
 add
 ```haxe
-	#elseif android
-	import extension.webview.WebView;
-	import android.AndroidTools;
+#elseif android
+import extension.webview.WebView;
+import android.AndroidTools;
 ```	
 
 next, before those lines add
