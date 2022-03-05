@@ -11,7 +11,6 @@ import haxe.CallStack.StackItem;
 import haxe.CallStack;
 import haxe.io.Path;
 import sys.FileSystem;
-import sys.io.File;
 
 class SUtil
 {
@@ -106,7 +105,7 @@ class SUtil
             FileSystem.createDirectory(SUtil.getPath() + "log");
         }
 
-        File.saveContent(SUtil.getPath() + path, errMsg + "\n");
+        sys.io.File.saveContent(SUtil.getPath() + path, errMsg + "\n");
 
 	Sys.println(errMsg);
 	Sys.println("Crash dump saved in " + Path.normalize(path));
