@@ -683,6 +683,26 @@ SUtil.saveContent("your file name", ".txt", "lololol");
 //The file location where is saved, will be where the assets and mods are located in phone storage in system-saves folder
 ```
 
+13. Do an action when you press on the screen
+```haxe
+		#if android
+                var justTouched:Bool = false;
+
+		for (touch in FlxG.touches.list)
+		{
+			if (touch.justPressed)
+			{
+				justTouched = true;
+			}
+		}
+		#end
+
+                if (controls.ACCEPT #if android || justTouched #end)
+                {
+                        //Will do something
+                }
+```
+
 ## Credits:
 * Saw (M.A. JIGSAW) me - doing the rest code, utils, pad buttons and anoder things
 * luckydog7 - original code for android controls
