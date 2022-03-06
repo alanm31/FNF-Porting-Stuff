@@ -427,7 +427,6 @@ add
 
 	#if android
 	public function addAndroidControls() {
-		#if android
                 androidc = new AndroidControls();
 
 		switch (androidc.mode)
