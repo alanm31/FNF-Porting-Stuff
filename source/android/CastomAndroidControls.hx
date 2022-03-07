@@ -39,8 +39,6 @@ class CastomAndroidControls extends MusicBeatState
 
 	var config:Config;
 
-	public static var menuBG:FlxSprite;
-
 	override public function create():Void
 	{
 		super.create();
@@ -48,12 +46,11 @@ class CastomAndroidControls extends MusicBeatState
 		config = new Config();
 		curSelected = config.getcontrolmode();
 
-		menuBG = new FlxSprite().loadGraphic(Paths.image('androidcontrols/menu/menuBG'));
-		menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
-                menuBG.color = 0xFFea71fd;
-		menuBG.updateHitbox();
-		menuBG.screenCenter();
-		add(menuBG);
+		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
+		bg.color = 0xFFea71fd;
+		bg.updateHitbox();
+		bg.screenCenter();
+		add(bg);
 
 		var titleText:Alphabet = new Alphabet(0, 0, "Android Controls", true, false, 0, 0.6);
 		titleText.x += 60;
@@ -233,7 +230,9 @@ class CastomAndroidControls extends MusicBeatState
 					setbuttontexts();
 				}
 
-			}else {
+			}
+                        else 
+                        {
 				if (_pad.buttonUp.justPressed) {
 					movebutton(touch, _pad.buttonUp);
 				}
@@ -250,7 +249,7 @@ class CastomAndroidControls extends MusicBeatState
 					movebutton(touch, _pad.buttonLeft);
 				}
 			}
-        }
+                }
 	}
 
 	function movebutton(touch:flixel.input.touch.FlxTouch, button:flixel.ui.FlxButton) {
