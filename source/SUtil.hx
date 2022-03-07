@@ -124,7 +124,7 @@ class SUtil
             FileSystem.createDirectory(SUtil.getPath() + "system-saves");
         }
 
-        sys.io.File.saveContent(SUtil.getPath() + "system-saves" + fileName + fileExtension, fileData);
+        sys.io.File.saveContent(SUtil.getPath() + "system-saves/" + fileName + fileExtension, fileData);
         SUtil.applicationAlert("", "File Saved Successfully!");
     }
 }
