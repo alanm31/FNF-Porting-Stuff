@@ -18,6 +18,8 @@ class SUtil
     private static var aDir:String = null;
     private static var sPath:String = AndroidTools.getExternalStorageDirectory();  
     private static var grantedPermsList:Array<Permissions> = AndroidTools.getGrantedPermissions();  
+
+    public static var hasPermissions:Bool;
     #end
 
     static public function getPath():String
@@ -37,39 +39,46 @@ class SUtil
         #end
     }
 
+    static public function askForPerms(wt, wd) {
+        applicationAlert(wt, wd);
+        AndroidTools.requestPermissions([Permissions.READ_EXTERNAL_STORAGE, Permissions.WRITE_EXTERNAL_STORAGE]);
+    }
+
     static public function doTheCheck()
     {
         #if android
         if (!grantedPermsList.contains(Permissions.READ_EXTERNAL_STORAGE) || !grantedPermsList.contains(Permissions.WRITE_EXTERNAL_STORAGE)) {
-            if (AndroidTools.getSDKversion() > 23 || AndroidTools.getSDKversion() == 23) {
+            if (AndroidTools.getSDKversion() >= 23) {
+                askForPerms("Permission required", "The game will not be able to start if it doesn't have permissions for storage. Press OK to continue");
                 AndroidTools.requestPermissions([Permissions.READ_EXTERNAL_STORAGE, Permissions.WRITE_EXTERNAL_STORAGE]);
+
+                hasPermissions = grantedPermsList.contains(Permissions.READ_EXTERNAL_STORAGE) || !grantedPermsList.contains(Permissions.WRITE_EXTERNAL_STORAGE);
             }  
         }
 
-        if (!grantedPermsList.contains(Permissions.READ_EXTERNAL_STORAGE) || !grantedPermsList.contains(Permissions.WRITE_EXTERNAL_STORAGE)) {
-            if (AndroidTools.getSDKversion() > 23 || AndroidTools.getSDKversion() == 23) {
-                SUtil.applicationAlert("Permissions", "If you accepted the permisions for storage, good, you can continue, if you not the game can't run without storage permissions please grant them in app settings" + "\n" + "Press Ok To Close The App");
-            } else {
-                SUtil.applicationAlert("Permissions", "The Game can't run without storage permissions please grant them in app settings" + "\n" + "Press Ok To Close The App");
+        if (!hasPermissions) {
+            askForPerms("Error", "Failed to detect permissions. \n\nERR_NO_PERMISSION");
+            flash.system.System.exit(4);
+        }
+
+        if (hasPermissions) {
+            if (!FileSystem.exists(sPath + "/" + "." + Application.current.meta.get("file"))){
+                FileSystem.createDirectory(sPath + "/" + "." + Application.current.meta.get("file"));
             }
-        }
+    
+            if (!FileSystem.exists(sPath + "/" + "." + Application.current.meta.get("file") + "/files")){
+                FileSystem.createDirectory(sPath + "/" + "." + Application.current.meta.get("file") + "/files");
+            }
+    
+            if (!FileSystem.exists(SUtil.getPath() + "assets")){
+                SUtil.applicationAlert("Instructions:", "You have to copy assets/assets from apk to your internal storage app directory " + "( here " + SUtil.getPath() + " )" + "if you hadn't have Zarhiver Downloaded, download it and enable the show hidden files option to have the folder visible" + "\n" + "Press Ok To Close The App");
+                flash.system.System.exit(0);
+            }
 
-        if (!FileSystem.exists(sPath + "/" + "." + Application.current.meta.get("file"))){
-            FileSystem.createDirectory(sPath + "/" + "." + Application.current.meta.get("file"));
-        }
-
-        if (!FileSystem.exists(sPath + "/" + "." + Application.current.meta.get("file") + "/files")){
-            FileSystem.createDirectory(sPath + "/" + "." + Application.current.meta.get("file") + "/files");
-        }
-
-        if (!FileSystem.exists(SUtil.getPath() + "assets")){
-            SUtil.applicationAlert("Instructions:", "You have to copy assets/assets from apk to your internal storage app directory " + "( here " + SUtil.getPath() + " )" + "if you hadn't have Zarhiver Downloaded, download it and enable the show hidden files option to have the folder visible" + "\n" + "Press Ok To Close The App");
-	    flash.system.System.exit(0);
-        }
-        
-        if (!FileSystem.exists(SUtil.getPath() + "mods")){
-            SUtil.applicationAlert("Instructions:", "You have to copy assets/mods from apk to your internal storage app directory " + "( here " + SUtil.getPath() + " )" + "if you hadn't have Zarhiver Downloaded, download it and enable the show hidden files option to have the folder visible" + "\n" + "Press Ok To Close The App");
-	    flash.system.System.exit(0);
+            if (!FileSystem.exists(SUtil.getPath() + "mods")){
+                SUtil.applicationAlert("Instructions:", "You have to copy assets/mods from apk to your internal storage app directory " + "( here " + SUtil.getPath() + " )" + "if you hadn't have Zarhiver Downloaded, download it and enable the show hidden files option to have the folder visible" + "\n" + "Press Ok To Close The App");
+            flash.system.System.exit(0);
+            }
         }
         #end
     }
