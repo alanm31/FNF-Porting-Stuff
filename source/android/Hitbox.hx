@@ -23,8 +23,15 @@ class Hitbox extends FlxSpriteGroup
 	{
 		super();
 
+                buttonLeft = new FlxButton(0, 0);
+                buttonDown = new FlxButton(0, 0);
+                buttonUp = new FlxButton(0, 0);
+                buttonRight = new FlxButton(0, 0);
+
 		hitbox = new FlxSpriteGroup();
+
 		hitboxframes = Paths.getSparrowAtlas('androidcontrols/hitbox');
+
 		hitbox.add(add(buttonLeft = createhitbox(0, "left")));
 		hitbox.add(add(buttonDown = createhitbox(320, "down")));
 		hitbox.add(add(buttonUp = createhitbox(640, "up")));
@@ -36,31 +43,31 @@ class Hitbox extends FlxSpriteGroup
 	}
 
 	public function createhitbox(buttonPozitionX:Float, framestring:String) {
-        var graphic:FlxGraphic = FlxGraphic.fromFrame(hitboxframes.getByName(framestring));
+                var graphic:FlxGraphic = FlxGraphic.fromFrame(hitboxframes.getByName(framestring));
 
 		var button = new FlxButton(buttonPozitionX, 0);
-        button.loadGraphic(graphic);
-        button.alpha = 0;
+                button.loadGraphic(graphic);
+                button.alpha = 0;
     
-        button.onDown.callback = function (){
-            FlxTween.num(0, 0.75, 0.075, {ease:FlxEase.circInOut}, function(alpha:Float){ 
-            	button.alpha = alpha;
-            });
-        };
+                button.onDown.callback = function (){
+                    FlxTween.num(0, 0.75, 0.075, {ease:FlxEase.circInOut}, function(alpha:Float){ 
+            	        button.alpha = alpha;
+                    });
+                };
 
-        button.onUp.callback = function (){
-            FlxTween.num(0.75, 0, 0.1, {ease:FlxEase.circInOut}, function(alpha:Float){ 
-            	button.alpha = alpha;
-            });
-        }
+                button.onUp.callback = function (){
+                    FlxTween.num(0.75, 0, 0.1, {ease:FlxEase.circInOut}, function(alpha:Float){ 
+            	        button.alpha = alpha;
+                    });
+                }
         
-        button.onOut.callback = function (){
-            FlxTween.num(button.alpha, 0, 0.2, {ease:FlxEase.circInOut}, function(alpha:Float){ 
-            	button.alpha = alpha;
-            });
-        }
+                button.onOut.callback = function (){
+                    FlxTween.num(button.alpha, 0, 0.2, {ease:FlxEase.circInOut}, function(alpha:Float){ 
+            	        button.alpha = alpha;
+                    });
+                }
 
-        return button;
+                return button;
 	}
 
 	override public function destroy():Void
