@@ -17,7 +17,6 @@ class FlxVirtualPad extends FlxSpriteGroup
 	public var buttonC:FlxButton;
 	public var buttonD:FlxButton;
 	public var buttonE:FlxButton;
-
 	public var buttonV:FlxButton;
 	public var buttonX:FlxButton;
 	public var buttonY:FlxButton;
@@ -43,10 +42,7 @@ class FlxVirtualPad extends FlxSpriteGroup
 		super();
 
 		dPad = new FlxSpriteGroup();
-		dPad.scrollFactor.set();
-
 		actions = new FlxSpriteGroup();
-		actions.scrollFactor.set();
 
 		switch (DPad)
 		{
@@ -139,7 +135,7 @@ class FlxVirtualPad extends FlxSpriteGroup
 		}
 	}
 
-	public function createButton(X:Float, Y:Float, Width:Int, Height:Int, Graphic:String, ?OnClick:Void->Void):FlxButton
+	public function createButton(X:Float, Y:Float, Width:Int, Height:Int, Graphic:String):FlxButton
 	{
 		var button = new FlxButton(X, Y);
 		var frame = getVirtualInputFrames().getByName(Graphic);
@@ -147,14 +143,10 @@ class FlxVirtualPad extends FlxSpriteGroup
 		button.resetSizeFromFrame();
 		button.solid = false;
 		button.immovable = true;
-		button.scrollFactor.set();
 
     	        #if FLX_DEBUG
 		button.ignoreDrawDebug = true;
 		#end
-
-		if (OnClick != null)
-			button.onDown.callback = OnClick;
 
 		return button;
 	}
