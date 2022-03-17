@@ -11,7 +11,6 @@ import haxe.CallStack.StackItem;
 import haxe.CallStack;
 import haxe.io.Path;
 import sys.FileSystem;
-
 class SUtil
 {
     #if android
@@ -110,7 +109,7 @@ class SUtil
         Sys.println("Crash dump saved in " + Path.normalize(path));
         Sys.println("Making a simple alert ...");
 
-		SUtil.applicationAlert("Uncaught Error:", errMsg);
+        SUtil.applicationAlert("Uncaught Error:", errMsg);
         flash.system.System.exit(0);
     }
 	
