@@ -66,12 +66,12 @@ class CastomAndroidControls extends MusicBeatState
 		_hb.visible = false;
 		add(_hb);
 
-                var exitbutton = new FlxButton(FlxG.width - 200, 50, "Exit", function()
-                {
+		var exitbutton = new FlxButton(FlxG.width - 200, 50, "Exit", function()
+		{
 			MusicBeatState.switchState(new options.OptionsState());
 		});
 		exitbutton.setGraphicSize(Std.int(exitbutton.width) * 3);
-                exitbutton.label.setFormat(null, 16, 0x333333, "center");
+		exitbutton.label.setFormat(null, 16, 0x333333, "center");
 		exitbutton.color = FlxColor.fromRGB(255,0,0);
 		add(exitbutton);		
 
@@ -81,12 +81,12 @@ class CastomAndroidControls extends MusicBeatState
 			MusicBeatState.switchState(new options.OptionsState());
 		});
 		savebutton.setGraphicSize(Std.int(savebutton.width) * 3);
-                savebutton.label.setFormat(null, 16, 0x333333, "center");
+		savebutton.label.setFormat(null, 16, 0x333333, "center");
 		savebutton.color = FlxColor.fromRGB(0,255,0);
 		add(savebutton);
 
-                inputvari = new Alphabet(0, 50, controlitems[curSelected], false, false, 0.05, 0.8);
-                inputvari.screenCenter(X);
+		inputvari = new Alphabet(0, 50, controlitems[curSelected], false, false, 0.05, 0.8);
+		inputvari.screenCenter(X);
 		add(inputvari);
 
 		var ui_tex = Paths.getSparrowAtlas('androidcontrols/menu/arrows');//thanks Andromeda Engine
@@ -140,7 +140,6 @@ class CastomAndroidControls extends MusicBeatState
 			}else if (touch.overlaps(rightArrow) && touch.justPressed){
 				changeSelection(1);
 			}
-
 			trackbutton(touch);
 		}
 	}
@@ -182,44 +181,42 @@ class CastomAndroidControls extends MusicBeatState
 					_pad.alpha = 0.75;
 					add(_pad);
 				case 'Hitbox':
-					_pad.alpha = 0;                         
-				case 'Keyboard':                     
+					_pad.alpha = 0;
+				case 'Keyboard':
 					remove(_pad);
 					_pad.alpha = 0;
 		}
 
-                if (daChoice != "Hitbox")
-	        {
-		        _hb.visible = false;
+		if (daChoice != "Hitbox")
+		{
+			_hb.visible = false;
 		}
-                else
-                {
-	                _hb.visible = true;
-                }
+		else
+		{
+			_hb.visible = true;
+		}
 
 		if (daChoice != "Pad-Custom")
 		{
-		        upPozition.visible = false;
-		        downPozition.visible = false;
+			upPozition.visible = false;
+			downPozition.visible = false;
 			leftPozition.visible = false;
 			rightPozition.visible = false;
 		}
-                else
-                {
+		else
+		{
 			upPozition.visible = true;
 			downPozition.visible = true;
 			leftPozition.visible = true;
 			rightPozition.visible = true;
-                }
+		}
 	}
 
 	function trackbutton(touch:flixel.input.touch.FlxTouch){
 		var daChoice:String = controlitems[Math.floor(curSelected)];
 
-                if (daChoice == 'Pad-Custom')
-                {
+		if (daChoice == 'Pad-Custom'){
 			if (buttonistouched){
-				
 				if (bindbutton.justReleased && touch.justReleased)
 				{
 					bindbutton = null;
@@ -229,10 +226,9 @@ class CastomAndroidControls extends MusicBeatState
 					movebutton(touch, bindbutton);
 					setbuttontexts();
 				}
-
 			}
-                        else 
-                        {
+			else 
+			{
 				if (_pad.buttonUp.justPressed) {
 					movebutton(touch, _pad.buttonUp);
 				}
@@ -249,7 +245,7 @@ class CastomAndroidControls extends MusicBeatState
 					movebutton(touch, _pad.buttonLeft);
 				}
 			}
-                }
+		}
 	}
 
 	function movebutton(touch:flixel.input.touch.FlxTouch, button:flixel.ui.FlxButton) {
@@ -270,7 +266,7 @@ class CastomAndroidControls extends MusicBeatState
 		config.setcontrolmode(curSelected);
 		var daChoice:String = controlitems[Math.floor(curSelected)];
 
-    	        if (daChoice == 'Pad-Custom'){
+		if (daChoice == 'Pad-Custom'){
 			savecustom();
 		}
 	}
@@ -294,10 +290,5 @@ class CastomAndroidControls extends MusicBeatState
 		leftArrow.x = inputvari.x - 60;
 		rightArrow.x = inputvari.x + inputvari.width + 10;
 		inputvari.screenCenter(X);
-	}
-
-	override function destroy()
-	{
-		super.destroy();
 	}
 }

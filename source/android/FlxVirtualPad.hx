@@ -145,8 +145,8 @@ class FlxVirtualPad extends FlxSpriteGroup
 		button.solid = false;
 		button.immovable = true;
 		button.scrollFactor.set();
-
-    	        #if FLX_DEBUG
+		
+		#if FLX_DEBUG
 		button.ignoreDrawDebug = true;
 		#end
 
@@ -197,15 +197,15 @@ enum FlxDPadMode
 	UP_LEFT_RIGHT;
 	FULL;
 	RIGHT_FULL;
-        DUO;
-        NONE;
+	DUO;
+	NONE;
 }
 
 enum FlxActionMode
 {
 	A;
-        B;
- 	D;   
+	B;
+	D;
 	A_B;
 	A_B_C;
 	A_B_E;

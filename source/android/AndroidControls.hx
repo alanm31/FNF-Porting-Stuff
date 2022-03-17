@@ -89,8 +89,8 @@ class AndroidControls extends FlxSpriteGroup
 				initControler(0);
 			case VIRTUALPAD_LEFT:
 				initControler(1);
-                        case VIRTUALPAD_CUSTOM:
- 				initControler(2);                               
+			case VIRTUALPAD_CUSTOM:
+				initControler(2);
 			case DUO:
 				initControler(3);
 			case HITBOX:
@@ -156,8 +156,8 @@ class AndroidControls extends FlxSpriteGroup
 enum ControlsGroup {
 	VIRTUALPAD_RIGHT;
 	VIRTUALPAD_LEFT;
-        VIRTUALPAD_CUSTOM;
-        DUO;
+	VIRTUALPAD_CUSTOM;
+	DUO;
 	HITBOX;
 	KEYBOARD;
 }
