@@ -8,15 +8,15 @@ import flixel.tweens.FlxEase;
 import flixel.ui.FlxButton;
 import flixel.FlxSprite;
 
-class Hitbox extends FlxSpriteGroup
+class FlxHitbox extends FlxSpriteGroup
 {
-	var hitbox_hint:FlxSprite;
-
 	public var hitbox:FlxSpriteGroup;
 	public var buttonLeft:FlxButton;
 	public var buttonDown:FlxButton;
 	public var buttonUp:FlxButton;
 	public var buttonRight:FlxButton;
+
+	var hitbox_hint:FlxSprite;
 	
 	public function new()
 	{

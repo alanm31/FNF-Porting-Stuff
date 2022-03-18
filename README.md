@@ -102,7 +102,7 @@ add
 ```haxe
 #if android
 import flixel.group.FlxGroup;
-import android.Hitbox;
+import android.FlxHitbox;
 import android.FlxVirtualPad;
 import flixel.ui.FlxButton;
 #end
@@ -137,7 +137,7 @@ add
 		action.add(input);
 	}
 
-	public function setHitBox(hitbox:Hitbox) 
+	public function setHitBox(hitbox:FlxHitbox) 
 	{
 		inline forEachBound(Control.NOTE_UP, (action, state) -> addbuttonNOTES(action, hitbox.buttonUp, state));
 		inline forEachBound(Control.NOTE_DOWN, (action, state) -> addbuttonNOTES(action, hitbox.buttonDown, state));
@@ -420,11 +420,11 @@ add
 		switch (androidc.mode)
 		{
 			case VIRTUALPAD_RIGHT | VIRTUALPAD_LEFT | VIRTUALPAD_CUSTOM:
-				controls.setVirtualPadNOTES(androidc._virtualPad, FULL, NONE);
+				controls.setVirtualPadNOTES(androidc.vpad, FULL, NONE);
 			case DUO:
-				controls.setVirtualPadNOTES(androidc._virtualPad, DUO, NONE);
+				controls.setVirtualPadNOTES(androidc.vpad, DUO, NONE);
 			case HITBOX:
-				controls.setHitBox(androidc._hitbox);
+				controls.setHitBox(androidc.hbox);
 			default:
 		}
 
