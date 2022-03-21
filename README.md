@@ -1,8 +1,6 @@
 # FNF-Porting-Stuff
 The Things im using when i port a mod to android
 
-# This methot is focused for psych engine mods ports so if you want to port anoder mods with it you have to modify some code
-
 ## Instructions:
 
 1. You Need to install AndroidTools, Extension-Webview and to replace the linc_luajit
