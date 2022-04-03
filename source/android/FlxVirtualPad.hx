@@ -154,6 +154,7 @@ class FlxVirtualPad extends FlxSpriteGroup
 		}
 
 		antialiasing = antialiasing;
+		alpha = 0.75;
 	}
 
 	public function createButton(x:Float, y:Float, width:Int, height:Int, frames:String):FlxButton
