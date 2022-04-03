@@ -37,7 +37,7 @@ class FlxVirtualPad extends FlxSpriteGroup
 	public var dPad:FlxSpriteGroup;
 	public var actions:FlxSpriteGroup;
 
-	public function new(?DPad:FlxDPadMode, ?Action:FlxActionMode)
+	public function new(?DPad:FlxDPadMode, ?Action:FlxActionMode, ?antialiasing:Bool = false)
 	{
 		super();
 
@@ -152,6 +152,8 @@ class FlxVirtualPad extends FlxSpriteGroup
 				actions.add(add(buttonA = createButton(FlxG.width - 44 * 3, FlxG.height - 45 * 3, 44 * 3, 45 * 3, "a")));						
 			case NONE:
 		}
+
+		antialiasing = antialiasing;
 	}
 
 	public function createButton(x:Float, y:Float, width:Int, height:Int, frames:String):FlxButton
