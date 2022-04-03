@@ -17,7 +17,7 @@ class FlxHitbox extends FlxSpriteGroup
 	public var buttonUp:FlxButton;
 	public var buttonRight:FlxButton;
 	
-	public function new(?antialiasing:Bool = false)
+	public function new(?alpha:Float = 0.75, ?antialiasing:Bool = true)
 	{
 		super();
 
@@ -37,7 +37,7 @@ class FlxHitbox extends FlxSpriteGroup
 		add(hitbox_hint);
 
 		antialiasing = antialiasing;
-		alpha = 0.75;
+		alpha = alpha;
 	}
 
 	public function createhitbox(x:Float = 0, y:Float = 0, frames:String) 
