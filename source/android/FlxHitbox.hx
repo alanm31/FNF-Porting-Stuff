@@ -34,10 +34,10 @@ class FlxHitbox extends FlxSpriteGroup
 
 		var hitbox_hint:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('androidcontrols/hitbox_hint'));
 		hitbox_hint.antialiasing = antialiasing;
-		hitbox_hint.alpha = 0.75;
 		add(hitbox_hint);
 
 		antialiasing = antialiasing;
+		alpha = 0.75;
 	}
 
 	public function createhitbox(x:Float = 0, y:Float = 0, frames:String) 
