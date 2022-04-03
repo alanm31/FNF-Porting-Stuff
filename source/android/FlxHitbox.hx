@@ -16,10 +16,16 @@ class FlxHitbox extends FlxSpriteGroup
 	public var buttonDown:FlxButton;
 	public var buttonUp:FlxButton;
 	public var buttonRight:FlxButton;
+
+	public var orgAlpha:Float = 0.75;
+	public var orgAntialiasing:Bool = true;
 	
 	public function new(?alphaAlt:Float = 0.75, ?antialiasingAlt:Bool = true)
 	{
 		super();
+
+		orgAlpha = alphaAlt;
+		orgAntialiasing = antialiasingAlt;
 
 		buttonLeft = new FlxButton(0, 0);
 		buttonDown = new FlxButton(0, 0);
@@ -33,18 +39,17 @@ class FlxHitbox extends FlxSpriteGroup
 		hitbox.add(add(buttonRight = createhitbox(960, 0, "right")));
 
 		var hitbox_hint:FlxSprite = new FlxSprite(0, 0).loadGraphic(Paths.image('androidcontrols/hitbox_hint'));
-		hitbox_hint.antialiasing = antialiasing;
+		hitbox_hint.antialiasing = orgAntialiasing;
+		hitbox_hint.alpha = orgAlpha;
 		add(hitbox_hint);
-
-		antialiasing = antialiasingAlt;
-		alpha = alphaAlt;
 	}
 
 	public function createhitbox(x:Float = 0, y:Float = 0, frames:String) 
         {
 		var button = new FlxButton(x, y);
 		button.loadGraphic(FlxGraphic.fromFrame(getFrames().getByName(frames)));
-		button.alpha = 0;
+		button.antialiasing = orgAntialiasing;
+		button.alpha = 0;// sorry but I can't hard lock the hitbox alpha
 		button.onDown.callback = function (){FlxTween.num(0, 0.75, 0.075, {ease:FlxEase.circInOut}, function(alpha:Float){ button.alpha = alpha;});};
 		button.onUp.callback = function (){FlxTween.num(0.75, 0, 0.1, {ease:FlxEase.circInOut}, function(alpha:Float){ button.alpha = alpha;});}
 		button.onOut.callback = function (){FlxTween.num(button.alpha, 0, 0.2, {ease:FlxEase.circInOut}, function(alpha:Float){ button.alpha = alpha;});}
