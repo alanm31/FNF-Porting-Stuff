@@ -9,7 +9,7 @@ To Install Them You Need To Open Command prompt/PowerShell And To Tipe
 ```cmd
 haxelib git AndroidTools https://github.com/jigsaw-4277821/AndroidTools.git
 
-haxelib git extension-webview https://github.com/jigsaw-4277821/extension-webview.git
+haxelib git extension-videoview https://github.com/jigsaw-4277821/extension-videoview.git
 
 haxelib remove linc_luajit
 
@@ -66,7 +66,7 @@ Than, After the Libraries, or where the packeges are located
 ```
 add
 ```xml
-        <haxelib name="extension-webview" if="android"/>
+        <haxelib name="extension-videoview" if="android"/>
         <haxelib name="AndroidTools" if="android"/>
 
         <config:android permission="android.permission.READ_EXTERNAL_STORAGE" if="android"/>
@@ -616,7 +616,7 @@ import vlc.VlcBitmap;
 add
 ```haxe
 #elseif android
-import extension.webview.WebView;
+import extension.videoview.VideoView;
 import android.AndroidTools;
 ```	
 
@@ -627,34 +627,14 @@ next, before those lines add
 ```	
 add
 ```haxe
-	#elseif android
-        WebView.playVideo(AndroidTools.getFileUrl(name), true);
-        WebView.onComplete = function(){
-		if (finishCallback != null){
-			finishCallback();
-		}
-        }
-```	
-this will use .html file to play a video
+	        #elseif android
 
-to play a video in this format you need the html file, the video(recomanded .mp4) and a blank png
-
-the html shoud be like this
-```html
-<html>
-    <body style="background-color: black;">
-        <video style="position: fixed; top: 0; left: 0; width: 100%; height: 100%;" audiobuffer="true" autoplay="true" poster="blank.png" preload="auto" id="player">
-            <source src="video.mp4" type="video/mp4"></source>
-        </video>
-    </body>
-</html>
-
-<script type='text/javascript'>
-    document.getElementById('player').addEventListener('ended', myHandler, false);
-    function myHandler(e) {
-        document.location.href='http://exitme/';
-    }
-</script>
+                VideoView.playVideo(AndroidTools.getFileUrl(name));
+                VideoView.onCompletion = function(){
+		        if (finishCallback != null){
+			        finishCallback();
+		        }
+                }
 ```	
 
 This will work only in you phone storage only!!
