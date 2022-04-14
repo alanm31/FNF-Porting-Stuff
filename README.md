@@ -199,9 +199,11 @@ add
 				inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonUI(action, virtualPad.buttonA, state));
 				inline forEachBound(Control.BACK, (action, state) -> addbuttonUI(action, virtualPad.buttonB, state));	
                         case A_B_C_X_Y_Z:
-                                //nothing
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonUI(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addbuttonUI(action, virtualPad.buttonB, state));
                         case FULL:
-                                //nothing
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonUI(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addbuttonUI(action, virtualPad.buttonB, state));
 			case NONE:
 		}
 	}
@@ -260,11 +262,13 @@ add
 				inline forEachBound(Control.BACK, (action, state) -> addbuttonNOTES(action, virtualPad.buttonB, state));
 			case A_B_C_X_Y:
 				inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonNOTES(action, virtualPad.buttonA, state));
-				inline forEachBound(Control.BACK, (action, state) -> addbuttonNOTES(action, virtualPad.buttonB, state));			
+				inline forEachBound(Control.BACK, (action, state) -> addbuttonNOTES(action, virtualPad.buttonB, state));
                         case A_B_C_X_Y_Z:
-                                //nothing
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonNOTES(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addbuttonNOTES(action, virtualPad.buttonB, state));
                         case FULL:
-                                //nothing                
+				inline forEachBound(Control.ACCEPT, (action, state) -> addbuttonNOTES(action, virtualPad.buttonA, state));
+				inline forEachBound(Control.BACK, (action, state) -> addbuttonNOTES(action, virtualPad.buttonB, state));           
 			case NONE:
 		}
 	}
@@ -411,6 +415,13 @@ add
 	#end
 
 	#if android
+	public function removeVirtualPad() {
+		controls.removeFlxInput(trackedinputsUI);
+		remove(_virtualpad);
+	}
+	#end
+
+	#if android
 	public function addAndroidControls() {
                 androidc = new AndroidControls();
 
@@ -489,6 +500,13 @@ add
 		controls.setVirtualPadUI(_virtualpad, DPad, Action);
 		trackedinputsUI = controls.trackedinputsUI;
 		controls.trackedinputsUI = [];
+	}
+	#end
+
+	#if android
+	public function removeVirtualPad() {
+		controls.removeFlxInput(trackedinputsUI);
+		remove(_virtualpad);
 	}
 	#end
 
