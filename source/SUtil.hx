@@ -142,7 +142,8 @@ class SUtil
         #end
     }
 
-    static public function copyContentFron(copyPath:String, savePath:String) {
+    //THANKS SIROX
+    static public function copyContent(copyPath:String, savePath:String) {
         if (!FileSystem.exists(savePath)){
 	    var bytes = OpenFlAssets.getBytes(copyPath);
 	    sys.io.File.saveBytes(savePath, bytes);
