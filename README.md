@@ -658,7 +658,7 @@ add
                 }
 ```	
 
-This will work only in you phone storage only!!
+This will work only in your phone storage only!!
 
 12. File Saver
 
