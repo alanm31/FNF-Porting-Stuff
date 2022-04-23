@@ -41,7 +41,7 @@ On Those Lines
 	<define name="MODS_ALLOWED" if="desktop"/>
 	<define name="LUA_ALLOWED" if="windows"/>
 	<define name="ACHIEVEMENTS_ALLOWED" />
-	<define name="VIDEOS_ALLOWED" if="web || desktop" unless="32bits"/>
+	<define name="VIDEOS_ALLOWED" if="web || windows" unless="32bits"/>
 	<define name="PSYCH_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS ON TITLE SCREEN -->
 
 ```
