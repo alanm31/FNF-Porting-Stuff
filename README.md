@@ -52,7 +52,7 @@ Replace It With
 	<define name="MODS_ALLOWED" if="desktop || android"/>
 	<define name="LUA_ALLOWED" if="windows || android"/>
 	<define name="ACHIEVEMENTS_ALLOWED" />
-	<define name="VIDEOS_ALLOWED" if="web || desktop || android" unless="32bits"/>
+	<define name="VIDEOS_ALLOWED" if="web || windows || android" unless="32bits"/>
 	<define name="PSYCH_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS ON TITLE SCREEN -->
 
 ```
