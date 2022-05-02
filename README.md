@@ -622,45 +622,9 @@ on Main.hx after
 add
 ```haxe
  	        SUtil.gameCrashCheck();
-```	
+```
 
-11. Video Cutscenes
-
-before those imports
-on FlxVideo.hx after
-```haxe
-#else
-import openfl.events.Event;
-import vlc.VlcBitmap;
-#end
-```	
-add
-```haxe
-#elseif android
-import extension.videoview.VideoView;
-import android.AndroidTools;
-```	
-
-next, before those lines add
-```haxe
-	#elseif desktop
-	// by Polybius, check out PolyEngine! https://github.com/polybiusproxy/PolyEngine
-```	
-add
-```haxe
-	        #elseif android
-
-                VideoView.playVideo(AndroidTools.getFileUrl(name));
-                VideoView.onCompletion = function(){
-		        if (finishCallback != null){
-			        finishCallback();
-		        }
-                }
-```	
-
-This will work only in your phone storage only!!
-
-12. File Saver
+11. File Saver
 
 This is a future to save files with sys.io.File
 This is the code
