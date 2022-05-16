@@ -31,7 +31,7 @@ On This Line
 Replace It With
 ```xml
 	<!--Mobile-specific-->
-	<window if="mobile" orientation="landscape" fullscreen="true" width="1280" height="720" resizable="false"/>
+	<window if="mobile" orientation="landscape" fullscreen="true" width="1280" height="720" resizable="false" allow-shaders="true" require-shaders="true"/>
 
 ```
 
@@ -69,9 +69,6 @@ add
         <haxelib name="extension-videoview" if="android"/>
         <haxelib name="extension-androidtools" if="android"/>
 
-        <config:android permission="android.permission.READ_EXTERNAL_STORAGE" if="android"/>
-        <config:android permission="android.permission.WRITE_EXTERNAL_STORAGE" if="android"/>
-
 ```
 
 The last thing Before
@@ -88,6 +85,12 @@ add
 	<haxedef name="HXCPP_CHECK_POINTER" if="release" />
 	<haxedef name="HXCPP_STACK_LINE" if="release" />
 
+	<!-- Android stuff: thanks Yoshi Engine -->
+	<android permission="android.permission.ACCESS_NETWORK_STATE"/>
+	<android permission="android.permission.INTERNET"/>
+	<android permission="android.permission.VIBRATE"/>
+	<android permission="android.permission.WRITE_EXTERNAL_STORAGE"/>
+	<android permission="android.permission.READ_EXTERNAL_STORAGE"/>
 ```
 
 4. Setup the Controls.hx
@@ -493,7 +496,6 @@ add
 	#if android
 	var _virtualpad:FlxVirtualPad;
 	var trackedinputsUI:Array<FlxActionInput> = [];
-	var trackedinputsNOTES:Array<FlxActionInput> = [];
 	#end
 	
 	#if android
@@ -525,7 +527,6 @@ add
 	override function destroy() {
 		#if android
 		controls.removeFlxInput(trackedinputsUI);
-		controls.removeFlxInput(trackedinputsNOTES);	
 		#end	
 		
 		super.destroy();
