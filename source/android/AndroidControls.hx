@@ -67,7 +67,7 @@ class AndroidControls extends FlxSpriteGroup {
 
 	var config:Config;
 
-	public function new() {
+	public function new(alphaAlt:Float = 0.75, antialiasingAlt:Bool = true) {
 		super();
 
 		config = new Config();
@@ -76,40 +76,42 @@ class AndroidControls extends FlxSpriteGroup {
 
 		switch (mode){
 			case VIRTUALPAD_RIGHT:
-				initControler(0);
+				initControler(0, alphaAlt, antialiasingAlt);
 			case VIRTUALPAD_LEFT:
-				initControler(1);
+				initControler(1, alphaAlt, antialiasingAlt);
 			case VIRTUALPAD_CUSTOM:
-				initControler(2);
+				initControler(2, alphaAlt, antialiasingAlt);
 			case DUO:
-				initControler(3);
+				initControler(3, alphaAlt, antialiasingAlt);
 			case HITBOX:
-				initControler(4);
+				initControler(4, alphaAlt, antialiasingAlt);
 			case KEYBOARD:// nothing
+				initControler(5);
 		}
 	}
 
-	function initControler(vpadMode:Int) {
+	function initControler(vpadMode:Int, alphaAlt:Float = 0.75, antialiasingAlt:Bool = true) {
 		switch (vpadMode){
 			case 0:
-				vpad = new FlxVirtualPad(RIGHT_FULL, NONE, 0.75, ClientPrefs.globalAntialiasing);	
+				vpad = new FlxVirtualPad(RIGHT_FULL, NONE, alphaAlt, antialiasingAlt);	
 				add(vpad);						
 			case 1:
-				vpad = new FlxVirtualPad(FULL, NONE, 0.75, ClientPrefs.globalAntialiasing);
+				vpad = new FlxVirtualPad(FULL, NONE, alphaAlt, antialiasingAlt);
 				add(vpad);			
 			case 2:
-				vpad = new FlxVirtualPad(FULL, NONE, 0.75, ClientPrefs.globalAntialiasing);
+				vpad = new FlxVirtualPad(FULL, NONE, alphaAlt, antialiasingAlt);
 				vpad = config.loadcustom(vpad);
 				add(vpad);	
 			case 3:
-				vpad = new FlxVirtualPad(DUO, NONE, 0.75, ClientPrefs.globalAntialiasing);
+				vpad = new FlxVirtualPad(DUO, NONE, alphaAlt, antialiasingAlt);
 				add(vpad);		
 			case 4:
-				hbox = new FlxHitbox(0.75, ClientPrefs.globalAntialiasing);
+				hbox = new FlxHitbox(alphaAlt, antialiasingAlt);
 				add(hbox);		
+			case 5:
+				//nothing
 			default:
-				vpad = new FlxVirtualPad(RIGHT_FULL, NONE, 0.75, ClientPrefs.globalAntialiasing);	
-				add(vpad);					
+				//nothing
 		}
 	}
 

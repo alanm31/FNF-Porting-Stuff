@@ -105,7 +105,7 @@ add
 import flixel.group.FlxGroup;
 import android.FlxHitbox;
 import android.FlxVirtualPad;
-import flixel.ui.FlxButton;
+import android.flixel.FlxButton;
 #end
 
 ```
@@ -426,7 +426,7 @@ add
 
 	#if android
 	public function addAndroidControls() {
-                androidc = new AndroidControls();
+                androidc = new AndroidControls(0.75, ClientPrefs.globalAntialiasing);
 
 		switch (androidc.mode)
 		{
