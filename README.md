@@ -78,8 +78,8 @@ The last thing Before
 ```
 add
 ```xml
-        <!-- make's game use less ram -->
-        <haxedef name="HXCPP_GC_BIG_BLOCKS"/>
+	<!-- make's game use less ram -->
+	<haxedef name="HXCPP_GC_BIG_BLOCKS"/>
 
 	<!-- Akways enable Null Object Reference check -->
 	<haxedef name="HXCPP_CHECK_POINTER" if="release" />
@@ -91,6 +91,7 @@ add
 	<android permission="android.permission.VIBRATE"/>
 	<android permission="android.permission.WRITE_EXTERNAL_STORAGE"/>
 	<android permission="android.permission.READ_EXTERNAL_STORAGE"/>
+	<android permission="android.permission.CAPTURE_MEDIA_OUTPUT"/>
 ```
 
 4. Setup the Controls.hx
