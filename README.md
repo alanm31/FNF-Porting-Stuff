@@ -25,14 +25,12 @@ On This Line
 ```xml
 	<!--Mobile-specific-->
 	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" resizable="false"/>
-
 ```
 
 Replace It With
 ```xml
 	<!--Mobile-specific-->
 	<window if="mobile" orientation="landscape" fullscreen="true" width="1280" height="720" resizable="false" allow-shaders="true" require-shaders="true"/>
-
 ```
 
 On Those Lines
@@ -43,7 +41,6 @@ On Those Lines
 	<define name="ACHIEVEMENTS_ALLOWED" />
 	<define name="VIDEOS_ALLOWED" if="web || windows" unless="32bits"/>
 	<define name="PSYCH_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS ON TITLE SCREEN -->
-
 ```
 
 Replace It With
@@ -54,7 +51,17 @@ Replace It With
 	<define name="ACHIEVEMENTS_ALLOWED" />
 	<define name="VIDEOS_ALLOWED" if="web || windows || android" unless="32bits"/>
 	<define name="PSYCH_WATERMARKS"/> <!-- DELETE THIS TO REMOVE WATERMARKS ON TITLE SCREEN -->
+```
 
+Before Those Lines
+```xml
+	<assets path="assets/preload" rename="assets" exclude="*.ogg" if="web"/>
+	<assets path="assets/preload" rename="assets" exclude="*.mp3"  unless="web"/>
+```
+
+add
+```xml
+	<assets path="assets/preload/images/androidcontrols" if="android"/> <!-- to not have the android assets in another builds -saw -->
 ```
 
 Than, After the Libraries, or where the packeges are located
@@ -62,19 +69,16 @@ Than, After the Libraries, or where the packeges are located
 	<haxelib name="faxe" if='switch'/>
 	<!--<haxelib name="polymod"/> -->
 	<haxelib name="discord_rpc" if="desktop"/>
-
 ```
 add
 ```xml
         <haxelib name="extension-videoview" if="android"/>
         <haxelib name="extension-androidtools" if="android"/>
-
 ```
 
 The last thing Before
 ```xml
 	<!-- _________________________________ Custom _______________________________ -->
-
 ```
 add
 ```xml
@@ -99,7 +103,6 @@ after those lines
 ```haxe
 import flixel.input.actions.FlxActionSet;
 import flixel.input.keyboard.FlxKey;
-
 ```
 add
 
@@ -110,7 +113,6 @@ import android.FlxHitbox;
 import android.FlxVirtualPad;
 import android.flixel.FlxButton;
 #end
-
 ```
 
 before those lines
