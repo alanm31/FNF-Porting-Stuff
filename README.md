@@ -430,7 +430,7 @@ add
 
 	#if android
 	public function addAndroidControls() {
-        androidc = new AndroidControls();
+		androidc = new AndroidControls();
 
 		switch (androidc.mode)
 		{
@@ -456,6 +456,24 @@ add
 		add(androidc);
 	}
 	#end
+
+	#if android
+	public function addPadCamera() {
+		var camcontrol = new flixel.FlxCamera();
+		FlxG.cameras.add(camcontrol);
+		camcontrol.bgColor.alpha = 0;
+		_virtualpad.cameras = [camcontrol];
+	}
+	#end
+	
+	override function destroy() {
+		#if android
+		controls.removeFlxInput(trackedinputsNOTES);
+		controls.removeFlxInput(trackedinputsUI);
+		#end	
+		
+		super.destroy();
+	}
 ```
 
 6. Setup MusicBeatSubstate.hx
@@ -499,7 +517,7 @@ add
 	#end
 
 	#if android
-        public function addPadCamera() {
+	public function addPadCamera() {
 		var camcontrol = new flixel.FlxCamera();
 		FlxG.cameras.add(camcontrol);
 		camcontrol.bgColor.alpha = 0;
@@ -621,7 +639,7 @@ SUtil.saveContent("your file name", ".txt", "lololol");
 13. Do an action when you press on the screen
 ```haxe
 		#if android
-                var justTouched:Bool = false;
+		var justTouched:Bool = false;
 
 		for (touch in FlxG.touches.list)
 		{
@@ -632,10 +650,10 @@ SUtil.saveContent("your file name", ".txt", "lololol");
 		}
 		#end
 
-                if (controls.ACCEPT #if android || justTouched #end)
-                {
-                        //Will do something
-                }
+		if (controls.ACCEPT #if android || justTouched #end)
+		{
+			//Will do something
+		}
 ```
 
 ## Credits:
