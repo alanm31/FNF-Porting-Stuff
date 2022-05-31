@@ -405,7 +405,7 @@ after those lines
 add
 ```haxe
 	#if android
-	var _virtualpad:FlxVirtualPad;
+	public var _virtualpad:FlxVirtualPad;
 	var androidc:AndroidControls;
 	var trackedinputsUI:Array<FlxActionInput> = [];
 	var trackedinputsNOTES:Array<FlxActionInput> = [];
@@ -495,7 +495,7 @@ after those lines
 add
 ```haxe
 	#if android
-	var _virtualpad:FlxVirtualPad;
+	public var _virtualpad:FlxVirtualPad;
 	var trackedinputsUI:Array<FlxActionInput> = [];
 	#end
 	
