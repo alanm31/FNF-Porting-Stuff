@@ -109,9 +109,9 @@ add
 ```haxe
 #if android
 import flixel.group.FlxGroup;
-import android.FlxHitbox;
-import android.FlxVirtualPad;
 import android.flixel.FlxButton;
+import android.flixel.FlxHitbox;
+import android.flixel.FlxVirtualPad;
 #end
 ```
 
@@ -392,7 +392,7 @@ in the lines you import things add
 #if android
 import flixel.input.actions.FlxActionInput;
 import android.AndroidControls.AndroidControls;
-import android.FlxVirtualPad;
+import android.flixel.FlxVirtualPad;
 #end
 ```
 
@@ -482,7 +482,7 @@ in the lines you import things add
 ```haxe
 #if android
 import flixel.input.actions.FlxActionInput;
-import android.FlxVirtualPad;
+import android.flixel.FlxVirtualPad;
 #end
 ```
 
