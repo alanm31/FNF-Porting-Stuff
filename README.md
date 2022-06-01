@@ -61,7 +61,7 @@ Before Those Lines
 
 add
 ```xml
-	<assets path="assets/preload/images/androidcontrols" if="android"/> <!-- to not have the android assets in another builds -saw -->
+	<assets path="assets/preload/images/android" if="android"/> <!-- to not have the android assets in another builds -saw -->
 ```
 
 Than, After the Libraries, or where the packeges are located
