@@ -47,7 +47,7 @@ class AndroidControlsMenu extends MusicBeatState
 		titleText.alpha = 0.4;
 		add(titleText);
 
-		resetbutton = new FlxButton(FlxG.width - 200, 50, "Exit");
+		resetbutton = new FlxButton(FlxG.width - 200, 50, "Reset Positions");
 		resetbutton.setGraphicSize(Std.int(resetbutton.width) * 3);
 		resetbutton.label.setFormat(null, 16, 0x333333, "center");
 		resetbutton.color = FlxColor.fromRGB(255, 0, 0);
@@ -187,6 +187,7 @@ class AndroidControlsMenu extends MusicBeatState
 
 		if (daChoice == 'Pad-Custom')
 		{
+			resetbutton.visible = true;
 			upPozition.visible = true;
 			downPozition.visible = true;
 			leftPozition.visible = true;
@@ -194,6 +195,7 @@ class AndroidControlsMenu extends MusicBeatState
 		}
 		else
 		{
+			resetbutton.visible = false;
 			upPozition.visible = false;
 			downPozition.visible = false;
 			leftPozition.visible = false;
