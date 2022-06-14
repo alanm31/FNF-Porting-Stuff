@@ -50,7 +50,7 @@ class AndroidControlsMenu extends MusicBeatState
 		resetButton = new FlxButton(FlxG.width - 200, 50, "Reset", function()
 		{
 			if (resetButton.visible)
-				openSubState(new Prompt('This action will clear current positions of the pad.\n\nProceed?', 0, reset(), null, false));
+				openSubState(new Prompt('This action will clear current positions of the pad.\n\nProceed?', 0, function() {reset();}, null, false));
 		});
 		resetButton.setGraphicSize(Std.int(resetButton.width) * 3);
 		resetButton.label.setFormat(null, 16, 0x333333, "center");
