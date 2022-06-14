@@ -14,6 +14,6 @@
 	<SubTexture name="s" x="1188" y="254" width="396" height="127" frameX="0" frameY="0" frameWidth="396" frameHeight="127"/>
 	<SubTexture name="v" x="0" y="381" width="396" height="127" frameX="0" frameY="0" frameWidth="396" frameHeight="127"/>
 	<SubTexture name="x" x="396" y="381" width="396" height="127" frameX="0" frameY="0" frameWidth="396" frameHeight="127"/>
-	<SubTexture name="y" x="92" y="381" width="396" height="127" frameX="0" frameY="0" frameWidth="396" frameHeight="127"/>
+	<SubTexture name="y" x="792" y="381" width="396" height="127" frameX="0" frameY="0" frameWidth="396" frameHeight="127"/>
 	<SubTexture name="z" x="1188" y="381" width="396" height="127" frameX="0" frameY="0" frameWidth="396" frameHeight="127"/>
 </TextureAtlas>

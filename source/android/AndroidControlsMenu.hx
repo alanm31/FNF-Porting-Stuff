@@ -30,7 +30,6 @@ class AndroidControlsMenu extends MusicBeatState
 	var bindButton:FlxButton;
 	var resetButton:FlxButton;
 	var config:Config;
-	var daChoice:String;
 
 	override function create()
 	{
@@ -120,8 +119,6 @@ class AndroidControlsMenu extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		daChoice = controlitems[Math.floor(curSelected)];
-
 		leftArrow.x = inputvari.x - 60;
 		rightArrow.x = inputvari.x + inputvari.width + 10;
 		inputvari.screenCenter(X);
@@ -155,6 +152,8 @@ class AndroidControlsMenu extends MusicBeatState
 			curSelected = 0;
 	
 		inputvari.changeText(controlitems[curSelected]);
+
+		var daChoice:String = controlitems[Math.floor(curSelected)];
 
 		switch (daChoice)
 		{
@@ -207,6 +206,8 @@ class AndroidControlsMenu extends MusicBeatState
 
 	function trackButton(touch:FlxTouch):Void
 	{
+		var daChoice:String = controlitems[Math.floor(curSelected)];
+
 		if (daChoice == 'Pad-Custom')
 		{
 			if (buttonIsTouched)
@@ -241,11 +242,10 @@ class AndroidControlsMenu extends MusicBeatState
 
 	function moveButton(touch:FlxTouch, button:FlxButton):Void
 	{
+		button.x = touch.x - button.width / 2;
+		button.y = touch.y - button.height / 2;
+
 		bindButton = button;
-
-		button.x = touch.x - button.getMidpoint().x;
-		button.y = touch.y - button.getMidpoint().y;
-
 		buttonIsTouched = true;
 	}
 
@@ -261,20 +261,22 @@ class AndroidControlsMenu extends MusicBeatState
 	{
 		config.setcontrolmode(curSelected);
 
+		var daChoice:String = controlitems[Math.floor(curSelected)];
+
 		if (daChoice == 'Pad-Custom')
 			config.savecustom(vpad);
 	}
 
 	function reset():Void
 	{
-		vpad.buttonUp.y = FlxG.height - 66 - 116 * 3;
-		vpad.buttonUp.x = FlxG.width - 86 * 3;
-		vpad.buttonDown.y = FlxG.height - 66 - 45 * 3;
-		vpad.buttonDown.x = FlxG.width - 86 * 3;
-		vpad.buttonRight.y = FlxG.height - 66 - 81 * 3;
-		vpad.buttonRight.x = FlxG.width - 44 * 3;
-		vpad.buttonLeft.y = FlxG.height - 66 - 81 * 3;
-		vpad.buttonLeft.x = FlxG.width - 128 * 3;
+		vpad.buttonUp.y = FlxG.height - 300;
+		vpad.buttonUp.x = FlxG.width - 258;
+		vpad.buttonDown.y = FlxG.height - 195;
+		vpad.buttonDown.x = FlxG.width - 258;
+		vpad.buttonRight.y = FlxG.height - 341;
+		vpad.buttonRight.x = FlxG.width - 132;
+		vpad.buttonLeft.y = FlxG.height - 341;
+		vpad.buttonLeft.x = FlxG.width - 384;
 	}
 
 	function loadCustom():Void
