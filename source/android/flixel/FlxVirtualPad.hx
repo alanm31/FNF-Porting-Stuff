@@ -18,7 +18,6 @@ import openfl.utils.ByteArray;
  * @original author Ka Wing Chin
  * @modification's author: Saw (M.A. Jigsaw)
  */
-
 class FlxVirtualPad extends FlxSpriteGroup
 {
 	public var buttonLeft:FlxButton;

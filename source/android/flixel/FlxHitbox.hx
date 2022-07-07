@@ -19,7 +19,6 @@ import openfl.utils.ByteArray;
  * @original author: luckydog
  * @modifications author: Saw (M.A. Jigsaw)
  */
-
 class FlxHitbox extends FlxSpriteGroup
 {
 	public var buttonLeft:FlxButton;
