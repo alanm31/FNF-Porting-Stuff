@@ -2,7 +2,7 @@
 
 The Things im using when i port a mod to android
 
-### This shoud be used for fnf 0.2.8 update and the engine that have this version of the game
+### This shoud be used for FNF 0.2.8 update and the engine that have this version of the game
 
 ## Instructions:
 
