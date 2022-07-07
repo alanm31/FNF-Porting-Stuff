@@ -40,10 +40,10 @@ class SUtil
 				Permissions.requestPermissions([PermissionsList.WRITE_EXTERNAL_STORAGE, PermissionsList.READ_EXTERNAL_STORAGE]);
 
 				/**
-				 * Basicaly for now i can't force the app to stop while it requst a android permission, so this make the app to stop while it request the specific permission!
+				 * Basically for now i can't force the app to stop while its requesting a android permission, so this makes the app to stop while its requesting the specific permission
 				 */
 				SUtil.applicationAlert('Permissions? ',
-					'IF you accepted the permissions all are good!' + "\nIf you didn't expect a crash" + 'Press Ok to see what happens');
+					'If you accepted the permissions all are good!' + "\nIf you didn't expect a crash" + 'Press Ok to see what happens');
 			}
 			else
 			{
@@ -87,7 +87,7 @@ class SUtil
 	}
 
 	/**
-	 * this will returm the external storage path that will be used for the game
+	 * This returns the external storage path that the game will use
 	 */
 	public static function getPath():String
 	{
@@ -99,7 +99,7 @@ class SUtil
 	}
 
 	/**
-	 * uncaught error handler original made by: sqirra-rng
+	 * Uncaught error handler original made by: sqirra-rng
 	 */
 	public static function uncaughtErrorHandler()
 	{
@@ -139,7 +139,7 @@ class SUtil
 			File.saveContent(path, errMsg + "\n");
 		}
 		catch (x:Exception)
-			SUtil.applicationAlert('Error!', "Chouldn't save the crash file becuase: " + x);
+			SUtil.applicationAlert('Error!', "Clouldn't save the crash dump because: " + x);
 
 		Sys.println(errMsg);
 		Sys.println("Crash dump saved in " + Path.normalize(path));
@@ -179,7 +179,7 @@ class SUtil
 				File.saveBytes(savePath, OpenFlAssets.getBytes(copyPath));
 		}
 		catch (x:Exception)
-			SUtil.applicationAlert('Error!', "Chouldn't copy the file becuase: " + x);
+			SUtil.applicationAlert('Error!', "Clouldn't copy the file becuase: " + x);
 	}
 	#end
 }
