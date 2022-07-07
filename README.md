@@ -11,13 +11,7 @@ The Things im using when i port a mod to android
 To Install Them You Need To Open Command prompt/PowerShell And To Tipe
 ```cmd
 haxelib git extension-androidtools https://github.com/jigsaw-4277821/extension-androidtools.git
-
 haxelib git extension-videoview https://github.com/jigsaw-4277821/extension-videoview.git
-
-haxelib remove linc_luajit
-
-haxelib git linc_luajit https://github.com/jigsaw-4277821/linc_luajit.git
-
 ```
 
 2. Download the repository code and paste it in your source code folder
