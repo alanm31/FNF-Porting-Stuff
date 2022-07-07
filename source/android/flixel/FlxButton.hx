@@ -15,12 +15,12 @@ import flixel.text.FlxText;
 import flixel.util.FlxDestroyUtil;
 import flixel.input.touch.FlxTouch;
 
-// Mofifications by saw (m.a. jigsaw)
 class FlxButton extends FlxTypedButton<FlxText>
 {
 	public static inline var NORMAL:Int = 0;
 	public static inline var HIGHLIGHT:Int = 1;
 	public static inline var PRESSED:Int = 2;
+
 	public var text(get, set):String;
 
 	public function new(X:Float = 0, Y:Float = 0, ?Text:String, ?OnClick:Void->Void)
@@ -204,9 +204,7 @@ class FlxTypedButton<T:FlxSprite> extends FlxSprite implements IFlxInput
 		super.drawDebug();
 
 		if (_spriteLabel != null)
-		{
 			_spriteLabel.drawDebug();
-		}
 	}
 	#end
 
@@ -240,29 +238,20 @@ class FlxTypedButton<T:FlxSprite> extends FlxSprite implements IFlxInput
 		var overlapFound = checkTouchOverlap();
 
 		if (currentInput != null && currentInput.justReleased && overlapFound)
-		{
 			onUpHandler();
-		}
 
 		if (status != FlxButton.NORMAL && (!overlapFound || (currentInput != null && currentInput.justReleased)))
-		{
 			onOutHandler();
-		}
 	}
 
 	function checkTouchOverlap():Bool
 	{
 		var overlap = false;
 		for (camera in cameras)
-		{
 			for (touch in FlxG.touches.list)
-			{
 				if (checkInput(touch, touch, touch.justPressedPosition, camera))
-				{
 					overlap = true;
-				}
-			}
-		}
+
 		return overlap;
 	}
 
@@ -293,13 +282,9 @@ class FlxTypedButton<T:FlxSprite> extends FlxSprite implements IFlxInput
 		else if (status == FlxButton.NORMAL)
 		{
 			if (allowSwiping && input.pressed)
-			{
 				onDownHandler();
-			}
 			else
-			{
 				onOverHandler();
-			}
 		}
 	}
 
