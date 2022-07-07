@@ -2,13 +2,13 @@
 
 The Things im using when i port a mod to android
 
-### This shoud be used for FNF 0.2.8 update and the engine that have this version of the game
+### This should be used for the FNF 0.2.8 update and engines that have this version of FNF
 
 ## Instructions:
 
-1. You Need to install extension-androidtools, Extension-Webview and to replace the linc_luajit
+1. You Need to install extension-androidtools, Extension-Webview and replace linc_luajit
 
-To Install Them You Need To Open Command prompt/PowerShell And To Tipe
+To Install Them You Need To Open Command prompt/PowerShell And To Type
 ```cmd
 haxelib git extension-androidtools https://github.com/jigsaw-4277821/extension-androidtools.git
 haxelib git extension-videoview https://github.com/jigsaw-4277821/extension-videoview.git
@@ -16,7 +16,7 @@ haxelib git extension-videoview https://github.com/jigsaw-4277821/extension-vide
 
 2. Download the repository code and paste it in your source code folder
 
-3. You Need to add in project.xml those things
+3. You Need to add in project.xml these things
 
 On This Line
 ```xml
@@ -36,7 +36,7 @@ Add
 	<assets path="assets/android" if="android"/> <!-- to not have the android assets in another builds -saw -->
 ```
 
-Than, After the Libraries, or where the packeges are located add
+Then, After the Libraries, or where the packeges are located add
 
 ```xml
         <haxelib name="extension-videoview" if="android"/>
@@ -60,9 +60,9 @@ Add
 	<android permission="android.permission.READ_EXTERNAL_STORAGE"/>
 ```
 
-4. Setup the Controls.hx
+4. Setup Controls.hx
 
-after those lines
+after these lines
 ```haxe
 import flixel.input.actions.FlxActionSet;
 import flixel.input.keyboard.FlxKey;
@@ -77,7 +77,7 @@ import android.flixel.FlxVirtualPad;
 #end
 ```
 
-before those lines
+before these lines
 ```haxe
 	override function update()
 	{
@@ -220,7 +220,7 @@ add
 	#end
 ```
 
-and instead of those lines
+and instead of these lines
 ```haxe
 	public function bindKeys(control:Control, keys:Array<FlxKey>)
 	{
@@ -317,7 +317,7 @@ import flixel.util.FlxDestroyUtil;
 #end
 ```
 
-after those lines
+after these lines
 ```haxe
 	inline function get_controls():Controls
 		return PlayerSettings.player1.controls;
@@ -437,7 +437,7 @@ import flixel.util.FlxDestroyUtil;
 #end
 ```
 
-after those lines
+after these lines
 ```haxe
 	inline function get_controls():Controls
 		return PlayerSettings.player1.controls;
@@ -499,7 +499,7 @@ add
 	}
 ```
 
-And Somehow you finised to add the android controls to your psych engine copy
+And somehow you finished adding the android controls to your psych engine copy
 
 now on every state/substate add
 ```haxe
@@ -512,11 +512,11 @@ now on every state/substate add
 	addPadCamera();
 	#end
 
-	//in states, those needs to be added before super.create();
-	//in substates, in fuction new at the last line add those
+	//in states, these need to be added before super.create();
+	//in substates, in fuction new at the last line add these
 
 	//on Playstate.hx after all
-	//obj.camera = ...
+	//obj.cameras = [...] 
 	//add
 	#if android
 	addAndroidControls();
@@ -556,14 +556,14 @@ you can set one with
 #if android || FlxG.android.justReleased.BACK #end
 ```
 
-9. sys.FileSystem and sys.io.File
+9. On sys.FileSystem and sys.io.File
 
-this is not working in your game storage but on phone storage will work with this
+this is not working with app storage but on phone storage it will work with this
 
 ```haxe
 SUtil.getPath() + 
 ```
-this will make the game to use the phone storage
+this will make the game use the phone storage
 but you will have to add one thing in Your source
 
 in Main.hx before 
@@ -575,7 +575,7 @@ add
 ```haxe
 SUtil.check();
 ```
-this will chack for android storage permisions and for the assets/mods directory
+this will check for android storage permisions and the assets/mods directories
 
 10. On Crash Application Alert
 
@@ -590,15 +590,16 @@ SUtil.uncaughtErrorHandler();
 
 11. File Saver
 
-This is a future to save files with sys.io.File
+This is a feature to save files with sys.io.File
 This is the code
 ```haxe
 SUtil.saveContent("your file name", ".txt", "lololol");
 
-//The file location where is saved, will be where the assets and mods are located in phone storage in system-saves folder
+//The file will be where the assets and mods are located in phone storage in system-saves folder
 ```
 
 13. Do an action when you press on the screen
+
 ```haxe
 		#if android
 		var justTouched:Bool = false;
@@ -615,7 +616,7 @@ SUtil.saveContent("your file name", ".txt", "lololol");
 ```
 
 ## Credits:
-* Saw (M.A. JIGSAW) me - doing the rest code, utils, pad buttons and anoder things
-* luckydog7 - original code for android controls
+* Saw (M.A. JIGSAW) me - Doing the rest of the code, utils, pad buttons and other things
+* luckydog7 - Original code for android controls
 * HayatoKawajiri - Hitbox designer
 * Goldie - Pad designer
