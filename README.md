@@ -38,7 +38,7 @@ Add
 Then, After the Libraries, or where the packeges are located add
 
 ```xml
-        <haxelib name="extension-videoview" if="android"/>
+        <haxelib name="extension-androidtools" if="android"/>
 ```
 
 Add
