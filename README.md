@@ -345,7 +345,7 @@ add
 			controls.removeFlxInput(trackedinputsUI);
 
 		if (virtualPad != null)
-			remove(virtualPad);
+			virtualPad.destroy();
 	}
 
 	public function addAndroidControls()
@@ -381,7 +381,7 @@ add
 			controls.removeFlxInput(trackedinputsNOTES);
 
 		if (androidControls != null)
-			remove(androidControls);
+			androidControls.destroy();
 	}
 
 	public function addPadCamera()
@@ -463,7 +463,7 @@ add
 			controls.removeFlxInput(trackedinputsUI);
 
 		if (virtualPad != null)
-			remove(virtualPad);
+			virtualPad.destroy();
 	}
 
 	public function addPadCamera()
