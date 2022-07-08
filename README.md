@@ -8,7 +8,7 @@ The Things im using when i port a mod to android
 
 1. You Need to install extension-androidtools, Extension-Webview and replace linc_luajit
 
-To Install Them You Need To Open Command prompt/PowerShell And To Type
+To Install Them You Need To Open Command prompt/PowerShell And Type
 ```cmd
 haxelib git extension-androidtools https://github.com/jigsaw-4277821/extension-androidtools.git
 haxelib git extension-videoview https://github.com/jigsaw-4277821/extension-videoview.git
@@ -16,7 +16,7 @@ haxelib git extension-videoview https://github.com/jigsaw-4277821/extension-vide
 
 2. Download the repository code and paste it in your source code folder
 
-3. You Need to add in project.xml these things
+3. You Need to add these things in project.xml
 
 On This Line
 ```xml
@@ -45,10 +45,10 @@ Then, After the Libraries, or where the packeges are located add
 
 Add
 ```xml
-	<!-- make's game use less ram -->
+	<!-- make's the game use less ram -->
 	<haxedef name="HXCPP_GC_BIG_BLOCKS"/>
 
-	<!-- Akways enable Null Object Reference check -->
+	<!-- Always enable Null Object Reference check -->
 	<haxedef name="HXCPP_CHECK_POINTER" if="release" />
 	<haxedef name="HXCPP_STACK_LINE" if="release" />
 
@@ -220,7 +220,7 @@ add
 	#end
 ```
 
-and instead of these lines
+and replace these lines
 ```haxe
 	public function bindKeys(control:Control, keys:Array<FlxKey>)
 	{
@@ -252,7 +252,7 @@ and instead of these lines
 
 ```
 
-add
+with
 ```haxe
         #if !android
 	public function bindKeys(control:Control, keys:Array<FlxKey>)
@@ -515,9 +515,9 @@ now on every state/substate add
 	//in states, these need to be added before super.create();
 	//in substates, in fuction new at the last line add these
 
-	//on Playstate.hx after all
-	//obj.cameras = [...] 
-	//add
+	//on Playstate.hx after all of the
+	//obj.cameras = [...];
+        //things, add
 	#if android
 	addAndroidControls();
 	#end
@@ -611,7 +611,7 @@ SUtil.saveContent("your file name", ".txt", "lololol");
 
 		if (controls.ACCEPT #if android || justTouched #end)
 		{
-			//Will do something
+			//Do something
 		}
 ```
 
