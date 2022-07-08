@@ -136,7 +136,6 @@ class SUtil
 		catch (x:Dynamic)
 			SUtil.applicationAlert('Error!', "Clouldn't save the crash dump because: " + x);
 
-		Sys.println("Crash dump saved in " + Path.normalize(path));
 		System.exit(1);
 	}
 
