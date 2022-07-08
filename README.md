@@ -218,7 +218,7 @@ add
 	#end
 ```
 
-and replace these lines (you can skip this, it's for psych emgine)
+and replace these lines (you can skip this, it's for psych engine)
 ```haxe
 	public function bindKeys(control:Control, keys:Array<FlxKey>)
 	{
