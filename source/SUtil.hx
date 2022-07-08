@@ -43,7 +43,7 @@ class SUtil
 				 * Basically for now i can't force the app to stop while its requesting a android permission, so this makes the app to stop while its requesting the specific permission
 				 */
 				SUtil.applicationAlert('Permissions? ',
-					'If you accepted the permissions you are all good!' + "\nIf you didn't then pexpect a crash" + 'Press Ok to see what happens');
+					'If you accepted the permissions you are all good!' + "\nIf you didn't then expect a crash" + 'Press Ok to see what happens');
 			}
 			else
 			{
@@ -60,7 +60,7 @@ class SUtil
 
 			if (!FileSystem.exists(SUtil.getPath() + 'assets/') && !FileSystem.exists(SUtil.getPath() + 'mods/'))
 			{
-				SUtil.applicationAlert('Error!', "Whoops, seems you didn't extract the files from the .APK!\nPlease watch the tutorial by pressing OK.");
+				SUtil.applicationAlert('Error!', "Whoops, seems like you didn't extract the files from the .APK!\nPlease watch the tutorial by pressing OK.");
 				CoolUtil.browserLoad('https://youtu.be/zjvkTmdWvfU');
 				System.exit(1);
 			}
@@ -69,7 +69,7 @@ class SUtil
 				if (!FileSystem.exists(SUtil.getPath() + 'assets/'))
 				{
 					SUtil.applicationAlert('Error!',
-						"Whoops, seems you didn't extract the assets/assets folder from the .APK!\nPlease watch the tutorial by pressing OK.");
+						"Whoops, seems like you didn't extract the assets/assets folder from the .APK!\nPlease watch the tutorial by pressing OK.");
 					CoolUtil.browserLoad('https://youtu.be/zjvkTmdWvfU');
 					System.exit(1);
 				}
@@ -77,7 +77,7 @@ class SUtil
 				if (!FileSystem.exists(SUtil.getPath() + 'mods/'))
 				{
 					SUtil.applicationAlert('Error!',
-						"Whoops, seems you didn't extract the assets/mods folder from the .APK!\nPlease watch the tutorial by pressing OK.");
+						"Whoops, seems like you didn't extract the assets/mods folder from the .APK!\nPlease watch the tutorial by pressing OK.");
 					CoolUtil.browserLoad('https://youtu.be/zjvkTmdWvfU');
 					System.exit(1);
 				}
