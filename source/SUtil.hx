@@ -6,12 +6,11 @@ import android.PermissionsList;
 import android.os.Build.VERSION;
 import android.os.Environment;
 #end
+import flash.system.System;
 import flixel.FlxG;
 import flixel.util.FlxStringUtil;
-import flash.system.System;
 import haxe.CallStack.StackItem;
 import haxe.CallStack;
-import haxe.Exception;
 import haxe.io.Path;
 import lime.app.Application;
 import openfl.events.UncaughtErrorEvent;
@@ -110,7 +109,6 @@ class SUtil
 	{
 		var errMsg:String = "";
 		var callStack:Array<StackItem> = CallStack.exceptionStack(true);
-		var path:String = SUtil.getPath() + "crash/" + Application.current.meta.get('file') + "_" + FlxStringUtil.formatTime(Sys.time(), true) + ".txt";
 
 		for (stackItem in callStack)
 		{
@@ -123,22 +121,22 @@ class SUtil
 			}
 		}
 
-		errMsg += "\nUncaught Error: " + e.error;
+		errMsg += e.error;
+
+		Sys.println(errMsg);
+		SUtil.applicationAlert('Error!', errMsg);
 
 		try
 		{
 			if (!FileSystem.exists(SUtil.getPath() + "crash/"))
 				FileSystem.createDirectory(SUtil.getPath() + "crash/");
 
-			File.saveContent(path, errMsg + "\n");
+			File.saveContent(SUtil.getPath() + "crash/" + Application.current.meta.get('file') + "_" + FlxStringUtil.formatTime(Sys.time(), true) + ".log", errMsg + "\n");
 		}
-		catch (x:Exception)
+		catch (x:Dynamic)
 			SUtil.applicationAlert('Error!', "Clouldn't save the crash dump because: " + x);
 
-		Sys.println(errMsg);
 		Sys.println("Crash dump saved in " + Path.normalize(path));
-
-		SUtil.applicationAlert('Error!', errMsg);
 		System.exit(1);
 	}
 
@@ -158,7 +156,7 @@ class SUtil
 			File.saveContent(SUtil.getPath() + 'saves/' + fileName + fileExtension, fileData);
 			SUtil.applicationAlert('Done!', 'File Saved Successfully!');
 		}
-		catch (e:Exception)
+		catch (e:Dynamic)
 		{
 			openfl.system.System.setClipboard(fileData);
 			SUtil.applicationAlert('Done!', 'Data Saved to Clipboard Successfully!');
@@ -172,7 +170,7 @@ class SUtil
 			if (!FileSystem.exists(savePath))
 				File.saveBytes(savePath, OpenFlAssets.getBytes(copyPath));
 		}
-		catch (x:Exception)
+		catch (x:Dynamic)
 			SUtil.applicationAlert('Error!', "Clouldn't copy the file because: " + x);
 	}
 	#end
