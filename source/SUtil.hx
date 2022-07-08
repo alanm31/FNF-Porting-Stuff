@@ -43,7 +43,7 @@ class SUtil
 				 * Basically for now i can't force the app to stop while its requesting a android permission, so this makes the app to stop while its requesting the specific permission
 				 */
 				SUtil.applicationAlert('Permissions? ',
-					'If you accepted the permissions all are good!' + "\nIf you didn't expect a crash" + 'Press Ok to see what happens');
+					'If you accepted the permissions you are all good!' + "\nIf you didn't then pexpect a crash" + 'Press Ok to see what happens');
 			}
 			else
 			{
@@ -154,7 +154,7 @@ class SUtil
 	}
 
 	#if android
-	public static function saveContent(fileName:String = 'file', fileExtension:String = '.json', fileData:String = 'you forgot something to add in your code')
+	public static function saveContent(fileName:String = 'file', fileExtension:String = '.json', fileData:String = 'you forgot to add something in your code')
 	{
 		try
 		{
@@ -179,7 +179,7 @@ class SUtil
 				File.saveBytes(savePath, OpenFlAssets.getBytes(copyPath));
 		}
 		catch (x:Exception)
-			SUtil.applicationAlert('Error!', "Clouldn't copy the file becuase: " + x);
+			SUtil.applicationAlert('Error!', "Clouldn't copy the file because: " + x);
 	}
 	#end
 }
