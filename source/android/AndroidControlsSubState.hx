@@ -250,9 +250,11 @@ class AndroidControlsSubState extends FlxSubState
 
 	function moveButton(touch:FlxTouch, button:FlxButton):Void
 	{
-		button.x = touch.x - touch.justPressedPosition.x;
-		button.y = touch.y - touch.justPressedPosition.y;
 		bindButton = button;
+
+		bindButton.x = touch.x - (bindButton.width / 2);
+		bindButton.y = touch.y - (0.5 + (bindButton.height / 2));// to be sure the value wil not have .5 in the back of the button offset -saw
+
 		buttonBinded = true;
 	}
 }

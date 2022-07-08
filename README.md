@@ -6,12 +6,11 @@ The Things im using when i port a mod to android
 
 ## Instructions:
 
-1. You Need to install extension-androidtools, Extension-Webview and replace linc_luajit
+1. You Need to install extension-androidtools
 
-To Install Them You Need To Open Command prompt/PowerShell And Type
+To Install it You Need To Open Command prompt/PowerShell And To Tipe
 ```cmd
 haxelib git extension-androidtools https://github.com/jigsaw-4277821/extension-androidtools.git
-haxelib git extension-videoview https://github.com/jigsaw-4277821/extension-videoview.git
 ```
 
 2. Download the repository code and paste it in your source code folder
@@ -40,7 +39,6 @@ Then, After the Libraries, or where the packeges are located add
 
 ```xml
         <haxelib name="extension-videoview" if="android"/>
-        <haxelib name="extension-androidtools" if="android"/>
 ```
 
 Add
