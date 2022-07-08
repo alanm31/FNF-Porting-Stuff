@@ -252,7 +252,7 @@ and replace these lines (you can skip this, it's for psych engine)
 
 with
 ```haxe
-        #if !android
+	#if !android
 	public function bindKeys(control:Control, keys:Array<FlxKey>)
 	{
 		var copyKeys:Array<FlxKey> = keys.copy();
@@ -289,7 +289,7 @@ with
 		inline forEachBound(control, (action, state) -> addKeys(action, keys, state));
 		#else
 		forEachBound(control, function(action, state) addKeys(action, keys, state));
-		#end	
+		#end
 	}
 
 	public function unbindKeys(control:Control, keys:Array<FlxKey>)
@@ -298,7 +298,7 @@ with
 		inline forEachBound(control, (action, _) -> removeKeys(action, keys));
 		#else
 		forEachBound(control, function(action, _) removeKeys(action, keys));
-		#end		
+		#end
 	}	
 	#end
 ```
