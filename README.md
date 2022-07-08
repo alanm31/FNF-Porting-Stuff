@@ -517,7 +517,7 @@ now on every state/substate add
 
 	//on Playstate.hx after all of the
 	//obj.cameras = [...];
-        //things, add
+	//things, add
 	#if android
 	addAndroidControls();
 	#end
