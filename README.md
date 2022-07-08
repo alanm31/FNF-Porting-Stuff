@@ -522,12 +522,12 @@ now on every state/substate add
 
 	//to make the controls visible the code is
 	#if android
-	androidc.visible = true;
+	androidControls.visible = true;
 	#end
 
 	//to make the controls invisible the code is
 	#if android
-	androidc.visible = false;
+	androidControls.visible = false;
 	#end
 ```
 
@@ -616,5 +616,4 @@ SUtil.saveContent("your file name", ".txt", "lololol");
 ## Credits:
 * Saw (M.A. JIGSAW) me - Doing the rest of the code, utils, pad buttons and other things
 * luckydog7 - Original code for android controls
-* HayatoKawajiri - Hitbox designer
 * Goldie - Pad designer
