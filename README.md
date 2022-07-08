@@ -38,7 +38,7 @@ Add
 Then, After the Libraries, or where the packeges are located add
 
 ```xml
-        <haxelib name="extension-androidtools" if="android"/>
+	<haxelib name="extension-androidtools" if="android"/>
 ```
 
 Add
@@ -218,7 +218,7 @@ add
 	#end
 ```
 
-and replace these lines
+and replace these lines (you can skip this, it's for psych emgine)
 ```haxe
 	public function bindKeys(control:Control, keys:Array<FlxKey>)
 	{
