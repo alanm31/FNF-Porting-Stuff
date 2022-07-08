@@ -1,6 +1,6 @@
 # FNF-Android-Porting
 
-The Things im using when i port a mod to android
+The things im using when i port a mod to android
 
 ### This should be used for the FNF 0.2.8 update and engines that have this version of FNF
 
@@ -50,7 +50,7 @@ Add
 	<haxedef name="HXCPP_CHECK_POINTER" if="release" />
 	<haxedef name="HXCPP_STACK_LINE" if="release" />
 
-	<!-- Android stuff: thanks Yoshi Engine -->
+	<!-- Android permissions -->
 	<android permission="android.permission.ACCESS_NETWORK_STATE"/>
 	<android permission="android.permission.INTERNET"/>
 	<android permission="android.permission.VIBRATE"/>
@@ -345,7 +345,7 @@ add
 			controls.removeFlxInput(trackedinputsUI);
 
 		if (virtualPad != null)
-			virtualPad.destroy();
+			remove(virtualPad);
 	}
 
 	public function addAndroidControls()
@@ -381,7 +381,7 @@ add
 			controls.removeFlxInput(trackedinputsNOTES);
 
 		if (androidControls != null)
-			androidControls.destroy();
+			remove(androidControls);
 	}
 
 	public function addPadCamera()
@@ -463,7 +463,7 @@ add
 			controls.removeFlxInput(trackedinputsUI);
 
 		if (virtualPad != null)
-			virtualPad.destroy();
+			remove(virtualPad);
 	}
 
 	public function addPadCamera()
