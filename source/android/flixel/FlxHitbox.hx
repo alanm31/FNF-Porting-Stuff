@@ -82,7 +82,7 @@ class FlxHitbox extends FlxSpriteGroup
 	public function createHitbox(X:Float, Y:Float, Graphic:String, ?Color:Int, ?OnClick:Void->Void):FlxButton
 	{
 		var button:FlxButton = new FlxButton(X, Y);
-		button.loadGraphic(FlxGraphic.fromFrame(getHitboxInputFrames().getByName(Graphic)));
+		button.loadGraphic(FlxGraphic.fromFrame(FlxAtlasFrames.fromSparrow('assets/android/hitbox.png', 'assets/android/hitbox.xml').getByName(Graphic)));
 		button.setGraphicSize(Std.int(FlxG.width / 4), FlxG.height);
 		button.updateHitbox();
 		button.alpha = 0.00001;
@@ -133,10 +133,5 @@ class FlxHitbox extends FlxSpriteGroup
 			button.onDown.callback = OnClick;
 
 		return button;
-	}
-
-	public static function getHitboxInputFrames():FlxAtlasFrames
-	{
-		return FlxAtlasFrames.fromSparrow('assets/android/hitbox.png', 'assets/android/hitbox.xml');
 	}
 }
