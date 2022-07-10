@@ -14,10 +14,9 @@ import openfl.utils.ByteArray;
 
 /**
  * A hitbox.
- * It's easy to set the callbacks and to customize the layout.
+ * It's easy to customize the layout.
  *
- * @original author: luckydog
- * @modifications author: Saw (M.A. Jigsaw)
+ * @author: Saw (M.A. Jigsaw)
  */
 class FlxHitbox extends FlxSpriteGroup
 {
@@ -85,7 +84,6 @@ class FlxHitbox extends FlxSpriteGroup
 			tween = FlxTween.num(button.alpha, 0.6, 0.06, {ease: FlxEase.circInOut}, function(value:Float)
 			{
 				button.alpha = value;
-				tween = null;
 			});
 		}
 
@@ -97,7 +95,6 @@ class FlxHitbox extends FlxSpriteGroup
 			tween = FlxTween.num(button.alpha, 0.00001, 0.15, {ease: FlxEase.circInOut}, function(value:Float)
 			{
 				button.alpha = value;
-				tween = null;
 			});
 		}
 
@@ -106,10 +103,9 @@ class FlxHitbox extends FlxSpriteGroup
 			if (tween != null)
 				tween.cancel();
 
-			tween = FlxTween.num(button.alpha, 0.00001, 0.15, {ease: FlxEase.circInOut}, function(value:Float)
+			tween = FlxTween.num(button.alpha, 0.00001, 0.2, {ease: FlxEase.circInOut}, function(value:Float)
 			{
 				button.alpha = value;
-				tween = null;
 			});
 		}
 		#if FLX_DEBUG
