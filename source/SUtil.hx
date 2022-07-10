@@ -60,7 +60,7 @@ class SUtil
 			if (!FileSystem.exists(SUtil.getPath() + 'assets/') && !FileSystem.exists(SUtil.getPath() + 'mods/'))
 			{
 				SUtil.applicationAlert('Error!', "Whoops, seems like you didn't extract the files from the .APK!\nPlease watch the tutorial by pressing OK.");
-				CoolUtil.browserLoad('https://youtu.be/zjvkTmdWvfU');
+				FlxG.openURL('https://youtu.be/zjvkTmdWvfU');
 				System.exit(1);
 			}
 			else
