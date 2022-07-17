@@ -20,23 +20,23 @@ import openfl.utils.ByteArray;
  */
 class FlxVirtualPad extends FlxSpriteGroup
 {
-	public var buttonLeft:FlxButton;
-	public var buttonUp:FlxButton;
-	public var buttonRight:FlxButton;
-	public var buttonDown:FlxButton;
-	public var buttonLeft2:FlxButton;
-	public var buttonUp2:FlxButton;
-	public var buttonRight2:FlxButton;
-	public var buttonDown2:FlxButton;
-	public var buttonA:FlxButton;
-	public var buttonB:FlxButton;
-	public var buttonC:FlxButton;
-	public var buttonD:FlxButton;
-	public var buttonE:FlxButton;
-	public var buttonV:FlxButton;
-	public var buttonX:FlxButton;
-	public var buttonY:FlxButton;
-	public var buttonZ:FlxButton;
+	public var buttonLeft:FlxButton = new FlxButton(0, 0);
+	public var buttonUp:FlxButton = new FlxButton(0, 0);
+	public var buttonRight:FlxButton = new FlxButton(0, 0);
+	public var buttonDown:FlxButton = new FlxButton(0, 0);
+	public var buttonLeft2:FlxButton = new FlxButton(0, 0);
+	public var buttonUp2:FlxButton = new FlxButton(0, 0);
+	public var buttonRight2:FlxButton = new FlxButton(0, 0);
+	public var buttonDown2:FlxButton = new FlxButton(0, 0);
+	public var buttonA:FlxButton = new FlxButton(0, 0);
+	public var buttonB:FlxButton = new FlxButton(0, 0);
+	public var buttonC:FlxButton = new FlxButton(0, 0);
+	public var buttonD:FlxButton = new FlxButton(0, 0);
+	public var buttonE:FlxButton = new FlxButton(0, 0);
+	public var buttonV:FlxButton = new FlxButton(0, 0);
+	public var buttonX:FlxButton = new FlxButton(0, 0);
+	public var buttonY:FlxButton = new FlxButton(0, 0);
+	public var buttonZ:FlxButton = new FlxButton(0, 0);
 
 	/**
 	 * Group of directions buttons.
@@ -177,16 +177,7 @@ class FlxVirtualPad extends FlxSpriteGroup
 		buttonZ = null;
 	}
 
-	/**
-	 * @param   X          The x-position of the button.
-	 * @param   Y          The y-position of the button.
-	 * @param   Width      The width of the button.
-	 * @param   Height     The height of the button.
-	 * @param   Graphic    The image of the button. It must contains 3 frames (`NORMAL`, `HIGHLIGHT`, `PRESSED`).
-	 * @param   Color      The color of the button.
-	 * @return  The button
-	 */
-	public function createButton(X:Float, Y:Float, Width:Int, Height:Int, Graphic:String, ?Color:Int = 0xFFFFFF):FlxButton
+	private function createButton(X:Float, Y:Float, Width:Int, Height:Int, Graphic:String, ?Color:Int = 0xFFFFFF):FlxButton
 	{
 		var button:FlxButton = new FlxButton(X, Y);
 		button.frames = FlxTileFrames.fromFrame(FlxAtlasFrames.fromSparrow('assets/android/virtualpad.png', 'assets/android/virtualpad.xml').getByName(Graphic), FlxPoint.get(Width, Height));
