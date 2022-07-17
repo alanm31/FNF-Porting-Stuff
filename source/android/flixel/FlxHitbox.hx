@@ -20,10 +20,10 @@ import openfl.utils.ByteArray;
  */
 class FlxHitbox extends FlxSpriteGroup
 {
-	public var buttonLeft:FlxButton;
-	public var buttonDown:FlxButton;
-	public var buttonUp:FlxButton;
-	public var buttonRight:FlxButton;
+	public var buttonLeft:FlxButton = new FlxButton(0, 0);
+	public var buttonDown:FlxButton = new FlxButton(0, 0);
+	public var buttonUp:FlxButton = new FlxButton(0, 0);
+	public var buttonRight:FlxButton = new FlxButton(0, 0);
 
 	/**
 	 * Group of the hint buttons.
@@ -59,51 +59,41 @@ class FlxHitbox extends FlxSpriteGroup
 		buttonRight = null;
 	}
 
-	/**
-	 * @param   X          The x-position of the button.
-	 * @param   Y          The y-position of the button.
-	 * @param   Color      The color of the button.
-	 * @return  The button
-	 */
-	public function createHitbox(X:Float, Y:Float, Graphic:String, ?Color:Int = 0xFFFFFF):FlxButton
+	private function createHitbox(X:Float, Y:Float, Graphic:String, ?Color:Int = 0xFFFFFF):FlxButton
 	{
+		var buttonTween:FlxTween;
 		var button:FlxButton = new FlxButton(X, Y);
 		button.loadGraphic(FlxGraphic.fromFrame(FlxAtlasFrames.fromSparrow('assets/android/hitbox.png', 'assets/android/hitbox.xml').getByName(Graphic)));
 		button.setGraphicSize(Std.int(FlxG.width / 4), FlxG.height);
 		button.updateHitbox();
 		button.color = Color;
 		button.alpha = 0.00001;
-
-		var tween:FlxTween;
-
 		button.onDown.callback = function()
 		{
-			if (tween != null)
-				tween.cancel();
+			if (buttonTween != null)
+				buttonTween.cancel();
 
-			tween = FlxTween.num(button.alpha, 0.6, 0.06, {ease: FlxEase.circInOut}, function(value:Float)
+			buttonTween = FlxTween.num(button.alpha, 0.6, 0.06, {ease: FlxEase.circInOut}, function(value:Float)
 			{
 				button.alpha = value;
 			});
 		}
-
 		button.onUp.callback = function()
 		{
-			if (tween != null)
-				tween.cancel();
+			if (buttonTween != null)
+				buttonTween.cancel();
 
-			tween = FlxTween.num(button.alpha, 0.00001, 0.15, {ease: FlxEase.circInOut}, function(value:Float)
+			buttonTween = FlxTween.num(button.alpha, 0.00001, 0.15, {ease: FlxEase.circInOut}, function(value:Float)
 			{
 				button.alpha = value;
 			});
 		}
-
 		button.onOut.callback = function()
 		{
-			if (tween != null)
-				tween.cancel();
+			if (buttonTween != null)
+				buttonTween.cancel();
 
-			tween = FlxTween.num(button.alpha, 0.00001, 0.2, {ease: FlxEase.circInOut}, function(value:Float)
+			buttonTween = FlxTween.num(button.alpha, 0.00001, 0.2, {ease: FlxEase.circInOut}, function(value:Float)
 			{
 				button.alpha = value;
 			});
