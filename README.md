@@ -51,11 +51,8 @@ Add
 	<haxedef name="HXCPP_STACK_LINE" if="release" />
 
 	<!-- Android permissions -->
-	<android permission="android.permission.ACCESS_NETWORK_STATE"/>
-	<android permission="android.permission.INTERNET"/>
-	<android permission="android.permission.VIBRATE"/>
-	<android permission="android.permission.WRITE_EXTERNAL_STORAGE"/>
-	<android permission="android.permission.READ_EXTERNAL_STORAGE"/>
+	<android permission="android.permission.WRITE_EXTERNAL_STORAGE" />
+	<android permission="android.permission.READ_EXTERNAL_STORAGE" />
 ```
 
 4. Setup Controls.hx
