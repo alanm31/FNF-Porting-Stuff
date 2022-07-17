@@ -25,11 +25,6 @@ class FlxHitbox extends FlxSpriteGroup
 	public var buttonRight:FlxButton = new FlxButton(0, 0);
 
 	/**
-	 * Group of the hint buttons.
-	 */
-	public var hitbox:FlxSpriteGroup;
-
-	/**
 	 * Create a hitbox.
 	 */
 	public function new()
@@ -38,20 +33,15 @@ class FlxHitbox extends FlxSpriteGroup
 
 		scrollFactor.set();
 
-		hitbox = new FlxSpriteGroup();
-		hitbox.add(buttonLeft = createHint(0, 0, 'left', 0xFFFF00FF));
-		hitbox.add(buttonDown = createHint(FlxG.width / 4, 0, 'down', 0xFF00FFFF));
-		hitbox.add(buttonUp = createHint(FlxG.width / 2, 0, 'up', 0xFF00FF00));
-		hitbox.add(buttonRight = createHint((FlxG.width / 2) + (FlxG.width / 4), 0, 'right', 0xFFFF0000));
-		hitbox.scrollFactor.set();
+		add(buttonLeft = createHint(0, 0, 'left', 0xFFFF00FF));
+		add(buttonDown = createHint(FlxG.width / 4, 0, 'down', 0xFF00FFFF));
+		add(buttonUp = createHint(FlxG.width / 2, 0, 'up', 0xFF00FF00));
+		add(buttonRight = createHint((FlxG.width / 2) + (FlxG.width / 4), 0, 'right', 0xFFFF0000));
 	}
 
 	override function destroy()
 	{
 		super.destroy();
-
-		hitbox = FlxDestroyUtil.destroy(hitbox);
-		hitbox = null;
 
 		buttonLeft = null;
 		buttonDown = null;
@@ -66,6 +56,7 @@ class FlxHitbox extends FlxSpriteGroup
 		hint.loadGraphic(FlxGraphic.fromFrame(FlxAtlasFrames.fromSparrow(Assets.getBitmapData('assets/android/hitbox.png'), Assets.getText('assets/android/hitbox.xml')).getByName(Graphic)));
 		hint.setGraphicSize(Std.int(FlxG.width / 4), FlxG.height);
 		hint.updateHitbox();
+		hint.scrollFactor.set();
 		hint.color = Color;
 		hint.alpha = 0.00001;
 		hint.onDown.callback = function()
