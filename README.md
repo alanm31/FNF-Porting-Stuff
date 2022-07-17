@@ -49,10 +49,6 @@ Add
 	<!-- Always enable Null Object Reference check -->
 	<haxedef name="HXCPP_CHECK_POINTER" if="release" />
 	<haxedef name="HXCPP_STACK_LINE" if="release" />
-
-	<!-- Android permissions -->
-	<android permission="android.permission.WRITE_EXTERNAL_STORAGE" />
-	<android permission="android.permission.READ_EXTERNAL_STORAGE" />
 ```
 
 4. Setup Controls.hx
