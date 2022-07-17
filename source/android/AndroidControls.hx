@@ -3,11 +3,9 @@ package android;
 import android.flixel.FlxHitbox;
 import android.flixel.FlxVirtualPad;
 import flixel.FlxG;
-import flixel.math.FlxPoint;
 import flixel.group.FlxSpriteGroup;
+import flixel.math.FlxPoint;
 import flixel.util.FlxDestroyUtil;
-
-using StringTools;
 
 class AndroidControls extends FlxSpriteGroup
 {
@@ -76,19 +74,19 @@ class AndroidControls extends FlxSpriteGroup
 
 	public static function setMode(mode:Int = 0)
 	{
-		FlxG.save.data.buttonsmode = mode;
+		FlxG.save.data.androidControlsMode = mode;
 		FlxG.save.flush();
 	}
 
 	public static function getMode():Int
 	{
-		if (FlxG.save.data.buttonsmode != null)
-			return FlxG.save.data.buttonsmode;
+		if (FlxG.save.data.androidControlsMode == null)
+			FlxG.save.data.androidControlsMode = 0;
 
-		return 0;
+		return FlxG.save.data.androidControlsMode;
 	}
 
-	public static function setCustom(virtualPad:FlxVirtualPad)
+	public static function setCustomMode(virtualPad:FlxVirtualPad)
 	{
 		if (FlxG.save.data.buttons == null)
 		{
@@ -99,7 +97,6 @@ class AndroidControls extends FlxSpriteGroup
 		else
 		{
 			var tempCount:Int = 0;
-
 			for (buttons in virtualPad)
 			{
 				FlxG.save.data.buttons[tempCount] = FlxPoint.get(buttons.x, buttons.y);
@@ -110,7 +107,7 @@ class AndroidControls extends FlxSpriteGroup
 		FlxG.save.flush();
 	}
 
-	public static function getCustom(virtualPad:FlxVirtualPad):FlxVirtualPad
+	public static function getCustomMode(virtualPad:FlxVirtualPad):FlxVirtualPad
 	{
 		var tempCount:Int = 0;
 
