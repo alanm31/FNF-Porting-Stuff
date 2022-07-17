@@ -43,8 +43,7 @@ class AndroidControls extends FlxSpriteGroup
 				virtualPad = new FlxVirtualPad(LEFT_FULL, NONE);
 				add(virtualPad);
 			case 2:
-				virtualPad = new FlxVirtualPad(RIGHT_FULL, NONE);
-				virtualPad = AndroidControls.getCustom(virtualPad);
+				virtualPad = AndroidControls.getCustomMode(new FlxVirtualPad(RIGHT_FULL, NONE));
 				add(virtualPad);
 			case 3:
 				virtualPad = new FlxVirtualPad(BOTH_FULL, NONE);
@@ -72,7 +71,7 @@ class AndroidControls extends FlxSpriteGroup
 		}
 	}
 
-	public static function setMode(mode:Int = 0)
+	public static function setMode(mode:Int = 0):Void
 	{
 		FlxG.save.data.androidControlsMode = mode;
 		FlxG.save.flush();
@@ -86,7 +85,7 @@ class AndroidControls extends FlxSpriteGroup
 		return FlxG.save.data.androidControlsMode;
 	}
 
-	public static function setCustomMode(virtualPad:FlxVirtualPad)
+	public static function setCustomMode(virtualPad:FlxVirtualPad):Void
 	{
 		if (FlxG.save.data.buttons == null)
 		{

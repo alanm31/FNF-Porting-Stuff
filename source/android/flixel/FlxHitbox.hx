@@ -63,37 +63,37 @@ class FlxHitbox extends FlxSpriteGroup
 	{
 		var hintTween:FlxTween;
 		var hint:FlxButton = new FlxButton(X, Y);
-		hint.loadGraphic(FlxGraphic.fromFrame(FlxAtlasFrames.fromSparrow(Assetd.getBitmapData('assets/android/hitbox.png'), Assetd.getText('assets/android/hitbox.xml')).getByName(Graphic)));
+		hint.loadGraphic(FlxGraphic.fromFrame(FlxAtlasFrames.fromSparrow(Assets.getBitmapData('assets/android/hitbox.png'), Assets.getText('assets/android/hitbox.xml')).getByName(Graphic)));
 		hint.setGraphicSize(Std.int(FlxG.width / 4), FlxG.height);
 		hint.updateHitbox();
 		hint.color = Color;
 		hint.alpha = 0.00001;
 		hint.onDown.callback = function()
 		{
-			if (buttonTween != null)
-				buttonTween.cancel();
+			if (hintTween != null)
+				hintTween.cancel();
 
-			buttonTween = FlxTween.num(hint.alpha, 0.6, 0.06, {ease: FlxEase.circInOut}, function(value:Float)
+			hintTween = FlxTween.num(hint.alpha, 0.6, 0.06, {ease: FlxEase.circInOut}, function(value:Float)
 			{
 				hint.alpha = value;
 			});
 		}
 		hint.onUp.callback = function()
 		{
-			if (buttonTween != null)
-				buttonTween.cancel();
+			if (hintTween != null)
+				hintTween.cancel();
 
-			buttonTween = FlxTween.num(hint.alpha, 0.00001, 0.15, {ease: FlxEase.circInOut}, function(value:Float)
+			hintTween = FlxTween.num(hint.alpha, 0.00001, 0.15, {ease: FlxEase.circInOut}, function(value:Float)
 			{
 				hint.alpha = value;
 			});
 		}
 		hint.onOut.callback = function()
 		{
-			if (buttonTween != null)
-				buttonTween.cancel();
+			if (hintTween != null)
+				hintTween.cancel();
 
-			buttonTween = FlxTween.num(hint.alpha, 0.00001, 0.2, {ease: FlxEase.circInOut}, function(value:Float)
+			hintTween = FlxTween.num(hint.alpha, 0.00001, 0.2, {ease: FlxEase.circInOut}, function(value:Float)
 			{
 				hint.alpha = value;
 			});
