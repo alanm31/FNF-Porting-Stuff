@@ -49,6 +49,10 @@ Add
 	<!-- Always enable Null Object Reference check -->
 	<haxedef name="HXCPP_CHECK_POINTER" if="release" />
 	<haxedef name="HXCPP_STACK_LINE" if="release" />
+
+	<!-- Internet connection stuff -->
+	<android permission="android.permission.ACCESS_NETWORK_STATE"/>
+	<android permission="android.permission.INTERNET"/>
 ```
 
 4. Setup Controls.hx
