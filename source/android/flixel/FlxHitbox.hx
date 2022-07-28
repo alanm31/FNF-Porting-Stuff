@@ -51,7 +51,7 @@ class FlxHitbox extends FlxSpriteGroup
 
 	private function createHint(X:Float, Y:Float, Graphic:String, ?Color:Int = 0xFFFFFF):FlxButton
 	{
-		var hintTween:FlxTween;
+		var hintTween:FlxTween = null;
 		var hint:FlxButton = new FlxButton(X, Y);
 		hint.loadGraphic(FlxGraphic.fromFrame(FlxAtlasFrames.fromSparrow(Assets.getBitmapData('assets/android/hitbox.png'),
 			Assets.getText('assets/android/hitbox.xml'))
