@@ -1,411 +1,616 @@
 package android.flixel;
 
 import flixel.FlxG;
+import flixel.FlxCamera;
 import flixel.FlxSprite;
-import flixel.group.FlxSpriteGroup;
-import flixel.input.touch.FlxTouch;
-import flixel.math.FlxAngle;
-import flixel.math.FlxMath;
+import flixel.graphics.atlas.FlxAtlas;
+import flixel.graphics.atlas.FlxNode;
+import flixel.graphics.frames.FlxTileFrames;
+import flixel.input.FlxInput;
+import flixel.input.FlxPointer;
+import flixel.input.IFlxInput;
 import flixel.math.FlxPoint;
-import flixel.math.FlxRect;
-import flixel.graphics.FlxGraphic;
+import flixel.system.FlxSound;
+import flixel.text.FlxText;
 import flixel.util.FlxDestroyUtil;
-import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.input.touch.FlxTouch;
 import openfl.utils.Assets;
 
 /**
- * A virtual thumbstick - useful for input on mobile devices.
- *
- * @author Ka Wing Chin
- * @modification's authors: El Trusted and Saw (M.A. Jigsaw) to work only with touch and to use custom assets
+ * A simple button class that calls a function when clicked by the touch.
  */
-class FlxJoyStick extends FlxSpriteGroup
+class FlxButton extends FlxTypedButton<FlxText>
 {
-	/**
-	 * Shows the current state of the button.
-	 */
-	public var status:Int = NORMAL;
-
-	public var thumb:FlxSprite;
-
-	/**
-	 * The background of the joystick, also known as the base.
-	 */
-	public var base:FlxSprite;
-
-	/**
-	 * This function is called when the button is released.
-	 */
-	public var onUp:Void->Void;
-
-	/**
-	 * This function is called when the button is pressed down.
-	 */
-	public var onDown:Void->Void;
-
-	/**
-	 * This function is called when the touch goes over the button.
-	 */
-	public var onOver:Void->Void;
-
-	/**
-	 * This function is called when the button is hold down.
-	 */
-	public var onPressed:Void->Void;
-
 	/**
 	 * Used with public variable status, means not highlighted or pressed.
 	 */
-	static inline var NORMAL:Int = 0;
+	public static inline var NORMAL:Int = 0;
 
 	/**
 	 * Used with public variable status, means highlighted (usually from touch over).
 	 */
-	static inline var HIGHLIGHT:Int = 1;
+	public static inline var HIGHLIGHT:Int = 1;
 
 	/**
 	 * Used with public variable status, means pressed (usually from touch click).
 	 */
-	static inline var PRESSED:Int = 2;
+	public static inline var PRESSED:Int = 2;
 
 	/**
-	 * A list of analogs that are currently active.
+	 * Shortcut to setting label.text
 	 */
-	static var _analogs:Array<FlxJoyStick> = [];
+	public var text(get, set):String;
 
 	/**
-	 * The current pointer that's active on the analog.
-	 */
-	var _currentTouch:FlxTouch;
-
-	/**
-	 * Helper array for checking touches
-	 */
-	var _tempTouches:Array<FlxTouch> = [];
-
-	/**
-	 * The area which the joystick will react.
-	 */
-	var _zone:FlxRect = FlxRect.get();
-
-	/**
-	 * The radius in which the stick can move.
-	 */
-	var _radius:Float = 0;
-
-	public var __dir:String = 'None';
-	public var _direction:Float = 0;
-	public var _amount:Float = 0;
-
-	/**
-	 * The speed of easing when the thumb is released.
-	 */
-	var _ease:Float;
-
-	/**
-	 * Create a virtual thumbstick - useful for input on android devices.
+	 * Creates a new `FlxButton` object with a gray background
+	 * and a callback function on the UI thread.
 	 *
-	 * @param   X            The X-coordinate of the point in space.
-	 * @param   Y            The Y-coordinate of the point in space.
-	 * @param   Radius       The radius where the thumb can move. If 0, half the base's width will be used.
-	 * @param   Ease         Used to smoothly back thumb to center. Must be between 0 and (FlxG.updateFrameRate / 60).
+	 * @param   X         The x position of the button.
+	 * @param   Y         The y position of the button.
+	 * @param   Text      The text that you want to appear on the button.
+	 * @param   OnClick   The function to call whenever the button is clicked.
 	 */
-	public function new(X:Float = 0, Y:Float = 0, Radius:Float = 0, Ease:Float = 0.25)
+	public function new(X:Float = 0, Y:Float = 0, ?Text:String, ?OnClick:Void->Void)
+	{
+		super(X, Y, OnClick);
+
+		for (point in labelOffsets)
+			point.set(point.x - 1, point.y + 3);
+
+		initLabel(Text);
+	}
+
+	/**
+	 * Updates the size of the text field to match the button.
+	 */
+	override function resetHelpers():Void
+	{
+		super.resetHelpers();
+
+		if (label != null)
+		{
+			label.fieldWidth = label.frameWidth = Std.int(width);
+			label.size = label.size; // Calls set_size(), don't remove!
+		}
+	}
+
+	inline function initLabel(Text:String):Void
+	{
+		if (Text != null)
+		{
+			label = new FlxText(x + labelOffsets[NORMAL].x, y + labelOffsets[NORMAL].y, 80, Text);
+			label.setFormat(null, 8, 0x333333, 'center');
+			label.alpha = labelAlphas[status];
+			label.drawFrame(true);
+		}
+	}
+
+	inline function get_text():String
+	{
+		return (label != null) ? label.text : null;
+	}
+
+	inline function set_text(Text:String):String
+	{
+		if (label == null)
+		{
+			initLabel(Text);
+		}
+		else
+		{
+			label.text = Text;
+		}
+		return Text;
+	}
+}
+
+/**
+ * A simple button class that calls a function when clicked by the touch.
+ */
+#if !display
+@:generic
+#end
+class FlxTypedButton<T:FlxSprite> extends FlxSprite implements IFlxInput
+{
+	/**
+	 * The label that appears on the button. Can be any `FlxSprite`.
+	 */
+	public var label(default, set):T;
+
+	/**
+	 * What offsets the `label` should have for each status.
+	 */
+	public var labelOffsets:Array<FlxPoint> = [FlxPoint.get(), FlxPoint.get(), FlxPoint.get(0, 1)];
+
+	/**
+	 * What alpha value the label should have for each status. Default is `[0.8, 1.0, 0.5]`.
+	 * Multiplied with the button's `alpha`.
+	 */
+	public var labelAlphas:Array<Float> = [0.8, 1.0, 0.5];
+
+	/**
+	 * What animation should be played for each status.
+	 * Default is ['normal', 'highlight', 'pressed'].
+	 */
+	public var statusAnimations:Array<String> = ['normal', 'highlight', 'pressed'];
+
+	/**
+	 * Whether you can press the button simply by releasing the touch button over it (default).
+	 * If false, the input has to be pressed while hovering over the button.
+	 */
+	public var allowSwiping:Bool = true;
+
+	/**
+	 * Maximum distance a pointer can move to still trigger event handlers.
+	 * If it moves beyond this limit, onOut is triggered.
+	 * Defaults to `Math.POSITIVE_INFINITY` (i.e. no limit).
+	 */
+	public var maxInputMovement:Float = Math.POSITIVE_INFINITY;
+
+	/**
+	 * Shows the current state of the button, either `FlxButton.NORMAL`,
+	 * `FlxButton.HIGHLIGHT` or `FlxButton.PRESSED`.
+	 */
+	public var status(default, set):Int;
+
+	/**
+	 * The properties of this button's `onUp` event (callback function, sound).
+	 */
+	public var onUp(default, null):FlxButtonEvent;
+
+	/**
+	 * The properties of this button's `onDown` event (callback function, sound).
+	 */
+	public var onDown(default, null):FlxButtonEvent;
+
+	/**
+	 * The properties of this button's `onOver` event (callback function, sound).
+	 */
+	public var onOver(default, null):FlxButtonEvent;
+
+	/**
+	 * The properties of this button's `onOut` event (callback function, sound).
+	 */
+	public var onOut(default, null):FlxButtonEvent;
+
+	public var justReleased(get, never):Bool;
+	public var released(get, never):Bool;
+	public var pressed(get, never):Bool;
+	public var justPressed(get, never):Bool;
+
+	/**
+	 * We cast label to a `FlxSprite` for internal operations to avoid Dynamic casts in C++
+	 */
+	var _spriteLabel:FlxSprite;
+
+	/** 
+	 * We don't need an ID here, so let's just use `Int` as the type.
+	 */
+	var input:FlxInput<Int>;
+
+	/**
+	 * The input currently pressing this button, if none, it's `null`. Needed to check for its release.
+	 */
+	var currentInput:IFlxInput;
+
+	var lastStatus = -1;
+
+	/**
+	 * Creates a new `FlxTypedButton` object with a gray background.
+	 *
+	 * @param   X         The x position of the button.
+	 * @param   Y         The y position of the button.
+	 * @param   OnClick   The function to call whenever the button is clicked.
+	 */
+	public function new(X:Float = 0, Y:Float = 0, ?OnClick:Void->Void)
 	{
 		super(X, Y);
 
-		_radius = Radius;
-		_ease = FlxMath.bound(Ease, 0, 60 / FlxG.updateFramerate);
+		loadDefaultGraphic();
 
-		_analogs.push(this);
+		onUp = new FlxButtonEvent(OnClick);
+		onDown = new FlxButtonEvent();
+		onOver = new FlxButtonEvent();
+		onOut = new FlxButtonEvent();
 
-		_point = FlxPoint.get();
+		status = FlxButton.NORMAL;
 
-		createBase();
-		createThumb();
-		createZone();
-
+		// Since this is a UI element, the default scrollFactor is (0, 0)
 		scrollFactor.set();
-		moves = false;
+
+		statusAnimations[FlxButton.HIGHLIGHT] = 'normal';
+		labelAlphas[FlxButton.HIGHLIGHT] = 1;
+
+		input = new FlxInput(0);
 	}
 
-	/**
-	 * Creates the background of the analog stick.
-	 */
-	function createBase(?Graphic:FlxGraphicAsset):Void
+	override public function graphicLoaded():Void
 	{
-		base = new FlxSprite(0,
-			0).loadGraphic(FlxGraphic.fromFrame(FlxAtlasFrames.fromSparrow(Assets.getBitmapData('assets/android/joystick.png'),
-				Assets.getText('assets/android/joystick.xml'))
-				.getByName('base')));
-		base.resetSizeFromFrame();
-		base.x += -base.width * 0.5;
-		base.y += -base.height * 0.5;
-		base.scrollFactor.set();
-		base.solid = false;
+		super.graphicLoaded();
 
-		#if FLX_DEBUG
-		base.ignoreDrawDebug = true;
-		#end
-
-		add(base);
+		setupAnimation('normal', FlxButton.NORMAL);
+		setupAnimation('highlight', FlxButton.HIGHLIGHT);
+		setupAnimation('pressed', FlxButton.PRESSED);
 	}
 
-	/**
-	 * Creates the thumb of the analog stick.
-	 */
-	function createThumb(?Graphic:FlxGraphicAsset):Void
+	function loadDefaultGraphic():Void
 	{
-		thumb = new FlxSprite(0,
-			0).loadGraphic(FlxGraphic.fromFrame(FlxAtlasFrames.fromSparrow(Assets.getBitmapData('assets/android/joystick.png'),
-				Assets.getText('assets/android/joystick.xml'))
-				.getByName('thumb')));
-		thumb.resetSizeFromFrame();
-		thumb.scrollFactor.set();
-		thumb.solid = false;
-
-		#if FLX_DEBUG
-		thumb.ignoreDrawDebug = true;
-		#end
-
-		add(thumb);
+		loadGraphic(Assets.getBitmapData('flixel/images/ui/button.png'), true, 80, 20);
 	}
 
-	/**
-	 * Creates the touch zone. It's based on the size of the background.
-	 * The thumb will react when the touch is in the zone.
-	 */
-	public function createZone():Void
+	function setupAnimation(animationName:String, frameIndex:Int):Void
 	{
-		if (base != null && _radius == 0)
-			_radius = base.width * 0.5;
-
-		_zone.set(x - _radius, y - _radius, 2 * _radius, 2 * _radius);
+		// make sure the animation doesn't contain an invalid frame
+		frameIndex = Std.int(Math.min(frameIndex, animation.frames - 1));
+		animation.add(animationName, [frameIndex]);
 	}
 
 	/**
-	 * Clean up memory.
+	 * Called by the game state when state is changed (if this object belongs to the state)
 	 */
 	override public function destroy():Void
 	{
+		label = FlxDestroyUtil.destroy(label);
+		_spriteLabel = null;
+
+		onUp = FlxDestroyUtil.destroy(onUp);
+		onDown = FlxDestroyUtil.destroy(onDown);
+		onOver = FlxDestroyUtil.destroy(onOver);
+		onOut = FlxDestroyUtil.destroy(onOut);
+
+		labelOffsets = FlxDestroyUtil.putArray(labelOffsets);
+
+		labelAlphas = null;
+		currentInput = null;
+		input = null;
+
 		super.destroy();
-
-		_zone = FlxDestroyUtil.put(_zone);
-
-		_analogs.remove(this);
-		onUp = null;
-		onDown = null;
-		onOver = null;
-		onPressed = null;
-		thumb = null;
-		base = null;
-
-		_currentTouch = null;
-		_tempTouches = null;
 	}
 
 	/**
-	 * Update the behavior.
+	 * Called by the game loop automatically, handles touch over and click detection.
 	 */
 	override public function update(elapsed:Float):Void
 	{
-		var offAll:Bool = true;
+		super.update(elapsed);
 
-		// There is no reason to get into the loop if their is already a pointer on the analog
-		if (_currentTouch != null)
+		if (visible)
 		{
-			_tempTouches.push(_currentTouch);
+			// Update the button, but only if at least either touches are enabled
+			#if FLX_POINTER_INPUT
+			updateButton();
+			#end
+
+			// Trigger the animation only if the button's input status changes.
+			if (lastStatus != status)
+			{
+				updateStatusAnimation();
+				lastStatus = status;
+			}
 		}
-		else
+
+		input.update();
+	}
+
+	function updateStatusAnimation():Void
+	{
+		animation.play(statusAnimations[status]);
+	}
+
+	/**
+	 * Just draws the button graphic and text label to the screen.
+	 */
+	override public function draw():Void
+	{
+		super.draw();
+
+		if (_spriteLabel != null && _spriteLabel.visible)
+		{
+			_spriteLabel.cameras = cameras;
+			_spriteLabel.draw();
+		}
+	}
+
+	#if FLX_DEBUG
+	/**
+	 * Helper function to draw the debug graphic for the label as well.
+	 */
+	override public function drawDebug():Void
+	{
+		super.drawDebug();
+
+		if (_spriteLabel != null)
+		{
+			_spriteLabel.drawDebug();
+		}
+	}
+	#end
+
+	/**
+	 * Stamps button's graphic and label onto specified atlas object and loads graphic from this atlas.
+	 * This method assumes that you're using whole image for button's graphic and image has no spaces between frames.
+	 * And it assumes that label is a single frame sprite.
+	 *
+	 * @param   atlas   Atlas to stamp graphic to.
+	 * @return  Whether the button's graphic and label's graphic were stamped on the atlas successfully.
+	 */
+	public function stampOnAtlas(atlas:FlxAtlas):Bool
+	{
+		var buttonNode:FlxNode = atlas.addNode(graphic.bitmap, graphic.key);
+		var result:Bool = (buttonNode != null);
+
+		if (buttonNode != null)
+		{
+			var buttonFrames:FlxTileFrames = cast frames;
+			var tileSize:FlxPoint = FlxPoint.get(buttonFrames.tileSize.x, buttonFrames.tileSize.y);
+			var tileFrames:FlxTileFrames = buttonNode.getTileFrames(tileSize);
+			this.frames = tileFrames;
+		}
+
+		if (result && label != null)
+		{
+			var labelNode:FlxNode = atlas.addNode(label.graphic.bitmap, label.graphic.key);
+			result = result && (labelNode != null);
+
+			if (labelNode != null)
+				label.frames = labelNode.getImageFrame();
+		}
+
+		return result;
+	}
+
+	/**
+	 * Basic button update logic - searches for overlaps with touches and
+	 * the touch and calls `updateStatus()`.
+	 */
+	function updateButton():Void
+	{
+		if (currentInput != null && currentInput.justReleased && checkTouchOverlap())
+			onUpHandler();
+
+		if (status != FlxButton.NORMAL && (!checkTouchOverlap() || (currentInput != null && currentInput.justReleased)))
+			onOutHandler();
+	}
+
+	function checkTouchOverlap():Bool
+	{
+		var overlap = false;
+
+		for (camera in cameras)
 		{
 			for (touch in FlxG.touches.list)
 			{
-				var touchInserted:Bool = false;
-
-				for (analog in _analogs)
+				if (checkInput(touch, touch, touch.justPressedPosition, camera))
 				{
-					// Check whether the pointer is already taken by another analog.
-					// TODO: check this place. This line was 'if (analog != this && analog._currentTouch != touch && touchInserted == false)'
-					if (analog == this && analog._currentTouch != touch && !touchInserted)
-					{
-						_tempTouches.push(touch);
-						touchInserted = true;
-					}
+					overlap = true;
 				}
 			}
 		}
 
-		for (touch in _tempTouches)
-		{
-			_point.set(touch.screenX, touch.screenY);
-
-			if (!updateAnalog(_point, touch.pressed, touch.justPressed, touch.justReleased))
-			{
-				offAll = false;
-				break;
-			}
-		}
-		#end
-
-		if ((status == HIGHLIGHT || status == NORMAL) && _amount != 0)
-		{
-			_amount -= _amount * _ease * FlxG.updateFramerate / 60;
-
-			if (Math.abs(_amount) < 0.1)
-			{
-				_amount = 0;
-				_direction = 0;
-			}
-		}
-
-		thumb.x = x + Math.cos(_direction) * _amount * _radius - (thumb.width * 0.5);
-		thumb.y = y + Math.sin(_direction) * _amount * _radius - (thumb.height * 0.5);
-
-		if (offAll)
-			status = NORMAL;
-
-		_tempTouches.splice(0, _tempTouches.length);
-
-		if (_direction >= -2.01 && _direction <= -1.12 && _amount >= 0.22)
-			__dir = 'Up';
-		else if (_direction >= -1.11 && _direction <= -0.35 && _amount >= 0.22)
-			__dir = 'Up Right';
-		else if (_direction >= -0.34 && _direction <= 0.37 && _amount >= 0.22)
-			__dir = 'Right';
-		else if (_direction >= 0.38 && _direction <= 1.08 && _amount >= 0.22)
-			__dir = 'Down Right';
-		else if (_direction >= 1.09 && _direction <= 1.94 && _amount >= 0.22)
-			__dir = 'Down';
-		else if (_direction >= 1.95 && _direction <= 2.69 && _amount >= 0.22)
-			__dir = 'Down Left';
-		else if (_direction >= 2.70 && _direction <= 3.14 && _amount >= 0.22 || _direction >= -3.12 && _direction <= -2.76 && _amount >= 0.22)
-			__dir = 'Left';
-		else if (_direction >= -2.75 && _direction <= -2.02 && _amount >= 0.22)
-			__dir = 'Left Up';
-		else
-			__dir = 'None';
-
-		super.update(elapsed);
+		return overlap;
 	}
 
-	function updateAnalog(TouchPoint:FlxPoint, Pressed:Bool, JustPressed:Bool, JustReleased:Bool, ?Touch:FlxTouch):Bool
+	function checkInput(pointer:FlxPointer, input:IFlxInput, justPressedPosition:FlxPoint, camera:FlxCamera):Bool
 	{
-		var offAll:Bool = true;
-
-		if (_zone.containsPoint(TouchPoint) || (status == PRESSED))
+		if (maxInputMovement != Math.POSITIVE_INFINITY
+			&& justPressedPosition.distanceTo(pointer.getScreenPosition(FlxPoint.weak())) > maxInputMovement
+			&& input == currentInput)
 		{
-			offAll = false;
-
-			if (Pressed)
-			{
-				if (Touch != null)
-				{
-					_currentTouch = Touch;
-				}
-
-				status = PRESSED;
-
-				if (JustPressed)
-				{
-					if (onDown != null)
-					{
-						onDown();
-					}
-				}
-
-				if (status == PRESSED)
-				{
-					if (onPressed != null)
-					{
-						onPressed();
-					}
-
-					var dx:Float = TouchPoint.x - x;
-					var dy:Float = TouchPoint.y - y;
-
-					var dist:Float = Math.sqrt(dx * dx + dy * dy);
-
-					if (dist < 1)
-					{
-						dist = 0;
-					}
-
-					_direction = Math.atan2(dy, dx);
-					_amount = Math.min(_radius, dist) / _radius;
-
-					acceleration.x = Math.cos(_direction) * _amount;
-					acceleration.y = Math.sin(_direction) * _amount;
-				}
-			}
-			else if (JustReleased && status == PRESSED)
-			{
-				_currentTouch = null;
-
-				status = HIGHLIGHT;
-
-				if (onUp != null)
-				{
-					onUp();
-				}
-
-				acceleration.set();
-			}
-
-			if (status == NORMAL)
-			{
-				status = HIGHLIGHT;
-
-				if (onOver != null)
-				{
-					onOver();
-				}
-			}
+			currentInput = null;
+		}
+		else if (overlapsPoint(pointer.getWorldPosition(camera, _point), true, camera))
+		{
+			updateStatus(input);
+			return true;
 		}
 
-		return offAll;
+		return false;
 	}
 
 	/**
-	 * Returns the angle in degrees.
+	 * Updates the button status by calling the respective event handler function.
 	 */
-	public function getAngle():Float
+	function updateStatus(input:IFlxInput):Void
 	{
-		return _direction * FlxAngle.TO_DEG;
+		if (input.justPressed)
+		{
+			currentInput = input;
+			onDownHandler();
+		}
+		else if (status == FlxButton.NORMAL)
+		{
+			// Allow 'swiping' to press a button (dragging it over the button while pressed)
+			if (allowSwiping && input.pressed)
+			{
+				onDownHandler();
+			}
+			else
+			{
+				onOverHandler();
+			}
+		}
+	}
+
+	function updateLabelPosition()
+	{
+		if (_spriteLabel != null) // Label positioning
+		{
+			_spriteLabel.x = (pixelPerfectPosition ? Math.floor(x) : x) + labelOffsets[status].x;
+			_spriteLabel.y = (pixelPerfectPosition ? Math.floor(y) : y) + labelOffsets[status].y;
+		}
+	}
+
+	function updateLabelAlpha()
+	{
+		if (_spriteLabel != null && labelAlphas.length > status)
+		{
+			_spriteLabel.alpha = alpha * labelAlphas[status];
+		}
 	}
 
 	/**
-	 * Whether the thumb is pressed or not.
+	 * Internal function that handles the onUp event.
 	 */
-	public var pressed(get, never):Bool;
+	function onUpHandler():Void
+	{
+		status = FlxButton.NORMAL;
+		input.release();
+		currentInput = null;
+		// Order matters here, because onUp.fire() could cause a state change and destroy this object.
+		onUp.fire();
+	}
+
+	/**
+	 * Internal function that handles the onDown event.
+	 */
+	function onDownHandler():Void
+	{
+		status = FlxButton.PRESSED;
+		input.press();
+		// Order matters here, because onDown.fire() could cause a state change and destroy this object.
+		onDown.fire();
+	}
+
+	/**
+	 * Internal function that handles the onOver event.
+	 */
+	function onOverHandler():Void
+	{
+		status = FlxButton.HIGHLIGHT;
+		// Order matters here, because onOver.fire() could cause a state change and destroy this object.
+		onOver.fire();
+	}
+
+	/**
+	 * Internal function that handles the onOut event.
+	 */
+	function onOutHandler():Void
+	{
+		status = FlxButton.NORMAL;
+		input.release();
+		// Order matters here, because onOut.fire() could cause a state change and destroy this object.
+		onOut.fire();
+	}
+
+	function set_label(Value:T):T
+	{
+		if (Value != null)
+		{
+			// use the same FlxPoint object for both
+			Value.scrollFactor.put();
+			Value.scrollFactor = scrollFactor;
+		}
+
+		label = Value;
+		_spriteLabel = label;
+
+		updateLabelPosition();
+
+		return Value;
+	}
+
+	function set_status(Value:Int):Int
+	{
+		status = Value;
+		updateLabelAlpha();
+		return status;
+	}
+
+	override function set_alpha(Value:Float):Float
+	{
+		super.set_alpha(Value);
+		updateLabelAlpha();
+		return alpha;
+	}
+
+	override function set_x(Value:Float):Float
+	{
+		super.set_x(Value);
+		updateLabelPosition();
+		return x;
+	}
+
+	override function set_y(Value:Float):Float
+	{
+		super.set_y(Value);
+		updateLabelPosition();
+		return y;
+	}
+
+	inline function get_justReleased():Bool
+	{
+		return input.justReleased;
+	}
+
+	inline function get_released():Bool
+	{
+		return input.released;
+	}
 
 	inline function get_pressed():Bool
 	{
-		return status == PRESSED;
+		return input.pressed;
+	}
+
+	inline function get_justPressed():Bool
+	{
+		return input.justPressed;
+	}
+}
+
+/** 
+ * Helper function for `FlxButton` which handles its events.
+ */
+private class FlxButtonEvent implements IFlxDestroyable
+{
+	/**
+	 * The callback function to call when this even fires.
+	 */
+	public var callback:Void->Void;
+
+	#if FLX_SOUND_SYSTEM
+	/**
+	 * The sound to play when this event fires.
+	 */
+	public var sound:FlxSound;
+	#end
+
+	/**
+	 * @param   Callback   The callback function to call when this even fires.
+	 * @param   sound      The sound to play when this event fires.
+	 */
+	public function new(?Callback:Void->Void, ?sound:FlxSound)
+	{
+		callback = Callback;
+
+		#if FLX_SOUND_SYSTEM
+		this.sound = sound;
+		#end
 	}
 
 	/**
-	 * Whether the thumb is just pressed or not.
+	 * Cleans up memory.
 	 */
-	public var justPressed(get, never):Bool;
-
-	function get_justPressed():Bool
+	public inline function destroy():Void
 	{
-		if (_currentTouch != null)
-			return _currentTouch.justPressed && status == PRESSED;
+		callback = null;
 
-		return false;
+		#if FLX_SOUND_SYSTEM
+		sound = FlxDestroyUtil.destroy(sound);
+		#end
 	}
 
 	/**
-	 * Whether the thumb is just released or not.
+	 * Fires this event (calls the callback and plays the sound)
 	 */
-	public var justReleased(get, never):Bool;
-
-	function get_justReleased():Bool
+	public inline function fire():Void
 	{
-		if (_currentTouch != null)
-			return _currentTouch.justReleased && status == HIGHLIGHT;
+		if (callback != null)
+			callback();
 
-		return false;
+		#if FLX_SOUND_SYSTEM
+		if (sound != null)
+			sound.play(true);
+		#end
 	}
 }
