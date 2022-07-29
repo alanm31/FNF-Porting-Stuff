@@ -93,13 +93,9 @@ class FlxButton extends FlxTypedButton<FlxText>
 	inline function set_text(Text:String):String
 	{
 		if (label == null)
-		{
 			initLabel(Text);
-		}
 		else
-		{
 			label.text = Text;
-		}
 		return Text;
 	}
 }
@@ -320,9 +316,7 @@ class FlxTypedButton<T:FlxSprite> extends FlxSprite implements IFlxInput
 		super.drawDebug();
 
 		if (_spriteLabel != null)
-		{
 			_spriteLabel.drawDebug();
-		}
 	}
 	#end
 
@@ -365,10 +359,12 @@ class FlxTypedButton<T:FlxSprite> extends FlxSprite implements IFlxInput
 	 */
 	function updateButton():Void
 	{
-		if (currentInput != null && currentInput.justReleased && checkTouchOverlap())
+		var overlapFound = checkTouchOverlap();
+
+		if (currentInput != null && currentInput.justReleased && overlapFound)
 			onUpHandler();
 
-		if (status != FlxButton.NORMAL && (!checkTouchOverlap() || (currentInput != null && currentInput.justReleased)))
+		if (status != FlxButton.NORMAL && (!overlapFound || (currentInput != null && currentInput.justReleased)))
 			onOutHandler();
 	}
 
@@ -377,15 +373,9 @@ class FlxTypedButton<T:FlxSprite> extends FlxSprite implements IFlxInput
 		var overlap = false;
 
 		for (camera in cameras)
-		{
 			for (touch in FlxG.touches.list)
-			{
 				if (checkInput(touch, touch, touch.justPressedPosition, camera))
-				{
 					overlap = true;
-				}
-			}
-		}
 
 		return overlap;
 	}
@@ -421,13 +411,9 @@ class FlxTypedButton<T:FlxSprite> extends FlxSprite implements IFlxInput
 		{
 			// Allow 'swiping' to press a button (dragging it over the button while pressed)
 			if (allowSwiping && input.pressed)
-			{
 				onDownHandler();
-			}
 			else
-			{
 				onOverHandler();
-			}
 		}
 	}
 
@@ -443,9 +429,7 @@ class FlxTypedButton<T:FlxSprite> extends FlxSprite implements IFlxInput
 	function updateLabelAlpha()
 	{
 		if (_spriteLabel != null && labelAlphas.length > status)
-		{
 			_spriteLabel.alpha = alpha * labelAlphas[status];
-		}
 	}
 
 	/**
