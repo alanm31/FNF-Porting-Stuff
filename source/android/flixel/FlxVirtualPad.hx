@@ -131,6 +131,9 @@ class FlxVirtualPad extends FlxSpriteGroup
 		}
 	}
 
+	/**
+	 * Clean up memory.
+	 */
 	override public function destroy():Void
 	{
 		super.destroy();
