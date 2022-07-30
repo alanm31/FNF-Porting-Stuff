@@ -43,14 +43,14 @@ Then, After the Libraries, or where the packeges are located add
 
 Add
 ```xml
-	<!-- make's the game use less ram -->
+	<!--Make's-the-game-use-less-ram-->
 	<haxedef name="HXCPP_GC_BIG_BLOCKS"/>
 
-	<!-- Always enable Null Object Reference check -->
+	<!--Always-enable-Null-Object-Reference-check-->
 	<haxedef name="HXCPP_CHECK_POINTER" if="release" />
 	<haxedef name="HXCPP_STACK_LINE" if="release" />
 
-	<!-- Internet connection stuff -->
+	<!--Android-Internet-connection-stuff-->
 	<android permission="android.permission.ACCESS_NETWORK_STATE"/>
 	<android permission="android.permission.INTERNET"/>
 ```
@@ -329,6 +329,7 @@ add
 	public function addVirtualPad(DPad:FlxDPadMode, Action:FlxActionMode)
 	{
 		virtualPad = new FlxVirtualPad(DPad, Action);
+		virtualPad.alpha = 0.6;
 		add(virtualPad);
 
 		controls.setVirtualPadUI(virtualPad, DPad, Action);
@@ -348,6 +349,7 @@ add
 	public function addAndroidControls()
 	{
 		androidControls = new AndroidControls();
+		androidControls.alpha = 0.6;
 
 		switch (AndroidControls.getMode())
 		{
@@ -447,6 +449,7 @@ add
 	public function addVirtualPad(DPad:FlxDPadMode, Action:FlxActionMode)
 	{
 		virtualPad = new FlxVirtualPad(DPad, Action);
+		virtualPad.alpha = 0.6;
 		add(virtualPad);
 
 		controls.setVirtualPadUI(virtualPad, DPad, Action);
@@ -551,7 +554,7 @@ you can set one with
 #if android || FlxG.android.justReleased.BACK #end
 ```
 
-9. On sys.FileSystem and sys.io.File
+9. On sys.FileSystem and sys.io.File for modding and polymod stuff
 
 this is not working with app storage but on phone storage it will work with this
 
@@ -602,15 +605,13 @@ SUtil.saveContent("your file name", ".txt", "lololol");
 		for (touch in FlxG.touches.list)
 			if (touch.justPressed)
 				justTouched = true;
-		#end
 
-		if (controls.ACCEPT #if android || justTouched #end)
-		{
+		if (justTouched)
 			//Do something
-		}
+		#end
 ```
 
 ## Credits:
 * Saw (M.A. JIGSAW) me - Doing the rest of the code, utils, pad buttons and other things
-* luckydog7 - Original code for android controls
-* Goldie - Pad designer
+* luckydog7 - Original code for android controls and hitbox original design.
+* Goldie - Pad designer.
