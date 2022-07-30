@@ -132,7 +132,7 @@ class SUtil
 					+ 'crash/'
 					+ Application.current.meta.get('file')
 					+ '_'
-					+ FlxStringUtil.formatTime(Sys.time(), true)
+					+ FlxStringUtil.formatTime(Date.now().getTime(), true)
 					+ '.log',
 					errMsg
 					+ "\n");

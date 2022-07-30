@@ -14,7 +14,6 @@ import flixel.system.FlxSound;
 import flixel.text.FlxText;
 import flixel.util.FlxDestroyUtil;
 import flixel.input.touch.FlxTouch;
-import openfl.utils.Assets;
 
 /**
  * A simple button class that calls a function when clicked by the touch.
@@ -230,9 +229,7 @@ class FlxTypedButton<T:FlxSprite> extends FlxSprite implements IFlxInput
 	}
 
 	function loadDefaultGraphic():Void
-	{
-		loadGraphic(Assets.getBitmapData('flixel/images/ui/button.png'), true, 80, 20);
-	}
+		loadGraphic('flixel/images/ui/button.png', true, 80, 20);
 
 	function setupAnimation(animationName:String, frameIndex:Int):Void
 	{
@@ -289,9 +286,7 @@ class FlxTypedButton<T:FlxSprite> extends FlxSprite implements IFlxInput
 	}
 
 	function updateStatusAnimation():Void
-	{
 		animation.play(statusAnimations[status]);
-	}
 
 	/**
 	 * Just draws the button graphic and text label to the screen.
@@ -522,24 +517,16 @@ class FlxTypedButton<T:FlxSprite> extends FlxSprite implements IFlxInput
 	}
 
 	inline function get_justReleased():Bool
-	{
 		return input.justReleased;
-	}
 
 	inline function get_released():Bool
-	{
 		return input.released;
-	}
 
 	inline function get_pressed():Bool
-	{
 		return input.pressed;
-	}
 
 	inline function get_justPressed():Bool
-	{
 		return input.justPressed;
-	}
 }
 
 /** 

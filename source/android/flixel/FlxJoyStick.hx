@@ -17,7 +17,7 @@ import openfl.utils.Assets;
  * A virtual thumbstick - useful for input on mobile devices.
  *
  * @author Ka Wing Chin
- * @modification's authors: El Trusted and Saw (M.A. Jigsaw) to work only with touch and to use custom assets
+ * @modification author Saw (M.A. Jigsaw) to work only with touch and to use custom assets
  */
 class FlxJoyStick extends FlxSpriteGroup
 {
@@ -142,11 +142,9 @@ class FlxJoyStick extends FlxSpriteGroup
 		base.y += -base.height * 0.5;
 		base.scrollFactor.set();
 		base.solid = false;
-
 		#if FLX_DEBUG
 		base.ignoreDrawDebug = true;
 		#end
-
 		add(base);
 	}
 
@@ -160,13 +158,13 @@ class FlxJoyStick extends FlxSpriteGroup
 				Assets.getText('assets/android/joystick.xml'))
 				.getByName('thumb')));
 		thumb.resetSizeFromFrame();
+		thumb.x += -thumb.width * 0.5;
+		thumb.y += -thumb.height * 0.5;
 		thumb.scrollFactor.set();
 		thumb.solid = false;
-
 		#if FLX_DEBUG
 		thumb.ignoreDrawDebug = true;
 		#end
-
 		add(thumb);
 	}
 
@@ -238,7 +236,7 @@ class FlxJoyStick extends FlxSpriteGroup
 		{
 			_point.set(touch.screenX, touch.screenY);
 
-			if (!updateAnalog(_point, touch.pressed, touch.justPressed, touch.justReleased))
+			if (!updateAnalog(_point, touch.pressed, touch.justPressed, touch.justReleased, touch))
 			{
 				offAll = false;
 				break;
@@ -267,7 +265,7 @@ class FlxJoyStick extends FlxSpriteGroup
 		super.update(elapsed);
 	}
 
-	function updateAnalog(TouchPoint:FlxPoint, Pressed:Bool, JustPressed:Bool, JustReleased:Bool, ?Touch:FlxTouch):Bool
+	function updateAnalog(TouchPoint:FlxPoint, Pressed:Bool, JustPressed:Bool, JustReleased:Bool, Touch:FlxTouch):Bool
 	{
 		var offAll:Bool = true;
 
@@ -278,26 +276,17 @@ class FlxJoyStick extends FlxSpriteGroup
 			if (Pressed)
 			{
 				if (Touch != null)
-				{
 					_currentTouch = Touch;
-				}
 
 				status = PRESSED;
 
-				if (JustPressed)
-				{
-					if (onDown != null)
-					{
-						onDown();
-					}
-				}
+				if (JustPressed && onDown != null)
+					onDown();
 
 				if (status == PRESSED)
 				{
 					if (onPressed != null)
-					{
 						onPressed();
-					}
 
 					var dx:Float = TouchPoint.x - x;
 					var dy:Float = TouchPoint.y - y;
@@ -305,9 +294,7 @@ class FlxJoyStick extends FlxSpriteGroup
 					var dist:Float = Math.sqrt(dx * dx + dy * dy);
 
 					if (dist < 1)
-					{
 						dist = 0;
-					}
 
 					_direction = Math.atan2(dy, dx);
 					_amount = Math.min(_radius, dist) / _radius;
@@ -323,9 +310,7 @@ class FlxJoyStick extends FlxSpriteGroup
 				status = HIGHLIGHT;
 
 				if (onUp != null)
-				{
 					onUp();
-				}
 
 				acceleration.set();
 			}
@@ -335,9 +320,7 @@ class FlxJoyStick extends FlxSpriteGroup
 				status = HIGHLIGHT;
 
 				if (onOver != null)
-				{
 					onOver();
-				}
 			}
 		}
 
