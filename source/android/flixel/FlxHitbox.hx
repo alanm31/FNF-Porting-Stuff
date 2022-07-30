@@ -39,6 +39,9 @@ class FlxHitbox extends FlxSpriteGroup
 		add(buttonRight = createHint((FlxG.width / 2) + (FlxG.width / 4), 0, 'right', 0xFFFF0000));
 	}
 
+	/**
+	 * Clean up memory.
+	 */
 	override function destroy()
 	{
 		super.destroy();
