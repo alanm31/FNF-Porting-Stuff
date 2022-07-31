@@ -59,28 +59,47 @@ class SUtil
 			if (!FileSystem.exists(SUtil.getPath()))
 				FileSystem.createDirectory(SUtil.getPath());
 
-			if (!FileSystem.exists(SUtil.getPath() + 'assets/') && !FileSystem.exists(SUtil.getPath() + 'mods/'))
+			if (!FileSystem.exists(SUtil.getPath() + 'assets') && !FileSystem.exists(SUtil.getPath() + 'mods'))
 			{
 				Application.current.window.alert("Whoops, seems like you didn't extract the files from the .APK!\nPlease watch the tutorial by pressing OK.",
 					'Error!');
 				FlxG.openURL('https://youtu.be/zjvkTmdWvfU');
 				System.exit(1);
 			}
+			else if ((FileSystem.exists(SUtil.getPath() + 'assets') && !FileSystem.isDirectory(SUtil.getPath() + 'assets'))
+				&& (FileSystem.exists(SUtil.getPath() + 'mods') && !FileSystem.isDirectory(SUtil.getPath() + 'mods')))
+			{
+				Application.current.window.alert("Why did you created two files called assets and mods instead of copying the directories?, expect a crash.",
+					'Error!');
+				System.exit(1);
+			}
 			else
 			{
-				if (!FileSystem.exists(SUtil.getPath() + 'assets/'))
+				if (!FileSystem.exists(SUtil.getPath() + 'assets'))
 				{
 					Application.current.window.alert("Whoops, seems like you didn't extract the assets/assets folder from the .APK!\nPlease watch the tutorial by pressing OK.",
 						'Error!');
 					FlxG.openURL('https://youtu.be/zjvkTmdWvfU');
 					System.exit(1);
 				}
+				else if (FileSystem.exists(SUtil.getPath() + 'assets') && !FileSystem.isDirectory(SUtil.getPath() + 'assets'))
+				{
+					Application.current.window.alert("Why did you created a file called assets instead of copying the assets directory?, expect a crash.",
+						'Error!');
+					System.exit(1);
+				}
 
-				if (!FileSystem.exists(SUtil.getPath() + 'mods/'))
+				if (!FileSystem.exists(SUtil.getPath() + 'mods'))
 				{
 					Application.current.window.alert("Whoops, seems like you didn't extract the assets/mods folder from the .APK!\nPlease watch the tutorial by pressing OK.",
 						'Error!');
 					FlxG.openURL('https://youtu.be/zjvkTmdWvfU');
+					System.exit(1);
+				}
+				else if (FileSystem.exists(SUtil.getPath() + 'mods') && !FileSystem.isDirectory(SUtil.getPath() + 'mods'))
+				{
+					Application.current.window.alert("Why did you created a file called mods instead of copying the mods directory?, expect a crash.",
+						'Error!');
 					System.exit(1);
 				}
 			}
@@ -128,8 +147,8 @@ class SUtil
 
 			try
 			{
-				if (!FileSystem.exists(SUtil.getPath() + 'crash/'))
-					FileSystem.createDirectory(SUtil.getPath() + 'crash/');
+				if (!FileSystem.exists(SUtil.getPath() + 'crash'))
+					FileSystem.createDirectory(SUtil.getPath() + 'crash');
 
 				File.saveContent(SUtil.getPath() + 'crash/' + Application.current.meta.get('file') + '_'
 					+ FlxStringUtil.formatTime(Date.now().getTime(), true) + '.log',
@@ -147,8 +166,8 @@ class SUtil
 	{
 		try
 		{
-			if (!FileSystem.exists(SUtil.getPath() + 'saves/'))
-				FileSystem.createDirectory(SUtil.getPath() + 'saves/');
+			if (!FileSystem.exists(SUtil.getPath() + 'saves'))
+				FileSystem.createDirectory(SUtil.getPath() + 'saves');
 
 			File.saveContent(SUtil.getPath() + 'saves/' + fileName + fileExtension, fileData);
 			Hardware.toast("File Saved Successfully!", 2);

@@ -501,34 +501,34 @@ And somehow you finished adding the android controls to your psych engine copy
 
 now on every state/substate add
 ```haxe
-	#if android
-	addVirtualPad(LEFT_FULL, A_B);
-	#end
+#if android
+addVirtualPad(LEFT_FULL, A_B);
+#end
 
-	//if you want it to have a camera
-	#if android
-	addPadCamera();
-	#end
+//if you want it to have a camera
+#if android
+addPadCamera();
+#end
 
-	//in states, these need to be added before super.create();
-	//in substates, in fuction new at the last line add these
+//in states, these need to be added before super.create();
+//in substates, in fuction new at the last line add these
 
-	//on Playstate.hx after all of the
-	//obj.cameras = [...];
-	//things, add
-	#if android
-	addAndroidControls();
-	#end
+//on Playstate.hx after all of the
+//obj.cameras = [...];
+//things, add
+#if android
+addAndroidControls();
+#end
 
-	//to make the controls visible the code is
-	#if android
-	androidControls.visible = true;
-	#end
+//to make the controls visible the code is
+#if android
+androidControls.visible = true;
+#end
 
-	//to make the controls invisible the code is
-	#if android
-	androidControls.visible = false;
-	#end
+//to make the controls invisible the code is
+#if android
+androidControls.visible = false;
+#end
 ```
 
 7. Prevent the Android BACK Button
@@ -593,22 +593,22 @@ This is the code
 ```haxe
 SUtil.saveContent("your file name", ".txt", "lololol");
 
-//The file will be where the assets and mods are located in phone storage in system-saves folder
+//The file will be where the assets and mods are located in phone storage in saves folder
 ```
 
 13. Do an action when you press on the screen
 
 ```haxe
-		#if android
-		var justTouched:Bool = false;
+#if android
+var justTouched:Bool = false;
 
-		for (touch in FlxG.touches.list)
-			if (touch.justPressed)
-				justTouched = true;
+for (touch in FlxG.touches.list)
+	if (touch.justPressed)
+		justTouched = true;
 
-		if (justTouched)
-			//Do something
-		#end
+if (justTouched)
+	//Do something
+#end
 ```
 
 ## Credits:
