@@ -39,7 +39,8 @@ class AndroidControlsSubState extends FlxSubState
 	{
 		curSelected = AndroidControls.getMode();
 
-		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.fromHSB(FlxG.random.int(0, 359), FlxG.random.float(0, 0.8), FlxG.random.float(0.3, 1)));
+		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height,
+			FlxColor.fromHSB(FlxG.random.int(0, 359), FlxG.random.float(0, 0.8), FlxG.random.float(0.3, 1)));
 		bg.alpha = 0.00001; // no lag on tween
 		bg.scrollFactor.set();
 		add(bg);
