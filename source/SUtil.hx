@@ -48,7 +48,7 @@ class SUtil
 			}
 			else
 			{
-				Application.current.window.alert('Please grant the storage permissions in app settings' + '\nPress Ok io close the app', 'Permissions?')
+				Application.current.window.alert('Please grant the game storage permissions in app settings' + '\nPress Ok io close the app', 'Permissions?')
 				System.exit(1);
 			}
 		}
@@ -69,7 +69,7 @@ class SUtil
 			else if ((FileSystem.exists(SUtil.getPath() + 'assets') && !FileSystem.isDirectory(SUtil.getPath() + 'assets'))
 				&& (FileSystem.exists(SUtil.getPath() + 'mods') && !FileSystem.isDirectory(SUtil.getPath() + 'mods')))
 			{
-				Application.current.window.alert("Why did you created two files called assets and mods instead of copying the directories?, expect a crash.",
+				Application.current.window.alert("Why did you create two files called assets and mods instead of copying the folders from the apk?, expect a crash.",
 					'Error!');
 				System.exit(1);
 			}
@@ -84,7 +84,7 @@ class SUtil
 				}
 				else if (FileSystem.exists(SUtil.getPath() + 'assets') && !FileSystem.isDirectory(SUtil.getPath() + 'assets'))
 				{
-					Application.current.window.alert("Why did you created a file called assets instead of copying the assets directory?, expect a crash.",
+					Application.current.window.alert("Why did you create a file called assets instead of copying the assets directory from the apk?, expect a crash.",
 						'Error!');
 					System.exit(1);
 				}
@@ -98,7 +98,7 @@ class SUtil
 				}
 				else if (FileSystem.exists(SUtil.getPath() + 'mods') && !FileSystem.isDirectory(SUtil.getPath() + 'mods'))
 				{
-					Application.current.window.alert("Why did you created a file called mods instead of copying the mods directory?, expect a crash.",
+					Application.current.window.alert("Why did you create a file called mods instead of copying the mods directory from the apk?, expect a crash.",
 						'Error!');
 					System.exit(1);
 				}
@@ -120,7 +120,7 @@ class SUtil
 	}
 
 	/**
-	 * Uncaught error handler original made by: sqirra-rng
+	 * Uncaught error handler, original made by: sqirra-rng
 	 */
 	public static function uncaughtErrorHandler()
 	{
