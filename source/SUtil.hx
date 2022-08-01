@@ -155,7 +155,7 @@ class SUtil
 					errMsg + "\n");
 			}
 			catch (e:Dynamic)
-				Hardware.toast("Error!\nClouldn't save the crash dump because: " + e, 2);
+				Hardware.toast("Error!\nClouldn't save the crash dump because:\n" + e, 2);
 
 			System.exit(1);
 		});
@@ -173,7 +173,7 @@ class SUtil
 			Hardware.toast("File Saved Successfully!", 2);
 		}
 		catch (e:Dynamic)
-			Hardware.toast("Error!\nClouldn't save the file because: " + e, 2);
+			Hardware.toast("Error!\nClouldn't save the file because:\n" + e, 2);
 	}
 
 	public static function copyContent(copyPath:String, savePath:String)
@@ -184,7 +184,7 @@ class SUtil
 				File.saveBytes(savePath, OpenFlAssets.getBytes(copyPath));
 		}
 		catch (e:Dynamic)
-			Hardware.toast("Error!\nClouldn't copy the file because: " + e, 2);
+			Hardware.toast("Error!\nClouldn't copy the file because:\n" + e, 2);
 	}
 	#end
 }
