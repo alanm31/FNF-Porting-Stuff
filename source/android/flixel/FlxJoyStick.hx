@@ -22,18 +22,6 @@ import openfl.utils.Assets;
 class FlxJoyStick extends FlxSpriteGroup
 {
 	/**
-	 * Shows the current state of the button.
-	 */
-	public var status:Int = NORMAL;
-
-	public var thumb:FlxSprite;
-
-	/**
-	 * The background of the joystick, also known as the base.
-	 */
-	public var base:FlxSprite;
-
-	/**
 	 * This function is called when the button is released.
 	 */
 	public var onUp:Void->Void;
@@ -67,6 +55,18 @@ class FlxJoyStick extends FlxSpriteGroup
 	 * Used with public variable status, means pressed (usually from touch click).
 	 */
 	static inline var PRESSED:Int = 2;
+
+	/**
+	 * Shows the current state of the button.
+	 */
+	public var status:Int = NORMAL;
+
+	/**
+	 * The background of the joystick, also known as the base.
+	 */
+	public var base:FlxSprite;
+
+	public var thumb:FlxSprite;
 
 	/**
 	 * A list of analogs that are currently active.
