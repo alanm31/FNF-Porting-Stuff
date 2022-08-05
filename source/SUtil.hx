@@ -154,7 +154,9 @@ class SUtil
 					errMsg + "\n");
 			}
 			catch (e:Dynamic)
+				#if android
 				Hardware.toast("Error!\nClouldn't save the crash dump because:\n" + e, 2);
+				#end
 
 			System.exit(1);
 		});
