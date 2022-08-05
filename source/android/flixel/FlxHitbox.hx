@@ -33,10 +33,10 @@ class FlxHitbox extends FlxSpriteGroup
 
 		scrollFactor.set();
 
-		add(buttonLeft = createHint(0, 0, 'left', 0xFFFF00FF));
-		add(buttonDown = createHint(FlxG.width / 4, 0, 'down', 0xFF00FFFF));
-		add(buttonUp = createHint(FlxG.width / 2, 0, 'up', 0xFF00FF00));
-		add(buttonRight = createHint((FlxG.width / 2) + (FlxG.width / 4), 0, 'right', 0xFFFF0000));
+		add(buttonLeft = createHint(0, 0, 'left', 0xFF00FF));
+		add(buttonDown = createHint(FlxG.width / 4, 0, 'down', 0x00FFFF));
+		add(buttonUp = createHint(FlxG.width / 2, 0, 'up', 0x00FF00));
+		add(buttonRight = createHint((FlxG.width / 2) + (FlxG.width / 4), 0, 'right', 0xFF0000));
 	}
 
 	/**
@@ -52,7 +52,7 @@ class FlxHitbox extends FlxSpriteGroup
 		buttonRight = null;
 	}
 
-	private function createHint(X:Float, Y:Float, Graphic:String, ?Color:Int = 0xFFFFFF):FlxButton
+	private function createHint(X:Float, Y:Float, Graphic:String, Color:Int = 0xFFFFFF):FlxButton
 	{
 		var hintTween:FlxTween = null;
 		var hint:FlxButton = new FlxButton(X, Y);
