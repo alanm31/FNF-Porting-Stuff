@@ -1,8 +1,8 @@
-# FNF-Android-Porting
+# FNF-Android-Porting:
 
 The things im using when i port a mod to android
 
-### This should be used for the FNF 0.2.8 update and engines that have this version of FNF
+**This should be used for the FNF 0.2.8 update and engines that have this version of FNF**
 
 ## Instructions:
 
@@ -74,10 +74,10 @@ import android.flixel.FlxVirtualPad;
 
 before these lines
 ```haxe
-	override function update()
-	{
-		super.update();
-	}
+override function update()
+{
+	super.update();
+}
 ```
 
 add
@@ -314,8 +314,8 @@ import flixel.util.FlxDestroyUtil;
 
 after these lines
 ```haxe
-	inline function get_controls():Controls
-		return PlayerSettings.player1.controls;
+inline function get_controls():Controls
+	return PlayerSettings.player1.controls;
 ```
 
 add
@@ -329,7 +329,6 @@ add
 	public function addVirtualPad(DPad:FlxDPadMode, Action:FlxActionMode)
 	{
 		virtualPad = new FlxVirtualPad(DPad, Action);
-		virtualPad.alpha = 0.6;
 		add(virtualPad);
 
 		controls.setVirtualPadUI(virtualPad, DPad, Action);
@@ -349,7 +348,7 @@ add
 	public function addAndroidControls()
 	{
 		androidControls = new AndroidControls();
-		androidControls.alpha = 0.6;
+		androidControls.alpha = 0.8;
 
 		switch (AndroidControls.getMode())
 		{
@@ -436,8 +435,8 @@ import flixel.util.FlxDestroyUtil;
 
 after these lines
 ```haxe
-	inline function get_controls():Controls
-		return PlayerSettings.player1.controls;
+inline function get_controls():Controls
+	return PlayerSettings.player1.controls;
 ```
 
 add
@@ -449,7 +448,6 @@ add
 	public function addVirtualPad(DPad:FlxDPadMode, Action:FlxActionMode)
 	{
 		virtualPad = new FlxVirtualPad(DPad, Action);
-		virtualPad.alpha = 0.6;
 		add(virtualPad);
 
 		controls.setVirtualPadUI(virtualPad, DPad, Action);
