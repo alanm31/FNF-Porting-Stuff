@@ -8,7 +8,7 @@ The things im using when i port a mod to android
 
 1. You Need to install extension-androidtools
 
-To Install it You Need To Open Command prompt/PowerShell And To Tipe
+To Install it You Need To Open Command prompt/PowerShell And Type
 ```cmd
 haxelib git extension-androidtools https://github.com/jigsaw-4277821/extension-androidtools.git
 ```
@@ -605,7 +605,7 @@ for (touch in FlxG.touches.list)
 		justTouched = true;
 
 if (justTouched)
-	//Do something
+	//Your code
 #end
 ```
 
