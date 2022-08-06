@@ -26,7 +26,7 @@ import sys.io.File;
 class SUtil
 {
 	/**
-	 * A simple check function
+	 * A simple function that checks for storage permissions and game files/folders
 	 */
 	public static function check()
 	{
@@ -68,7 +68,7 @@ class SUtil
 			else if ((FileSystem.exists(SUtil.getPath() + 'assets') && !FileSystem.isDirectory(SUtil.getPath() + 'assets'))
 				&& (FileSystem.exists(SUtil.getPath() + 'mods') && !FileSystem.isDirectory(SUtil.getPath() + 'mods')))
 			{
-				Application.current.window.alert("Why did you create two files called assets and mods instead of copying the folders from the apk?, expect a crash.",
+				Application.current.window.alert("Why did you create two files called assets and mods instead of copying the folders from the .APK?, expect a crash.",
 					'Error!');
 				System.exit(1);
 			}
@@ -83,7 +83,7 @@ class SUtil
 				}
 				else if (FileSystem.exists(SUtil.getPath() + 'assets') && !FileSystem.isDirectory(SUtil.getPath() + 'assets'))
 				{
-					Application.current.window.alert("Why did you create a file called assets instead of copying the assets directory from the apk?, expect a crash.",
+					Application.current.window.alert("Why did you create a file called assets instead of copying the assets directory from the .APK?, expect a crash.",
 						'Error!');
 					System.exit(1);
 				}
@@ -97,7 +97,7 @@ class SUtil
 				}
 				else if (FileSystem.exists(SUtil.getPath() + 'mods') && !FileSystem.isDirectory(SUtil.getPath() + 'mods'))
 				{
-					Application.current.window.alert("Why did you create a file called mods instead of copying the mods directory from the apk?, expect a crash.",
+					Application.current.window.alert("Why did you create a file called mods instead of copying the mods directory from the .APK?, expect a crash.",
 						'Error!');
 					System.exit(1);
 				}
