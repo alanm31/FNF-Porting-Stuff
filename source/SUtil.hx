@@ -181,7 +181,7 @@ class SUtil
 	{
 		try
 		{
-			if (!FileSystem.exists(savePath))
+			if (!FileSystem.exists(savePath) && OpenFlAssets.exists(copyPath))
 				File.saveBytes(savePath, OpenFlAssets.getBytes(copyPath));
 		}
 		catch (e:Dynamic)
