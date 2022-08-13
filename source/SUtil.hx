@@ -17,6 +17,8 @@ import openfl.Lib;
 import sys.FileSystem;
 import sys.io.File;
 
+using StringTools;
+
 /**
  * ...
  * @author: Saw (M.A. Jigsaw)
