@@ -53,9 +53,6 @@ Add
 	<!--Android-Internet-connection-stuff-->
 	<android permission="android.permission.ACCESS_NETWORK_STATE"/>
 	<android permission="android.permission.INTERNET"/>
-
-	<!--Android-Audio-Capture-thing-->
-	<android permission="android.permission.CAPTURE_AUDIO_OUTPUT" />
 ```
 
 4. Setup Controls.hx
