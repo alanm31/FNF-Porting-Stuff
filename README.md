@@ -43,15 +43,16 @@ Then, After the Libraries, or where the packeges are located add
 
 Add
 ```xml
-	<!--Make's-the-game-use-less-ram-->
+	<!--Make's-the-Game-use-less-ram-->
 	<haxedef name="HXCPP_GC_BIG_BLOCKS"/>
 
 	<!--Always-enable-Null-Object-Reference-check-->
 	<haxedef name="HXCPP_CHECK_POINTER" if="release" />
 	<haxedef name="HXCPP_STACK_LINE" if="release" />
 
-	<!--Android-Internet-connection-stuff-->
+	<!--Android-Internet-Connection-->
 	<android permission="android.permission.ACCESS_NETWORK_STATE"/>
+	<android permission="android.permission.ACCESS_WIFI_STATE"/>
 	<android permission="android.permission.INTERNET"/>
 ```
 
