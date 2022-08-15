@@ -11,9 +11,9 @@ import haxe.CallStack.StackItem;
 import haxe.CallStack;
 import haxe.io.Path;
 import lime.app.Application;
-import openfl.events.UncaughtErrorEvent;
-import openfl.utils.Assets as OpenFlAssets;
 import openfl.Lib;
+import openfl.events.UncaughtErrorEvent;
+import openfl.utils.Assets;
 import sys.FileSystem;
 import sys.io.File;
 
@@ -147,9 +147,9 @@ class SUtil
 				if (!FileSystem.exists(SUtil.getPath() + 'logs'))
 					FileSystem.createDirectory(SUtil.getPath() + 'logs');
 
-				File.saveContent(SUtil.getPath() + 'logs/' + Application.current.meta.get('file') + '_'
-					+ Date.now().toString().replace(" ", "-").replace(":", "'") + '.log',
-					errMsg + "\n");
+				File.saveContent(SUtil.getPath() + 'logs/' + Application.current.meta.get('file') + '-'
+					+ Date.now().toString().replace(' ', '-').replace(':', "'") + '.log',
+					errMsg + '\n');
 			}
 			#if android
 			catch (e:Dynamic)
@@ -160,7 +160,7 @@ class SUtil
 		});
 	}
 
-	public static function saveContent(fileName:String = 'file', fileExtension:String = '.json', fileData:String = 'you forgot to add something in your code')
+	public static function saveContent(fileName:String = 'file', fileExtension:String = '.json', fileData:String = 'you forgot to add something in your code lol')
 	{
 		try
 		{
@@ -180,8 +180,8 @@ class SUtil
 	{
 		try
 		{
-			if (!FileSystem.exists(savePath) && OpenFlAssets.exists(copyPath))
-				File.saveBytes(savePath, OpenFlAssets.getBytes(copyPath));
+			if (!FileSystem.exists(savePath) && Assets.exists(copyPath))
+				File.saveBytes(savePath, Assets.getBytes(copyPath));
 		}
 		#if android
 		catch (e:Dynamic)
