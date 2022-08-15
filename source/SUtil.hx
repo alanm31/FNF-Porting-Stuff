@@ -148,7 +148,6 @@ class SUtil
 					+ Date.now().toString().replace(' ', '-').replace(':', "'") + '.log',
 					errMsg + '\n');
 			}
-
 			#if android
 			catch (e:Dynamic)
 				Hardware.toast("Error!\nClouldn't save the crash dump because:\n" + e, 2);
