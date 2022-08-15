@@ -139,9 +139,6 @@ class SUtil
 
 			errMsg += u.error;
 
-			Sys.println(errMsg);
-			Application.current.window.alert(errMsg, 'Error!');
-
 			try
 			{
 				if (!FileSystem.exists(SUtil.getPath() + 'logs'))
@@ -155,6 +152,9 @@ class SUtil
 			catch (e:Dynamic)
 				Hardware.toast("Error!\nClouldn't save the crash dump because:\n" + e, 2);
 			#end
+
+			Sys.println(errMsg);
+			Application.current.window.alert(errMsg, 'Error!');
 
 			System.exit(1);
 		});
