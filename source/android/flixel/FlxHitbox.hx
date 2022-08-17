@@ -69,30 +69,39 @@ class FlxHitbox extends FlxSpriteGroup
 			if (hintTween != null)
 				hintTween.cancel();
 
-			hintTween = FlxTween.tween(hint, {alpha: AndroidControls.getOpacity()}, AndroidControls.getOpacity() / 10, {ease: FlxEase.circInOut, onComplete: function(twn:FlxTween)
-			{
-				hintTween = null;
-			}});
+			hintTween = FlxTween.tween(hint, {alpha: AndroidControls.getOpacity()}, AndroidControls.getOpacity() / 10, {
+				ease: FlxEase.circInOut,
+				onComplete: function(twn:FlxTween)
+				{
+					hintTween = null;
+				}
+			});
 		}
 		hint.onUp.callback = function()
 		{
 			if (hintTween != null)
 				hintTween.cancel();
 
-			hintTween = FlxTween.tween(hint, {alpha: 0.00001}, 0.1, {ease: FlxEase.circInOut, onComplete: function(twn:FlxTween)
-			{
-				hintTween = null;
-			}});
+			hintTween = FlxTween.tween(hint, {alpha: 0.00001}, 0.1, {
+				ease: FlxEase.circInOut,
+				onComplete: function(twn:FlxTween)
+				{
+					hintTween = null;
+				}
+			});
 		}
 		hint.onOut.callback = function()
 		{
 			if (hintTween != null)
 				hintTween.cancel();
 
-			hintTween = FlxTween.tween(hint, {alpha: 0.00001}, 0.1, {ease: FlxEase.circInOut, onComplete: function(twn:FlxTween)
-			{
-				hintTween = null;
-			}});
+			hintTween = FlxTween.tween(hint, {alpha: 0.00001}, 0.1, {
+				ease: FlxEase.circInOut,
+				onComplete: function(twn:FlxTween)
+				{
+					hintTween = null;
+				}
+			});
 		}
 		#if FLX_DEBUG
 		hint.ignoreDrawDebug = true;
