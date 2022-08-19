@@ -18,39 +18,22 @@ class AndroidControls extends FlxSpriteGroup
 
 		switch (AndroidControls.getMode())
 		{
-			case 0: // RIGHT_FULL
-				initControler(0);
-			case 1: // LEFT_FULL
-				initControler(1);
-			case 2: // CUSTOM
-				initControler(2);
-			case 3: // BOTH_FULL
-				initControler(3);
-			case 4: // HITBOX
-				initControler(4);
-			case 5: // KEYBOARD
-		}
-	}
-
-	private function initControler(virtualPadMode:Int = 0):Void
-	{
-		switch (virtualPadMode)
-		{
-			case 0:
+			case 'Pad-Right':
 				virtualPad = new FlxVirtualPad(RIGHT_FULL, NONE);
 				add(virtualPad);
-			case 1:
+			case 'Pad-Left':
 				virtualPad = new FlxVirtualPad(LEFT_FULL, NONE);
 				add(virtualPad);
-			case 2:
+			case 'Pad-Custom':
 				virtualPad = AndroidControls.getCustomMode(new FlxVirtualPad(RIGHT_FULL, NONE));
 				add(virtualPad);
-			case 3:
+			case 'Pad-Duo':
 				virtualPad = new FlxVirtualPad(BOTH_FULL, NONE);
 				add(virtualPad);
-			case 4:
+			case 'Hitbox':
 				hitbox = new FlxHitbox();
 				add(hitbox);
+			case 'Keyboard': // do nothing
 		}
 	}
 
@@ -88,17 +71,17 @@ class AndroidControls extends FlxSpriteGroup
 		return FlxG.save.data.androidControlsOpacity;
 	}
 
-	public static function setMode(mode:Int = 0):Void
+	public static function setMode(mode:String = 'Pad-Right'):Void
 	{
 		FlxG.save.data.androidControlsMode = mode;
 		FlxG.save.flush();
 	}
 
-	public static function getMode():Int
+	public static function getMode():String
 	{
 		if (FlxG.save.data.androidControlsMode == null)
 		{
-			FlxG.save.data.androidControlsMode = 0;
+			FlxG.save.data.androidControlsMode = 'Pad-Right';
 			FlxG.save.flush();
 		}
 

@@ -20,40 +20,40 @@ haxelib git extension-androidtools https://github.com/jigsaw-4277821/extension-a
 On This Line
 ```xml
 	<!--Mobile-specific-->
-	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" resizable="false"/>
+	<window if="mobile" orientation="landscape" fullscreen="true" width="0" height="0" resizable="false" />
 ```
 
 Replace It With
 ```xml
 	<!--Mobile-specific-->
-	<window if="mobile" orientation="landscape" fullscreen="true" width="1280" height="720" resizable="false" allow-shaders="true" require-shaders="true"/>
+	<window if="mobile" orientation="landscape" fullscreen="true" width="1280" height="720" resizable="false" allow-shaders="true" require-shaders="true" />
 ```
 
 Add
 
 ```xml
-	<assets path="assets/android" if="android"/> <!-- to not have the android assets in another builds -saw -->
+	<assets path="assets/android" if="android" /> <!-- to not have the android assets in another builds -saw -->
 ```
 
 Then, After the Libraries, or where the packeges are located add
 
 ```xml
-	<haxelib name="extension-androidtools" if="android"/>
+	<haxelib name="extension-androidtools" if="android" />
 ```
 
 Add
 ```xml
 	<!--Make's-the-Game-use-less-ram-->
-	<haxedef name="HXCPP_GC_BIG_BLOCKS"/>
+	<haxedef name="HXCPP_GC_BIG_BLOCKS" />
 
 	<!--Always-enable-Null-Object-Reference-check-->
 	<haxedef name="HXCPP_CHECK_POINTER" if="release" />
 	<haxedef name="HXCPP_STACK_LINE" if="release" />
 
 	<!--Android-Internet-Connection-->
-	<android permission="android.permission.ACCESS_NETWORK_STATE"/>
-	<android permission="android.permission.ACCESS_WIFI_STATE"/>
-	<android permission="android.permission.INTERNET"/>
+	<android permission="android.permission.ACCESS_NETWORK_STATE" />
+	<android permission="android.permission.ACCESS_WIFI_STATE" />
+	<android permission="android.permission.INTERNET" />
 ```
 
 4. Setup Controls.hx
@@ -197,7 +197,7 @@ add
 		}
 	}
 
-	public function removeFlxInput(Tinputs:Array<FlxActionInput>)
+	public function removeAControlsInput(Tinputs:Array<FlxActionInput>)
 	{
 		for (action in this.digitalActions)
 		{
@@ -245,7 +245,6 @@ and replace these lines (you can skip this, it's for psych engine)
 		forEachBound(control, function(action, _) removeKeys(action, copyKeys));
 		#end
 	}
-
 ```
 
 with
@@ -254,9 +253,9 @@ with
 	public function bindKeys(control:Control, keys:Array<FlxKey>)
 	{
 		var copyKeys:Array<FlxKey> = keys.copy();
-		for (i in 0...copyKeys.length) {
-			if(i == NONE) copyKeys.remove(i);
-		}
+		for (i in 0...copyKeys.length)
+			if(i == NONE)
+				copyKeys.remove(i);
 
 		#if (haxe >= "4.0.0")
 		inline forEachBound(control, (action, state) -> addKeys(action, copyKeys, state));
@@ -268,9 +267,9 @@ with
 	public function unbindKeys(control:Control, keys:Array<FlxKey>)
 	{
 		var copyKeys:Array<FlxKey> = keys.copy();
-		for (i in 0...copyKeys.length) {
-			if(i == NONE) copyKeys.remove(i);
-		}
+		for (i in 0...copyKeys.length)
+			if(i == NONE)
+				copyKeys.remove(i);
 
 		#if (haxe >= "4.0.0")
 		inline forEachBound(control, (action, _) -> removeKeys(action, copyKeys));
@@ -278,9 +277,7 @@ with
 		forEachBound(control, function(action, _) removeKeys(action, copyKeys));
 		#end
 	}
-	
 	#else
-
 	public function bindKeys(control:Control, keys:Array<FlxKey>)
 	{
 		#if (haxe >= "4.0.0")
@@ -308,6 +305,7 @@ in the lines you import things add
 #if android
 import android.AndroidControls;
 import android.flixel.FlxVirtualPad;
+import flixel.FlxCamera;
 import flixel.input.actions.FlxActionInput;
 import flixel.util.FlxDestroyUtil;
 #end
@@ -341,7 +339,7 @@ add
 	public function removeVirtualPad()
 	{
 		if (trackedinputsUI != [])
-			controls.removeFlxInput(trackedinputsUI);
+			controls.removeAControlsInput(trackedinputsUI);
 
 		if (virtualPad != null)
 			remove(virtualPad);
@@ -354,19 +352,19 @@ add
 
 		switch (AndroidControls.getMode())
 		{
-			case 0 | 1 | 2: // RIGHT_FULL | LEFT_FULL | CUSTOM
+			case 'Pad-Right' | 'Pad-Left' | 'Pad-Custom':
 				controls.setVirtualPadNOTES(androidControls.virtualPad, RIGHT_FULL, NONE);
-			case 3: // BOTH_FULL
+			case 'Pad-Duo':
 				controls.setVirtualPadNOTES(androidControls.virtualPad, BOTH_FULL, NONE);
-			case 4: // HITBOX
+			case 'Hitbox':
 				controls.setHitBox(androidControls.hitbox);
-			case 5: // KEYBOARD
+			case 'Keyboard': // do nothing
 		}
 
 		trackedinputsNOTES = controls.trackedinputsNOTES;
 		controls.trackedinputsNOTES = [];
 
-		var camControls = new flixel.FlxCamera();
+		var camControls:FlxCamera = new FlxCamera();
 		FlxG.cameras.add(camControls);
 		camControls.bgColor.alpha = 0;
 
@@ -378,7 +376,7 @@ add
 	public function removeAndroidControls()
 	{
 		if (trackedinputsNOTES != [])
-			controls.removeFlxInput(trackedinputsNOTES);
+			controls.removeAControlsInput(trackedinputsNOTES);
 
 		if (androidControls != null)
 			remove(androidControls);
@@ -388,7 +386,7 @@ add
 	{
 		if (virtualPad != null)
 		{
-			var camControls = new flixel.FlxCamera();
+			var camControls:FlxCamera = new FlxCamera();
 			FlxG.cameras.add(camControls);
 			camControls.bgColor.alpha = 0;
 			virtualPad.cameras = [camControls];
@@ -400,10 +398,10 @@ add
 	{
 		#if android
 		if (trackedinputsNOTES != [])
-			controls.removeFlxInput(trackedinputsNOTES);
+			controls.removeAControlsInput(trackedinputsNOTES);
 
 		if (trackedinputsUI != [])
-			controls.removeFlxInput(trackedinputsUI);
+			controls.removeAControlsInput(trackedinputsUI);
 		#end
 
 		super.destroy();
@@ -430,6 +428,7 @@ in the lines you import things add
 ```haxe
 #if android
 import android.flixel.FlxVirtualPad;
+import flixel.FlxCamera;
 import flixel.input.actions.FlxActionInput;
 import flixel.util.FlxDestroyUtil;
 #end
@@ -461,7 +460,7 @@ add
 	public function removeVirtualPad()
 	{
 		if (trackedinputsUI != [])
-			controls.removeFlxInput(trackedinputsUI);
+			controls.removeAControlsInput(trackedinputsUI);
 
 		if (virtualPad != null)
 			remove(virtualPad);
@@ -471,7 +470,7 @@ add
 	{
 		if (virtualPad != null)
 		{
-			var camControls = new flixel.FlxCamera();
+			var camControls:FlxCamera = new FlxCamera();
 			FlxG.cameras.add(camControls);
 			camControls.bgColor.alpha = 0;
 			virtualPad.cameras = [camControls];
@@ -483,7 +482,7 @@ add
 	{
 		#if android
 		if (trackedinputsUI != [])
-			controls.removeFlxInput(trackedinputsUI);
+			controls.removeAControlsInput(trackedinputsUI);
 		#end
 
 		super.destroy();
@@ -506,6 +505,11 @@ now on every state/substate add
 addVirtualPad(LEFT_FULL, A_B);
 #end
 
+if you want to remove it at some moment use
+#if android
+removeVirtualPad();
+#end
+
 //if you want it to have a camera
 #if android
 addPadCamera();
@@ -519,6 +523,11 @@ addPadCamera();
 //things, add
 #if android
 addAndroidControls();
+#end
+
+if you want to remove it at some moment use
+#if android
+removeAndroidControls();
 #end
 
 //to make the controls visible the code is
@@ -593,8 +602,6 @@ This is a feature to save files with sys.io.File
 This is the code
 ```haxe
 SUtil.saveContent("your file name", ".txt", "lololol");
-
-//The file will be where the assets and mods are located in phone storage in saves folder
 ```
 
 13. Do an action when you press on the screen
