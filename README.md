@@ -328,7 +328,6 @@ add
 	public function addVirtualPad(DPad:FlxDPadMode, Action:FlxActionMode)
 	{
 		virtualPad = new FlxVirtualPad(DPad, Action);
-		virtualPad.alpha = AndroidControls.getOpacity();
 		add(virtualPad);
 
 		controls.setVirtualPadUI(virtualPad, DPad, Action);
@@ -348,7 +347,6 @@ add
 	public function addAndroidControls()
 	{
 		androidControls = new AndroidControls();
-		androidControls.alpha = AndroidControls.getOpacity();
 
 		switch (AndroidControls.getMode())
 		{
@@ -449,7 +447,6 @@ add
 	public function addVirtualPad(DPad:FlxDPadMode, Action:FlxActionMode)
 	{
 		virtualPad = new FlxVirtualPad(DPad, Action);
-		virtualPad.alpha = AndroidControls.getOpacity();
 		add(virtualPad);
 
 		controls.setVirtualPadUI(virtualPad, DPad, Action);
