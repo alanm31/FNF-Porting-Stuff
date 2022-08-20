@@ -9,7 +9,8 @@ import flixel.graphics.FlxGraphic;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.group.FlxSpriteGroup;
-import openfl.utils.Assets;
+import openfl.display.Shape;
+import openfl.display.BitmapData;
 
 /**
  * A zone with 4 hint's (A hitbox).
@@ -52,11 +53,27 @@ class FlxHitbox extends FlxSpriteGroup
 		buttonRight = null;
 	}
 
+	private function createHintGraphic(Width:Int, Height:Int, Color:Int = 0xFFFFFF):BitmapData
+	{
+		var bitmap = new BitmapData(Width, Height, true);
+		var sh = new Shape();
+		var g = sh.graphics;
+
+		g.beginFill(Color);
+		g.lineStyle(10, Color, 1);
+		g.drawRect(0, 0, Width, Height);
+		g.endFill();
+
+		bitmap.draw(sh);
+
+		return bitmap;
+	}
+
 	private function createHint(X:Float, Y:Float, Width:Int, Height:Int, Color:Int = 0xFFFFFF):FlxButton
 	{
 		var hintTween:FlxTween = null;
 		var hint:FlxButton = new FlxButton(X, Y);
-		hint.makeGraphic(Width, Height, Color);
+		hint.loadGraphic(createHintGraphic(Width, Height, Color));
 		hint.solid = false;
 		hint.immovable = true;
 		hint.scrollFactor.set();
