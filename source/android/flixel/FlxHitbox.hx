@@ -55,17 +55,14 @@ class FlxHitbox extends FlxSpriteGroup
 
 	private function createHintGraphic(Width:Int, Height:Int, Color:Int = 0xFFFFFF):BitmapData
 	{
-		var bitmap = new BitmapData(Width, Height, true);
-		var sh = new Shape();
-		var g = sh.graphics;
+		var shape:Shape = new Shape();
+		shape.graphics.beginFill(Color);
+		shape.graphics.lineStyle(10, Color, 1);
+		shape.graphics.drawRect(0, 0, Width, Height);
+		shape.graphics.endFill();
 
-		g.beginFill(Color);
-		g.lineStyle(10, Color, 1);
-		g.drawRect(0, 0, Width, Height);
-		g.endFill();
-
-		bitmap.draw(sh);
-
+		var bitmap:BitmapData = new BitmapData(Width, Height, true, 0);
+		bitmap.draw(shape);
 		return bitmap;
 	}
 
@@ -83,7 +80,7 @@ class FlxHitbox extends FlxSpriteGroup
 			if (hintTween != null)
 				hintTween.cancel();
 
-			hintTween = FlxTween.tween(hint, {alpha: AndroidControls.getOpacity()}, AndroidControls.getOpacity() / 10, {
+			hintTween = FlxTween.tween(hint, {alpha: AndroidControls.getOpacity(true)}, AndroidControls.getOpacity(true) / 10, {
 				ease: FlxEase.circInOut,
 				onComplete: function(twn:FlxTween)
 				{

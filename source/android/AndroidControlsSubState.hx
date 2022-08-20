@@ -45,7 +45,7 @@ class AndroidControlsSubState extends FlxSubState
 
 		resetButton = new FlxButton(FlxG.width - 200, 50, 'Reset', function()
 		{
-			if (resetButton.visible) // being sure about something
+			if (resetButton.visible && virtualPad != null) // being sure about something
 			{
 				virtualPad.buttonUp.x = FlxG.width - 258;
 				virtualPad.buttonUp.y = FlxG.height - 408;
