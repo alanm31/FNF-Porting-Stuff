@@ -71,7 +71,7 @@ Add
 	<haxedef name="HXCPP_CHECK_POINTER" if="release" />
 	<haxedef name="HXCPP_STACK_LINE" if="release" />
 
-	<!--Android-Internet-Connection-->
+	<!--Android-Things-->
 	<android permission="android.permission.ACCESS_NETWORK_STATE" />
 	<android permission="android.permission.ACCESS_WIFI_STATE" />
 	<android permission="android.permission.INTERNET" />
