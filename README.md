@@ -341,8 +341,8 @@ inline function get_controls():Controls
 add
 ```haxe
 	#if android
-	var virtualPad:FlxVirtualPad;
 	var androidControls:AndroidControls;
+	var virtualPad:FlxVirtualPad;
 	var trackedinputsUI:Array<FlxActionInput> = [];
 	var trackedinputsNOTES:Array<FlxActionInput> = [];
 
