@@ -365,7 +365,7 @@ add
 			remove(virtualPad);
 	}
 
-	public function addAndroidControls()
+	public function addAndroidControls(DefaultDrawTarget:Bool = true)
 	{
 		androidControls = new AndroidControls();
 
@@ -384,7 +384,7 @@ add
 		controls.trackedinputsNOTES = [];
 
 		var camControls:FlxCamera = new FlxCamera();
-		FlxG.cameras.add(camControls);
+		FlxG.cameras.add(camControls, DefaultDrawTarget);
 		camControls.bgColor.alpha = 0;
 
 		androidControls.cameras = [camControls];
@@ -401,12 +401,12 @@ add
 			remove(androidControls);
 	}
 
-	public function addPadCamera()
+	public function addPadCamera(DefaultDrawTarget:Bool = true)
 	{
 		if (virtualPad != null)
 		{
 			var camControls:FlxCamera = new FlxCamera();
-			FlxG.cameras.add(camControls);
+			FlxG.cameras.add(camControls, DefaultDrawTarget);
 			camControls.bgColor.alpha = 0;
 			virtualPad.cameras = [camControls];
 		}
@@ -484,12 +484,12 @@ add
 			remove(virtualPad);
 	}
 
-	public function addPadCamera()
+	public function addPadCamera(DefaultDrawTarget:Bool = true)
 	{
 		if (virtualPad != null)
 		{
 			var camControls:FlxCamera = new FlxCamera();
-			FlxG.cameras.add(camControls);
+			FlxG.cameras.add(camControls, DefaultDrawTarget);
 			camControls.bgColor.alpha = 0;
 			virtualPad.cameras = [camControls];
 		}
