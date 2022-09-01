@@ -72,9 +72,9 @@ Add
 	<haxedef name="HXCPP_STACK_LINE" if="release" />
 
 	<!--Android-Internet-Connection-->
-	<android permission="android.permission.ACCESS_NETWORK_STATE" />
-	<android permission="android.permission.ACCESS_WIFI_STATE" />
-	<android permission="android.permission.INTERNET" />
+	<config:android permission="android.permission.ACCESS_NETWORK_STATE" />
+	<config:android permission="android.permission.ACCESS_WIFI_STATE" />
+	<config:android permission="android.permission.INTERNET" />
 ```
 
 4. Setup Controls.hx
